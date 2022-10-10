@@ -1,9 +1,9 @@
 import { Box } from "@chakra-ui/react"
 
-navbar = ()=>{
+const BottomNavbar = ()=>{
     return (
         <Box>
-
+        
         </Box>
     )
 }

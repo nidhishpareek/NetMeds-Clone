@@ -1,0 +1,12 @@
+ Install the Dependencies as you clone the repository, list is in Dependencies.txt.
+ Add the dependencies you used in the Dependencies.txt.
+ Dont give style to tags,
+ Use chakra UI components as much as Possible (for sake of consistency in website).
+ Use Colorpicker extension to get the color code.
+ Arrange your files in systamatic ways and folders respectively.
+ 
+ ** Merge your code in main branch only after pulling the letest version from main.**
+ Don't force merge the branch if there is any conflict.
+
+ Feel free to add other details if i missed something.
+ 
