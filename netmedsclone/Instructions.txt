@@ -8,5 +8,5 @@
  ** Merge your code in main branch only after pulling the letest version from main.**
  Don't force merge the branch if there is any conflict.
 
- Feel free to add other details if I missed something.
+ Feel free to add other details if i missed something.
  
