@@ -8,11 +8,7 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  MenuItemOption,
   Button,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
 } from "@chakra-ui/react";
 
 const Myselect = ({ placeholder, optionarray, width }) => {
@@ -46,7 +42,7 @@ const Myselect = ({ placeholder, optionarray, width }) => {
             <MenuList onMouseEnter={onOpen} onMouseLeave={onClose}>
               {optionarray &&
                 optionarray.map((ele, index) => (
-                  <MenuItem value="ele" key={uuid()}>
+                  <MenuItem value="ele" key={uuid()} fontSize={"14px"}>
                     {ele}
                   </MenuItem>
                 ))}

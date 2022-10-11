@@ -7,7 +7,7 @@ const BottomNavbar = () => {
 
   return (
     <Box bg="rgb(50,174,177)">
-      <Flex gap={'50px'} className="BottomNavbar" alignItems={"center"} justifyContent='center' paddingBlock={'15px'}>
+      <Flex gap={'85px'} className="BottomNavbar" alignItems={"center"} justifyContent='center' paddingBlock={'15px'}>
         <HStack className="BottomNavbarBox">
           <Image
             src="https://www.netmeds.com/assets/version1663621997/gloryweb/images/icons/medicine.svg"

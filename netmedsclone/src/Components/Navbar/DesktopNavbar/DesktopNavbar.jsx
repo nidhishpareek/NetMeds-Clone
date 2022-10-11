@@ -1,11 +1,16 @@
 import { Box, Flex } from "@chakra-ui/react";
-import BottomNavbar from "./DesktopBottomNavbar";
-import TopNavbar from "./DesktopTopNavbar";
+import BottomNavbar from "./NavComponents/DesktopBottomNavbar";
+import TopNavbar from "./NavComponents/DesktopTopNavbar";
+import BottomList from "./NavComponents/BottomList";
+
 const DesktopNavbar = () => {
   return (
     <Box>
       <TopNavbar></TopNavbar>
-      {/* <Box><BottomNavbar></BottomNavbar></Box> */}
+      <Box>
+        <BottomNavbar></BottomNavbar>
+        <BottomList></BottomList>
+      </Box>
     </Box>
   );
 };
