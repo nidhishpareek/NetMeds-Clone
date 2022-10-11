@@ -25,7 +25,7 @@ export default function ShopByCategory() {
         }
     ]
   return (
-    <Box p={2}>
+    <Box p='0 25px' mb='30px'>
         <Box display={'flex'} alignItems='center' justifyContent='space-between' mb='30px'>
             <Box>
             <Heading as='h2' fontSize='25px' fontWeight='500'>Shop By Category</Heading>
@@ -34,12 +34,12 @@ export default function ShopByCategory() {
                 <Link color='red' style={{textDecoration: 'none'}} ><Text>View All <ChevronRightIcon/></Text></Link>
             </Box>
         </Box>
-        <Grid templateColumns={'repeat(5,1fr)'} gap={3}>
+        <Grid templateColumns={`repeat(${showByCategory.length},1fr)`} gap={3}>
             {
                 showByCategory.map(((el, index) => (
-                    <Box bg='#fff' p='30px 20px' borderRadius={6} boxShadow='md' cursor='pointer'>
+                    <Box key={el.id} bg='#fff' p='30px 20px' borderRadius={6} boxShadow='md' cursor='pointer'>
                         <Center><Image h='180px' w='100%' src={process.env.PUBLIC_URL+`/Images/netmedSBC${index+1}.jpg`}></Image></Center>
-                        <Center><Text mt='20px'>{el.title}</Text></Center>
+                        <Center><Text mt='20px' fontWeight={'600'}>{el.title}</Text></Center>
                     </Box>
                 )))
             }

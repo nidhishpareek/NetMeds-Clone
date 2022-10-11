@@ -40,20 +40,20 @@ export const Carousel = () => {
         background: '#fff'
     }
     return (
-        <Box position='relative'>
+        <Box position='relative' p='0 15px'>
             <Box className="Carousel-Container" w='100%' mb='40px'>
                 {
                     <Box className="slide" h='300px'>
                         <Image w='100%' h='100%' objectFit='cover' src={process.env.PUBLIC_URL + `/Images/netmedC${index+1}.jpg`} alt="" />
                     </Box>
                 }
-                <ChevronLeftIcon onClick={PrevSlide} cursor='pointer' position='absolute' bottom='140px' left='10px' w='50px' h='50px' color="black" />
-                <ChevronRightIcon onClick={NextSlide} cursor='pointer' position='absolute'   bottom='140px' right='10px' w='50px' h='50px' color="black" />
+                <ChevronLeftIcon onClick={PrevSlide} cursor='pointer' position='absolute' bottom='140px' left='15px' w='50px' h='50px' color="black" />
+                <ChevronRightIcon onClick={NextSlide} cursor='pointer' position='absolute'   bottom='140px' right='15px' w='50px' h='50px' color="black" />
                 <Center>
                     <Box className='dotDiv'>
                         {
                             [0,1,2,3].map(el => (
-                                <Box style={index===el ? dotStyleTrue: dotStyleFalse} onClick={() => handleDot(el)}></Box>
+                                <Box key={el} style={index===el ? dotStyleTrue: dotStyleFalse} onClick={() => handleDot(el)}></Box>
                             ))
                         }
                     </Box>
