@@ -1,9 +1,8 @@
 import { Box } from "@chakra-ui/react"
 
-const Navbar = ()=>{
+const Navbar = () => {
     return (
         <Box>
-        
         </Box>
     )
 }
