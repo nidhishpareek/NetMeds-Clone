@@ -1,9 +1,6 @@
 import {
-  Box,
   Flex,
   Input,
-  InputGroup,
-  InputLeftElement,
 } from "@chakra-ui/react";
 import DelieveryComponent from "./DelieveryComponent";
 const InputComponent = () => {

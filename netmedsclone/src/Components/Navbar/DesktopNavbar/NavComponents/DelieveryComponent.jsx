@@ -12,7 +12,6 @@ import {
 } from "@chakra-ui/react";
 
 const Delievery = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const location = null;
   return (
     <Box>

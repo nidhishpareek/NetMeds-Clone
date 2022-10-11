@@ -1,6 +1,5 @@
-import { Box, Container, Flex, HStack, Image } from "@chakra-ui/react";
+import { Box, Flex, HStack, Image } from "@chakra-ui/react";
 import Myselect from "./SelectTag";
-import { v4 as uuid } from "uuid";
 import "./DesktopBottomNavbar.css";
 
 const BottomNavbar = () => {

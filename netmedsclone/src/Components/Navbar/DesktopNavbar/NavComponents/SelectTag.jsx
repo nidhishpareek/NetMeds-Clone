@@ -1,4 +1,4 @@
-import { Box, Select, Text } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import "./SelectTag.css";
 import { v4 as uuid } from "uuid";
 import { ChevronDownIcon,ChevronUpIcon } from "@chakra-ui/icons";
