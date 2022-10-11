@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react"
 
-const BottomNavbar = ()=>{
+Footer = ()=>{
     return (
         <Box>
         
@@ -8,4 +8,4 @@ const BottomNavbar = ()=>{
     )
 }
 
-export default navbar
+export default Footer;
