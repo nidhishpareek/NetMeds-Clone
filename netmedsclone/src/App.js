@@ -1,6 +1,6 @@
 import './App.css';
 import MainNavbar from './Components/Navbar/MainNavbar'
-import Products from './Pages/ProductPage/Products';
+import Products from './pages/ProductPage/Products';
 function App() {
   return (
     <div className="App">
