@@ -8,7 +8,6 @@ const InputComponent = () => {
     <Flex bg={"white"} borderRadius="6px" width={'600px'}>
       <DelieveryComponent />
       <Input
-        type="tel"
         width='100%'
         fontSize="14px"
         placeholder="Search for medicine & wellness products…"
