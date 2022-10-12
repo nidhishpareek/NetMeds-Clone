@@ -6,51 +6,43 @@ import {
   AvatarBadge,
   Box,
   Flex,
-  IconButton,
-  Menu,
   Text,
 } from "@chakra-ui/react";
 
 import { HiShoppingCart } from "react-icons/hi";
-import { Link } from "react-router-dom";
 
 const CartButton = () => {
   const count = 2;
   return (
     <>
-      <Menu></Menu>
       <Box
         bgColor={"rgb(50,174,177)"}
         _hover={{ bg: "rgb(50,174,177)" }}
         size="xs"
       >
         <Flex align={"center"}>
-          <IconButton
-            size="lg"
-            variant="ghost"
-            aria-label="open menu"
-            _hover={{ bg: "rgb(50,174,177)" }}
-            icon={
-              <>
-                <Avatar
-                  icon={<HiShoppingCart />}
-                  bg='"rgb(50,174,177)"'
-                  boxSize={"30px"}
-                >
-                  <AvatarBadge
-                    boxSize="15px"
-                    bg="red.500"
-                    border={"0px"}
-                    fontSize="10px"
-                  >
-                    {count}
-                  </AvatarBadge>
-                </Avatar>
-              </>
-            }
-          />
+          <Avatar
+            paddingLeft={"10px"}
+            icon={<HiShoppingCart />}
+            bg='"rgb(50,174,177)"'
+            boxSize={"30px"}
+          >
+            <AvatarBadge
+              boxSize="15px"
+              bg="red.500"
+              border={"0px"}
+              fontSize="10px"
+            >
+              {count}
+            </AvatarBadge>
+          </Avatar>
 
-          <Text color={"white"} fontSize="14px" fontWeight="semibold">
+          <Text
+            color={"white"}
+            fontSize="14px"
+            fontWeight="semibold"
+            paddingLeft={"5px"}
+          >
             Cart
           </Text>
         </Flex>

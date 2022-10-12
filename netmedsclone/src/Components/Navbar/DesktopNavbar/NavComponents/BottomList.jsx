@@ -16,7 +16,7 @@ const BottomList = () => {
     "Treatments",
   ];
   return (
-    <Box bg='rgb(243,246,250)' padding={'10px'}>
+    <Box bg='rgb(243,246,250)' padding={'10px'} >
       <Container size={"5xl"}>
         <Flex margin={"auto"} justifyContent="center" gap={"4%"}>
           {ListArray.map((ele, index) => {

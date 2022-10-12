@@ -1,5 +1,4 @@
 import { Box } from "@chakra-ui/react";
-import "./SelectTag.css";
 import { v4 as uuid } from "uuid";
 import { ChevronDownIcon,ChevronUpIcon } from "@chakra-ui/icons";
 import { useDisclosure } from "@chakra-ui/react";
@@ -16,12 +15,6 @@ const Myselect = ({ placeholder, optionarray, width }) => {
   return (
     <Box>
       <Menu
-        fontSize={"14px"}
-        className="selectelement"
-        variant="flushed"
-        bg="rgb(50,174,177)"
-        borderColor="transparent"
-        color="white"
         isOpen={isOpen}
       >
           <>
