@@ -8,7 +8,6 @@ import {
   MenuItem,
   MenuList,
   Text,
-  useDisclosure,
 } from "@chakra-ui/react";
 
 const Delievery = () => {

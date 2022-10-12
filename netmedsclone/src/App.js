@@ -1,13 +1,13 @@
-import './App.css';
-import MainNavbar from './Components/Navbar/MainNavbar'
-import Products from './pages/ProductPage/Products';
-import Footer from './Components/Footer/Footer'
+import "./App.css";
+import MainNavbar from "./Components/Navbar/MainNavbar";
+import Products from "./pages/ProductPage/Products";
+import Footer from "./Components/Footer/Footer";
 function App() {
   return (
     <div className="App">
-      <MainNavbar/>
+      <MainNavbar />
+      <Products />
       <Footer />
-      {/* <Products/> */}
     </div>
   );
 }

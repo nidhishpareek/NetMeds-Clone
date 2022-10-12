@@ -42,6 +42,13 @@ const Footer = () => {
       <Center height="64px">
         <Divider orientation="horizontal" borderColor="rgba(11,18,25,.5)" />
       </Center>
+      <Flex justifyContent={'space-between'} color='rgba(11,18,25,.5)'>
+        <Text fontSize="14px" as={'button'}>Medicine</Text>
+        <Text fontSize="14px" as={'button'}>Wellness</Text>
+        <Text fontSize="14px" as={'button'}>Lab Tests</Text>
+        <Text fontSize="14px" as={'button'}>Beauty</Text>
+        <Text fontSize="14px" as={'button'}>Copyright &#169; All Rights Reserved.</Text>
+      </Flex>
     </Box>
   );
 };

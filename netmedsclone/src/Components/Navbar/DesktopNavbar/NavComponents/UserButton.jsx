@@ -13,7 +13,7 @@ const UserButton = () => {
       _hover={{ bg: "rgb(50,174,177)" }}
       size="xs"
     >
-      <Link _hover={{ textDecoration: "none" }} to={'/login'}>
+      <Link _hover={{ textDecoration: "none" }} to={'/Login'}>
         <Flex align={"center"}>
           <IconButton
             size="lg"

@@ -11,6 +11,7 @@ const InputComponent = () => {
         width='100%'
         fontSize="14px"
         placeholder="Search for medicine & wellness products…"
+        focusBorderColor='none'
       />
     </Flex>
   );

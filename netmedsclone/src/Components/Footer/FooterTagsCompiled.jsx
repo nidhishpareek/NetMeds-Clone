@@ -1,4 +1,3 @@
-import { Flex } from "@chakra-ui/react";
 import FooterTags from "./FooterTags";
 
 const FooterTagsCombined = () => {
