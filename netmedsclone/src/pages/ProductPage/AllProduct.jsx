@@ -5,40 +5,31 @@ import { useState } from 'react'
 
 const AllProduct = () => {
     const [prod, setProd] = useState([]);
+    const [page, setPage] = useState(1);
+    // const load=useSelector();
 
-    const getProduct = () => {
-        fetch(`http://localhost:3001/products?_limit=20`)
+    const getProduct = (page) => {
+        fetch(`http://localhost:3001/products?_page=${page}&_limit=20`)
             .then((res) => res.json())
             .then(res => setProd(res))
     }
     useEffect(() => {
-        getProduct()
-    }, [])
-    // const prod = [{
-    //     "id": 1290,
-    //     "title": "Biosoft Aloevera Paraffin Wax 500 S gm",
-    //     "img1": "https://www.netmeds.com/images/product-v1/600x600/958099/biosoft_aloevera_paraffin_wax_500_s_gm_0_0.jpg",
-    //     "img2": "https://www.netmeds.com/images/product-v1/150x150/958099/biosoft_aloevera_paraffin_wax_500_s_gm_1_0.jpg",
-    //     "img3": "https://www.netmeds.com/images/product-v1/150x150/958099/biosoft_aloevera_paraffin_wax_500_s_gm_2_0.jpg",
-    //     "actual_price": "425",
-    //     "crossed_price": "500",
-    //     "manufacturer": "SSIZ INTERNATIONAL PRIVATE LIMITED",
-    //     "country": "Italy",
-    //     "category": "Mom & Baby",
-    //     "sub_category": "Feminine Hygiene"
-    // }]
+        getProduct(page)
+    }, [page])
+
     return (
         <>
             <Box p={"15px"} bgColor="#ffffff" borderRadius={"10px"} >
                 <Text fontSize={"13px"} fontWeight='700' color={"rgba(21,27,57,.6)"} letterSpacing="1px" textTransform={"uppercase"} mb="10px">All Product</Text>
                 <Grid templateColumns="repeat(4,1fr)" gap="13px">
                     {prod.map((el) => {
-                        const { title, id, img1, actual_price, crossed_price, manufacturer, category, sub_category } = el
+                        const { title, id, img1, actual_price, crossed_price, manufacturer, category, sub_category } = el;
+                        const discount = Math.round(((crossed_price - actual_price) / crossed_price) * 100);
                         return <GridItem key={id} w="100%" p={'14px 16px 15px 16px'} border='solid 1px rgba(112,112,112,.38)' borderRadius={"8px"} position="relative">
-                            <Text as='span' position={"absolute"} bg="#84be52" fontSize={"9px"} lineHeight="11px" p="4px 5px 2px 5px" borderRadius={"4px"} color="white" top="8px" left="8px">10% OFF</Text>
+                            {crossed_price && <Text as='span' position={"absolute"} bg="#84be52" fontSize={"9px"} lineHeight="11px" p="4px 5px 2px 5px" borderRadius={"4px"} color="white" top="8px" left="8px">{discount}% OFF</Text>}
                             <Image h={'150px'} objectFit="contain" margin={"0 auto"} src={img1} />
                             <Text overflow={"hidden"} fontSize={"14px"} fontWeight={"700"} h={"42px"} color="#151b39">{title}</Text>
-                            <Box overflow={"hidden"} h='24px'>
+                            <Box overflow={"hidden"} h='24px' m="5px 0">
                                 <Text as="span" color={"#24aeb1"} fontSize="10px" borderRadius={"40px"} mr="4px" p='4px 10px' bgColor={"#f3f7fb"}>{category}</Text>
                                 <Text as="span" color={"#24aeb1"} fontSize="10px" borderRadius={"40px"} mr="4px" p='4px 10px' bgColor={"#f3f7fb"}>{sub_category}</Text>
                             </Box>
@@ -51,6 +42,12 @@ const AllProduct = () => {
                         </GridItem >
                     })}
                 </Grid>
+                <Box textAlign={"center"} mt="30px" display="flex" gap='5px' justifyContent={"center"}>
+                    <Button size={"sm"} _hover={{ color: '#0298a7', bgColor: '#D4D5D940' }} bgColor="white" fontWeight={"400"} fontSize={"13px"} color="#151b39">{page}</Button>
+                    <Button onClick={(e) => setPage(+e.target.innerHTML)} size={"sm"} _hover={{ color: '#0298a7', bgColor: '#D4D5D940' }} bgColor="white" fontWeight={"400"} fontSize={"13px"} color="#151b39">{page + 1}</Button>
+                    <Button size={"sm"} _hover={{ color: '#0298a7', bgColor: '#D4D5D940' }} bgColor="white" fontWeight={"400"} fontSize={"13px"} color="#151b39">{page + 2}</Button>
+                    <Button size={"sm"} border="1px solid #d4d5d9" bgColor="white" p="0 20px" fontWeight={"400"} _hover={{ color: '#0298a7', bgColor: 'white' }} fontSize={"13px"} color="#151b39" onClick={() => setPage(page + 1)}>NEXT</Button>
+                </Box>
             </Box>
         </>
     )

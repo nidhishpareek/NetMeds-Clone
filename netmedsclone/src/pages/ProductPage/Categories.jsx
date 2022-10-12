@@ -1,7 +1,6 @@
 import { Accordion, AccordionIcon, AccordionItem, AccordionButton, Box, AccordionPanel, Text } from '@chakra-ui/react'
 import React from 'react'
 import { v4 as uuid } from "uuid"
-import "./product.css"
 
 const CategoriesComp = () => {
     const Categories = [
@@ -138,7 +137,7 @@ const CategoriesComp = () => {
             }}>
                 <Text textAlign="left" fontSize="20px" p={"10px 0 5px 5px"}>Categories</Text>
                 {Categories.map((el) => {
-                    return <Accordion key={el.cat} defaultIndex={[0]} allowMultiple >
+                    return <Accordion key={el.cat} allowToggle >
                         <AccordionItem>
                             <h2>
                                 <AccordionButton p="8px  2px" _hover={{ bg: "white" }}>
