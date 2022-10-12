@@ -13,7 +13,7 @@ const UploadButton = ()=>{
           pr={"5px"}
           src="https://www.netmeds.com/assets/gloryweb/images/icons/upload_rx.svg"
           alt="upload icon"
-          loading="eager"
+          loading="eager" marginTop={'-5px'}
         ></Image>
         <Text color={"white"} fontSize="14px" fontWeight="semibold">
           Upload

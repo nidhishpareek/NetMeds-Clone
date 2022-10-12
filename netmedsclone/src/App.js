@@ -4,8 +4,9 @@ import Products from './pages/ProductPage/Products';
 function App() {
   return (
     <div className="App">
-      <MainNavbar/>
-      <Products/>
+      <MainNavbar />
+      <Products />
+      <Footer />
     </div>
   );
 }
