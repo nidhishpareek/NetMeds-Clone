@@ -16,6 +16,11 @@ import TopBrands from "./LandingPage/TopBrands"
 import TrendingToday from "./LandingPage/TrendingToday"
 import MensGrooming from "./LandingPage/MensGrooming"
 import HealthConcern from "./LandingPage/HealthConcern"
+import HealthLibrary from "./LandingPage/HealthLibrary"
+import { AboutSome } from "./LandingPage/AboutSome"
+import { FirstMembership } from "./LandingPage/FirstMembership"
+import { OnlineDoctorConsultants } from "./LandingPage/OnlineDoctorConsultants"
+import { Subscribe } from "./LandingPage/Subscribe"
 
 export const Landing = () => {
     return <>
@@ -26,15 +31,20 @@ export const Landing = () => {
     <TrendingToday/>
     <LimitedTimeDeals/>
     <BrandDays/>
-    {/* <HealthSlider/> */}
     <ShopByCategory/>
     <NewOnNetmeds/>
-    <TopBrands/><fieldset><CategoriesOnFocus/></fieldset>
+    <TopBrands/>
+    <FirstMembership/>
+    <CategoriesOnFocus/>
     <ExploreBeauty/>
+    <OnlineDoctorConsultants/>
     <BestInBeauty/>
     <PersonalCare/>
     <MensGrooming/>
+    <Subscribe/>
     <HealthConcern/>
+    <HealthLibrary/>
+    <AboutSome/>
     {/* <Check buttons={false} width={400}/> */}
     </>
 }

@@ -4,7 +4,7 @@ import { Landing } from './pages/landing';
 function App() {
   return (
     <div className="App">
-      <Box border='1px solid black' bg='#f3f7fb'>
+      <Box bg='#f3f7fb'>
       <Landing/>
       </Box>
     </div>

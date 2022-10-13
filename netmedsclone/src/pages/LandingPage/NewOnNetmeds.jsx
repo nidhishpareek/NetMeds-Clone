@@ -1,35 +1,59 @@
-import { Box, Grid, Heading, Image } from '@chakra-ui/react'
-import React from 'react'
+import { Box, Button, Grid, Heading, Image } from '@chakra-ui/react'
+import React, { useRef, useState } from 'react'
 
 export default function NewOnNetmeds() {
+    const [count, setCount] = useState(0);
+    const ref = useRef();
     const newOnNetmeds = [
-        {
-            id: 1
-        },
-        {
-            id: 2
-        },
-        {
-            id: 3
-        }
+        {id: 1}, {id: 2}, {id: 3}, { id: 4}, {id: 5}, {id: 6}, {id: 7}, {id: 8}, {id: 9}, {id: 10}
     ]
-  return (
-    <Box mb='30px' p='8px 25px' bgGradient='linear(#fff 0%, #fff 25%, #f3f7fb 50%)'>
-        <Box display={'flex'} alignItems='center' justifyContent='space-between' mb='30px'>
-            <Box>
-            <Heading as='h2' fontSize='25px' fontWeight='500'>New On Netmeds</Heading>
-            </Box>
-        </Box>
-        <Grid gridTemplateColumns={`repeat(${newOnNetmeds.length},1fr)`} gap={4}>
-            {
-                newOnNetmeds.map(el => (
-                    <Box key={el.id}>
-                        <Image borderRadius={'10px'} w='100%' h='100%' src={process.env.PUBLIC_URL+`/Images/netmedNON${el.id}.jpg`}></Image>
-                    </Box>
-                ))
+    const handleClick = (val) => {
+        let newCount = count;
+            if (val === 'forward') {
+                newCount++;
+                setCount(newCount);
+            } else if (val === 'backward') {
+                newCount--;
+                setCount(newCount);
             }
-        </Grid>
-
+    
+            if (newCount === newOnNetmeds.length-2) {
+                setCount(0);
+                ref.current.style.transform = 'translate(0%)';
+                return;
+            }
+            if (newCount === -1) {
+                setCount(0);
+                ref.current.style.transform = `translate(0%)`;
+                return;
+            }
+            ref.current.style.transform = `translate(-${newCount*33.7}%)`;
+    }
+  return (
+    <Box position={'relative'}>
+    <Box w='95vw' m='auto' mb='30px'>
+    <Box display={'flex'} alignItems='center' justifyContent='space-between' mb='30px'>
+        <Box>
+        <Heading as='h2' fontSize='25px' fontWeight='500'>Trending Today</Heading>
+        </Box>
     </Box>
+    <Box overflow={'hidden'} >
+    <Box transition={'0.3s'} ref={ref} display='grid' gridTemplateColumns={`repeat(${newOnNetmeds.length},1fr)`} gap='1vw'>
+        {
+            newOnNetmeds.map(el => (
+                <Box w='31vw' key={el.id} >
+                    <Image borderRadius={'10px'} w='100%' h='100%' src={process.env.PUBLIC_URL+`/Images/netmedNON${el.id}.jpg`}></Image>
+                </Box>
+            ))
+        }
+    </Box>
+    </Box>
+
+</Box>
+<Box w='99%' left='0.5%' position={'absolute'} display='flex' justifyContent={'space-between'} top='55%'>
+        <Button disabled={count===0} onClick={() => handleClick('backward')} borderRadius={'50%'} bg='#fff' w='40px' h='40px'><span style={{fontSize:'30px'}} class="material-symbols-outlined">chevron_left</span></Button>
+        <Button disabled={count===newOnNetmeds.length-3} onClick={() => handleClick('forward')} borderRadius={'50%'} bg='#fff' w='40px' h='40px'><span style={{fontSize:'30px'}} class="material-symbols-outlined">chevron_right</span></Button>
+    </Box>
+</Box>
   )
 }

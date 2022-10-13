@@ -1,5 +1,5 @@
 import { ChevronRightIcon, TimeIcon } from '@chakra-ui/icons'
-import { Box, Button, Center, Flex, Grid, Heading, Image, Link, Text } from '@chakra-ui/react'
+import { Box, Button, Center, Flex, Heading, Image, Link, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useState } from 'react';
 import { useRef } from 'react';
@@ -9,11 +9,14 @@ export function LimitedTimeDeals() {
     const [hour, setHour] = useState(22);
     const [minutes, setMinutes] = useState(29);
     const [seconds, setSeconds] = useState(59);
-    const ref = useRef(null);
+    const [limitedTimeData, setLimitedTimeData] = useState([]);
+    const [count, setCount] = useState(0);
+    const ref = useRef();
+    const timeref = useRef(null);
 
     useEffect(() => {
-        clearInterval(ref.current);
-        ref.current = setInterval(() => {
+        clearInterval(timeref.current);
+        timeref.current = setInterval(() => {
             setSeconds((prev) => prev-1);
         },1000)
     },[])
@@ -22,7 +25,7 @@ export function LimitedTimeDeals() {
         if(hour===0) {
             if(minutes===0) {
                 if(seconds===0) {
-                    clearInterval(ref.current);
+                    clearInterval(timeref.current);
                 }
             }
         }
@@ -35,45 +38,41 @@ export function LimitedTimeDeals() {
             setHour((prev) => prev-1);
         }
     },[seconds])
-    const limitedTimeData = [
-        {
-            id: 1,
-            title: 'Accu-Chek Instant Glucometer With Free 10',
-            price: 944.89,
-            crossedPrice: 1549.00,
-            off: 'UPTO 39% off'
-        },
-        {
-            id: 2,
-            title: 'Scalpe Plus Anti Dandruff Shampoo 75 ml',
-            price: 224.00,
-            crossedPrice: 280.00,
-            off: 'UPTO 20% off'
-        },
-        {
-            id: 3,
-            title: 'Cetaphil Oily Skin Cleanser 125ml',
-            price: 479.60,
-            crossedPrice: 545.00,
-            off: 'UPTO 12% off'
-        },
-        {
-            id: 4,
-            title: 'Lacto Calamine Oil Balance For Oily Skin Lotion 120 ml',
-            price: 212.64,
-            crossedPrice: 240.00,
-            off: 'UPTO 11% off'
-        },
-        {
-            id: 5,
-            title: 'Indulekha Bringha Oil 100 ml',
-            price: 388.80,
-            crossedPrice: 432.00,
-            off: 'UPTO 10% off'
-        },
-    ]
+    const getData = () => {
+        console.log('here')
+        fetch('https://netmedsdata.onrender.com/home?_page=1&_limit=10')
+        .then((res) => res.json())
+        .then((res) => {
+            setLimitedTimeData(res);
+        })
+    }
+    useEffect(() => {
+        getData();
+    },[])
+    const handleClick = (val) => {
+        let newCount = count;
+            if (val === 'forward') {
+                newCount++;
+                setCount(newCount);
+            } else if (val === 'backward') {
+                newCount--;
+                setCount(newCount);
+            }
+    
+            if (newCount === limitedTimeData.length-4) {
+                setCount(0);
+                ref.current.style.transform = 'translate(0%)';
+                return;
+            }
+            if (newCount === -1) {
+                setCount(0);
+                ref.current.style.transform = `translate(0%)`;
+                return;
+            }
+            ref.current.style.transform = `translate(-${newCount*20.2}%)`;
+    }
   return (
-    <Box>
+    <Box position={'relative'}>
         <Box bg='#24aeb1' h='200px' p='15px 30px'>
             <Box display={'flex'} alignItems='center' justifyContent='space-between' mb='20px'>
                 <Box>
@@ -87,23 +86,33 @@ export function LimitedTimeDeals() {
                 <Text color='#fff' fontSize={'13px'}><TimeIcon fontSize='16px'/> {hour}h {minutes}m {seconds}s remaining</Text>
             </Box>
         </Box>
-        <Box h='300px' position='relative'>
-            <Grid position={'absolute'} bottom='20px' m='15px 30px' gap='10px' gridTemplateColumns={`repeat(${limitedTimeData.length},1fr)`}>
-                    {
-                        limitedTimeData.map(el => (
-                            <Box key={el.id} p=' 30px 15px 15px 15px' boxShadow='rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px' borderRadius={'10px'} bg='#fff'>
-                                <Center><Image src={process.env.PUBLIC_URL+`/Images/netmedLTD${el.id}.jpg`}></Image></Center>
-                                <Text mt='30px'fontWeight={'600'} >{el.title}</Text>
-                                <Flex mt='8px' alignItems={'flex-end'}>
-                                    <Text fontWeight={'600'}>₹ {parseFloat(el.price).toFixed(2)}</Text>
-                                    <Text color='gray' fontWeight={'600'} textDecoration={'line-through'} fontSize={'10px'}>₹ {parseFloat(el.crossedPrice).toFixed(2)}</Text>
-                                </Flex>
-                                <Text m='5px 0' color='#60a723' fontSize='15px' fontWeight={'500'}>{el.off}</Text>
-                                <Center><Button h='35px' borderRadius={'3px'} bg='#24aeb1' color='#fff' _hover={'none'} fontSize='14px' w='100%'>ADD TO CART</Button></Center>
-                            </Box>
-                        ))
-                    }
-            </Grid>
+        <Box h='330px'>
+            <Box w='100%' position='absolute' top='100px'>
+                <Box w='95vw' m='auto'>
+                    <Box overflow={'hidden'} pb='20px'>
+                        <Box ref={ref} transition='0.3s' display='grid' gap='1vw' gridTemplateColumns={`repeat(${limitedTimeData.length},1fr)`}>
+                                {
+                                    limitedTimeData.map(el => (
+                                        <Box w='18.2vw' key={el.id} p=' 30px 15px 15px 15px' boxShadow='rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px' borderRadius={'10px'} bg='#fff'>
+                                            <Center><Image w='150px' h='150px' src={el.img1}></Image></Center>
+                                            <Text mt='30px'fontWeight={'600'} h='50px' noOfLines={[1,2]} textOverflow={'ellipsis'}>{el.title}</Text>
+                                            <Flex mt='8px' alignItems={'flex-end'}>
+                                                <Text fontWeight={'600'} mr='5px'>₹ {parseFloat(el.actual_price).toFixed(2)}</Text>
+                                                <Text color='gray' fontWeight={'600'} textDecoration={'line-through'} fontSize={'10px'}>₹ {parseFloat(el.crossed_price).toFixed(2)}</Text>
+                                            </Flex>
+                                            <Text m='5px 0' color='#60a723' fontSize='15px' fontWeight={'500'}>UPTO 25% off</Text>
+                                            <Center><Button h='35px' borderRadius={'3px'} bg='#24aeb1' color='#fff' _hover={'none'} fontSize='14px' w='100%'>ADD TO CART</Button></Center>
+                                        </Box>
+                                    ))
+                                }
+                        </Box>
+                    </Box>
+                </Box>
+                <Box w='99%' left='0.5%' position={'absolute'} display='flex' justifyContent={'space-between'} top='50%' transform={'translateY(-50%)'}>
+                    <Button disabled={count===0} onClick={() => handleClick('backward')} borderRadius={'50%'} bg='#fff' w='40px' h='40px'><span style={{fontSize:'30px'}} class="material-symbols-outlined">chevron_left</span></Button>
+                    <Button disabled={count===limitedTimeData.length-5} onClick={() => handleClick('forward')} borderRadius={'50%'} bg='#fff' w='40px' h='40px'><span style={{fontSize:'30px'}} class="material-symbols-outlined">chevron_right</span></Button>
+                </Box>
+            </Box>
         </Box>
     </Box>
   )

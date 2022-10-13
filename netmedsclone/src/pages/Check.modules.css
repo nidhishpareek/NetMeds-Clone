@@ -1,0 +1,84 @@
+/* .main {
+	position: relative;
+	margin: auto;
+}
+.container {
+	overflow: hidden;
+	height: 100%;
+	width: 100%;
+}
+.imageContainer {
+	display: flex;
+	width: fit-content;
+	height: 100%;
+	transition: 0.3s;
+}
+.buttons button {
+	width: fit-content;
+	height: fit-content;
+	border: none;
+	padding: 0;
+	background: none;
+	color: black;
+}
+.main button i {
+	font-size: 200%;
+	opacity: 0.8;
+}
+.buttons {
+	position: absolute;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	top: 50%;
+	transform: translateY(-50%);
+} */
+
+.container {
+	border: 1px solid blue;
+	position: relative;
+	width: 100vw;
+	margin: auto;
+}
+.container img {
+	width: 100%;
+	height: 100%;
+}
+.imageContainer > div {
+	border: 1px solid blue;
+	width: 100vw;
+}
+.box {
+	border:1px solid red;
+	overflow: hidden;
+}
+.imageContainer {
+	display: grid;
+	grid-template-columns: repeat(4,1fr);
+	gap: 20px;
+	width: fit-content;
+	height: 100%;
+	/* transform: translate(-25%); */
+	transition: 0.3s;
+}
+.yes button {
+	width: fit-content;
+	height: fit-content;
+	border: none;
+	padding: 0;
+	background: none;
+	color: black;
+}
+.yes i {
+	font-size: 200%;
+	opacity: 0.8;
+}
+.yes {
+	border: 1px solid red;
+	position: absolute;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	top: 50%;
+	transform: translateY(-50%);
+} 

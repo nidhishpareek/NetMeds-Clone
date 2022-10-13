@@ -1,17 +1,4 @@
 
-.dotDiv {
-    display: flex;
-    gap: 5px;
-    position: absolute;
-    bottom: 10px;
-}
-.dotDiv div {
-    height: 8px;
-    width: 8px;
-    border: 1px solid gray;
-    background-color: #fff;
-    border-radius: 50%;
-}
 .healthSliderDiv {
     border: 1px solid green;
     display: flex;
@@ -24,7 +11,7 @@
     height: 300px;
 }
 .healthSliderDiv > div {
-    border: 1px solid #8dad3c;
+    border: 1px solid #515151;
     /* width: 500px; */
     display: grid;
     grid-template-columns: repeat(4,calc(500px));
