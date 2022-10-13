@@ -2,14 +2,14 @@ import { Accordion, AccordionIcon, AccordionItem, AccordionButton, Box, Accordio
 import React from 'react'
 import { v4 as uuid } from "uuid"
 
-const CategoriesComp = ({ Categories }) => {
+const CategoriesComp = ({ Categories, handleSubCategory }) => {
 
 
     return (
         <Box pr="15px" bgColor="#ffffff" borderRadius={"10px"}>
             <Box borderRadius={"10px"} overflowY={'scroll'} height={"350px"} bgColor="#ffffff" p="0 0px 15px 15px" sx={{
                 '&::-webkit-scrollbar': {
-                    w: '1'
+                    w: '3px'
                 },
                 '&::-webkit-scrollbar-track': {
                     w: '6',
@@ -34,7 +34,7 @@ const CategoriesComp = ({ Categories }) => {
                                 </AccordionButton>
                             </h2>
                             {el.sub_cat.map((subs) => {
-                                return <AccordionPanel key={uuid()} p="2px 26px" textAlign="left" color="#6f7284" _hover={{ color: "#151b39", cursor: "pointer" }} >
+                                return <AccordionPanel key={uuid()} p="2px 26px" textAlign="left" color="#6f7284" _hover={{ color: "#151b39", cursor: "pointer" }} onClick={(e) => handleSubCategory(e.target.innerHTML)} >
                                     {subs}
                                 </AccordionPanel>
                             })}

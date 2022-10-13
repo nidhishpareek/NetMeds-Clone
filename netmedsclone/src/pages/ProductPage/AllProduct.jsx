@@ -1,7 +1,7 @@
 import { Box, Text, Grid, GridItem, Image, Button } from '@chakra-ui/react'
 import React from 'react'
 import ErrorPage from '../ErrorPage';
-const AllProduct = ({ page, loading, error, setval, prod, handleAdd, handlePage }) => {
+const AllProduct = ({ page, currItem, totalItem, loading, error, setval, prod, handleAdd, handlePage }) => {
 
     return loading ? <Box h="100vh">
         <Image pos={"absolute"} top="20%" left="50%" m="100px auto" bgColor={"transparent"} src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.giff" />
@@ -9,16 +9,6 @@ const AllProduct = ({ page, loading, error, setval, prod, handleAdd, handlePage 
         error ? <ErrorPage /> :
             (
                 <>
-                    <Box display="flex" justifyContent="space-between" alignItems={"center"} margin={"20px 0"}>
-                        <Box fontSize={'14px'}>Showing <strong>20</strong> of <strong>134</strong> items</Box>
-                        <Box display={"flex"} flexDir="row" alignItems={"center"} gap="5px">
-                            <Text fontSize={"14px"}>Sort by:</Text>
-                            <Button _hover={{ color: '#24aeb1', border: ' 1px solid #24aeb1' }} size={"xs"} border={"1px solid transparent"} bg="white" fontSize={"12px"} padding={"5px 20px 4px"} onClick={() => setval("", "")}>Popularity</Button>
-                            <Button _hover={{ color: '#24aeb1', border: ' 1px solid #24aeb1' }} size={"xs"} border={"1px solid transparent"} bg="white" fontSize={"12px"} padding={"5px 20px 4px"} onClick={() => setval("actual_price", "desc")}>High to Low</Button>
-                            <Button _hover={{ color: '#24aeb1', border: ' 1px solid #24aeb1' }} size={"xs"} border={"1px solid transparent"} bg="white" fontSize={"12px"} padding={"5px 20px 4px"} onClick={() => setval("actual_price", "asc")}>Low to High</Button>
-                            <Button _hover={{ color: '#24aeb1', border: ' 1px solid #24aeb1' }} size={"xs"} border={"1px solid transparent"} bg="white" fontSize={"12px"} padding={"5px 20px 4px"}>Discount</Button>
-                        </Box>
-                    </Box>
                     <Box p={"15px"} bgColor="#ffffff" borderRadius={"10px"} >
                         <Text fontSize={"13px"} fontWeight='700' color={"rgba(21,27,57,.6)"} letterSpacing="1px" textTransform={"uppercase"} mb="10px">All Product</Text>
                         <Grid templateColumns="repeat(4,1fr)" gap="13px">
@@ -42,12 +32,14 @@ const AllProduct = ({ page, loading, error, setval, prod, handleAdd, handlePage 
                                 </GridItem >
                             })}
                         </Grid>
-                        <Box textAlign={"center"} mt="30px" display="flex" gap='5px' justifyContent={"center"}>
-                            <Button size={"sm"} _hover={{ color: '#0298a7', bgColor: '#D4D5D940' }} bgColor="white" fontWeight={"400"} fontSize={"13px"} color="#151b39">{page}</Button>
-                            <Button onClick={(e) => handlePage(+e.target.innerHTML)} size={"sm"} _hover={{ color: '#0298a7', bgColor: '#D4D5D940' }} bgColor="white" fontWeight={"400"} fontSize={"13px"} color="#151b39">{page + 1}</Button>
-                            <Button size={"sm"} _hover={{ color: '#0298a7', bgColor: '#D4D5D940' }} bgColor="white" fontWeight={"400"} fontSize={"13px"} color="#151b39">{page + 2}</Button>
-                            <Button size={"sm"} border="1px solid #d4d5d9" bgColor="white" p="0 20px" fontWeight={"400"} _hover={{ color: '#0298a7', bgColor: 'white' }} fontSize={"13px"} color="#151b39" onClick={() => handlePage(page + 1)}>NEXT</Button>
-                        </Box>
+                        {currItem >= 20 && <Box textAlign={"center"} mt="30px" display="flex" gap='5px' justifyContent={"center"}>
+                            {page !== 1 && <Button size={"sm"} border="1px solid #d4d5d9" bgColor="white" p="0 20px" fontWeight={"400"} _hover={{ color: '#0298a7', bgColor: 'white' }} fontSize={"13px"} color="#151b39" onClick={() => handlePage(page - 1)}>PREV</Button>}
+                            {/* <span>{page}</span> */}
+                            {page !== Math.ceil(totalItem / 20) && <Button onClick={(e) => handlePage(+e.target.innerHTML)} size={"sm"} _hover={{ color: '#0298a7', bgColor: '#D4D5D940' }} bgColor="white" fontWeight={"400"} fontSize={"13px"} color="#151b39">{page}</Button>}
+                            {page !== Math.ceil(totalItem / 20) && <Button onClick={(e) => handlePage(+e.target.innerHTML)} size={"sm"} _hover={{ color: '#0298a7', bgColor: '#D4D5D940' }} bgColor="white" fontWeight={"400"} fontSize={"13px"} color="#151b39">{page + 1}</Button>}
+                            {page + 1 !== Math.ceil(totalItem / 20) && <Button onClick={(e) => handlePage(+e.target.innerHTML)} size={"sm"} _hover={{ color: '#0298a7', bgColor: '#D4D5D940' }} bgColor="white" fontWeight={"400"} fontSize={"13px"} color="#151b39">{page + 2}</Button>}
+                            {page + 2 !== Math.ceil(totalItem / 20) && <Button size={"sm"} border="1px solid #d4d5d9" bgColor="white" p="0 20px" fontWeight={"400"} _hover={{ color: '#0298a7', bgColor: 'white' }} fontSize={"13px"} color="#151b39" onClick={() => handlePage(page + 1)}>NEXT</Button>}
+                        </Box>}
                     </Box>
                 </>
             )

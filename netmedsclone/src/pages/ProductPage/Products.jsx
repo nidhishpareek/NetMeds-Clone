@@ -7,8 +7,15 @@ import CategoriesComp from './Categories'
 import CategoryImage from './CategoryImage'
 import Filters from './Filters'
 import axios from 'axios'
-import { errorState } from '../../Redux/action'
-import { allProduct } from '../../Redux/action'
+import { errorState, setCartProduct } from '../../Redux/action'
+import ProductSortingStrip from './ProductSortingStrip'
+// import { allProduct } from '../../Redux/action'
+
+const updatedUrl = (api, sort, order, subcategory) => {
+    return sort && subcategory ? `${api}&_sort=${sort}&_order=${order}&sub_category=${subcategory}` : sort ? `${api}&_sort=${sort}&_order=${order}` : subcategory ? `https://netmedsdata.onrender.com/products?_page=1&_limit=20&sub_category=${subcategory}` : api
+
+}
+
 function Products() {
     const Categories = [
         {
@@ -141,60 +148,85 @@ function Products() {
     const [prod, setProd] = useState([]);
     const [page, setPage] = useState(1);
     const [sort, setSort] = useState("");
+    const [total, setTotal] = useState(1747);
+    const [currItem, setCurrItem] = useState(20);
     const [subCategory, setSubCategory] = useState("");
     const [order, setOrder] = useState("");
+    const [manufacturer, setManufacturer] = useState('');
+    // const[ selectCat,setSelectCat]=useState("");
     const [loading, setLoading] = useState(false);
-    const { error, product } = useSelector((state) => state);
+    const [priceSort, setPriceSort] = useState({ min: 0, max: 0 })
+    const { error, cart } = useSelector((state) => state);
     const dispatch = useDispatch();
-    console.log(product)
-
-    const api = 'http://localhost:3001/products';
-    const cartApi = 'http://localhost:3001/cart'
-    const getProduct = (page) => {
-        setLoading(true)
-        axios.get(api, {
-            params: {
-                _page: page,
-                _limit: 20,
-                _sort: sort,
-                _order: order
-            }
+    console.log(cart)
+    const maxMin = () => {
+        let maxVal = 0, minVal = 0;
+        prod.map(el => {
+            maxVal = Math.max(maxVal, el.actual_price);
+            minVal = Math.min(minVal, el.actual_price);
         })
+        console.log(maxVal, "max")
+        console.log(minVal, "min")
+    }
+    console.log(priceSort, "sortedPrice")
+    maxMin()
+
+    // const api = 'https://netmedsdata.onrender.com/products';
+    const cartApi = 'https://netmedsdata.onrender.com/cart'
+    const getProduct = () => {
+        setLoading(true)
+        const api = updatedUrl(`https://netmedsdata.onrender.com/products?_page=${page}&_limit=20`, sort, order, subCategory)
+        console.log(api)
+        axios.get(api)
             .then(res => {
                 setLoading(false)
-                console.log(res.data)
-                dispatch(allProduct(res.data))
+                setTotal(res.headers['x-total-count'])
+                setCurrItem(res.data.length)
+                setProd(res.data)
+                console.log(total, currItem, prod)
+                // dispatch(allProduct(...res.data))
             })
             .catch(() => dispatch(errorState()))
             .finally(() => setLoading(false))
     }
-
+    const handleSubCategory = (val) => {
+        setSubCategory(val)
+        console.log("subcategory", subCategory)
+    }
+    const handleManufacturer = (val) => {
+        console.log("manufacturer", val)
+        setManufacturer(val)
+    }
     const handleAdd = (item) => {
         console.log(item);
+        // dispatch(setCartProduct(item))
         axios.post(cartApi, item)
-            .then((res) => console.log(res.data))
+            .then((res) => dispatch(setCartProduct(res.data)))
     }
     useEffect(() => {
-        getProduct(page, sort, order, subCategory)
+        getProduct()
     }, [page, sort, order, subCategory])
 
     const handlePage = (val) => {
         setPage(val);
     }
+    // console.log(prod.length)
     const setval = (sortval, orderval) => {
         setSort(sortval);
         setOrder(orderval)
+        console.log('sortcalled', sort, order)
     }
     return (
         <Box bg={"#f3f3f3"} pt="30px" pb="30px">
             < Box w="97%" margin="20px auto" display="flex" gap="10px">
                 <Box w="18%" display={"flex"} flexDir="column" gap="40px" >
-                    <CategoriesComp Categories={Categories} />
-                    <Filters />
+                    <CategoriesComp Categories={Categories} getProduct={getProduct} handleSubCategory={handleSubCategory} />
+                    <Filters prod={prod} handleManufacturer={handleManufacturer} />
                 </Box>
                 <Box w="80%" ml="10px" mr="10px">
                     <CategoryImage Categories={Categories} />
-                    <AllProduct page={page} loading={loading} error={error} setval={setval} prod={prod} handleAdd={handleAdd} handlePage={handlePage} />
+                    <ProductSortingStrip currItem={currItem} totalItem={total} setval={setval} />
+                    <AllProduct currItem={currItem} totalItem={total} page={page} loading={loading} error={error} setval={setval} prod={prod} handleAdd={handleAdd} handlePage={handlePage} />
                 </Box>
             </Box >
         </Box>
