@@ -1,9 +1,11 @@
 import { Accordion, AccordionIcon, AccordionItem, AccordionButton, Box, AccordionPanel, Text } from '@chakra-ui/react'
 import React from 'react'
+import { useContext } from 'react'
 import { v4 as uuid } from "uuid"
+import { Data } from '../Context/DataContext'
 
-const CategoriesComp = ({ Categories, handleSubCategory }) => {
-
+const CategoriesComp = () => {
+    const { Categories, handleSubCategory } = useContext(Data);
 
     return (
         <Box pr="15px" bgColor="#ffffff" borderRadius={"10px"}>

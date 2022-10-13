@@ -1,10 +1,12 @@
 import { Box, Tab, TabList, Tabs, Text } from '@chakra-ui/react'
-import React from 'react'
+import React, { useContext } from 'react'
+import { Data } from '../Context/DataContext';
 
-const ProductSortingStrip = ({ setval, totalItem, currItem }) => {
+const ProductSortingStrip = () => {
+    const { setval, total, currItem } = useContext(Data);
     return (
         <Box display="flex" justifyContent="space-between" alignItems={"center"} margin={"20px 0"}>
-            <Box fontSize={'14px'}>Showing <strong>{currItem}</strong> of <strong>{currItem === 0 ? 0 : totalItem}</strong> items</Box>
+            <Box fontSize={'14px'}>Showing <strong>{currItem}</strong> of <strong>{currItem === 0 ? 0 : total}</strong> items</Box>
             <Tabs size={"xs"} variant="unstyled" >
                 <TabList display={"flex"} alignItems="center" gap="5px">
                     <Text fontSize={"14px"} >Sort by:</Text>

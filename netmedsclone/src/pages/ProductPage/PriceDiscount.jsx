@@ -11,8 +11,7 @@ const PriceDiscount = ({ name }) => {
                 ml="25px"
                 mr="50px"
                 aria-label={['min', 'max']}
-                onChange={(val) => console.log(val)}
-            // onChangeEnd={(val) => console.log(val)}
+            // onChange={(val) => console.log(val)}
             >
                 <RangeSliderTrack>
                     <RangeSliderFilledTrack />

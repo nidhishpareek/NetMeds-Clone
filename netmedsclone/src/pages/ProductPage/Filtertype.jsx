@@ -1,17 +1,22 @@
 import { Box, Checkbox, Input } from '@chakra-ui/react'
-import React from 'react'
+import React, { useContext } from 'react'
 import { BsSearch } from 'react-icons/bs';
 import { v4 as uuid } from 'uuid';
+import { Data } from '../Context/DataContext';
 
-const Filtertype = ({ name, prod, handleManufacturer }) => {
-
-    const set = new Set();
-    const arr = new Array();
+const Filtertype = ({ name }) => {
+    const { prod, handleManufacturer, handleSubCategory } = useContext(Data);
+    const setManu = new Set();
+    const setCat = new Set();
+    const arr1 = []
+    const arr2 = [];
     const getManu = () => {
-        prod.map(el => set.add(el.manufacturer))
+        prod.map(el => setManu.add(el.manufacturer));
+        prod.map(el => setCat.add(el.category));
     }
     getManu()
-    arr.push(...set)
+    arr1.push(...setManu)
+    arr2.push(...setCat)
 
     return (
         <>
@@ -20,7 +25,7 @@ const Filtertype = ({ name, prod, handleManufacturer }) => {
                 <Input type="text" focusBorderColor='none' w="93%" h="30px" placeholder='Search...' color={'#6f7284'} ml="-5px" fontWeight={"400"} fontSize="14px" border='none' bgColor={"transparent"} />
                 <BsSearch color='#6f7284' />
             </Box>
-            <Box maxH={"260px"} overflowY='auto' overflowX={"hidden"} display={"flex"} flexDir="column" ml={"20px"} mr={"10px"} sx={{
+            <Box maxH={"260px"} overflowY='auto' overflowX={"hidden"} display={"flex"} p="10px" flexDir="column" ml={"20px"} mr={"10px"} sx={{
                 '&::-webkit-scrollbar': {
                     w: '3px'
                 },
@@ -32,24 +37,14 @@ const Filtertype = ({ name, prod, handleManufacturer }) => {
                     bg: `#6f7284`
                 },
             }}>
-                {arr.map((el) => {
+                {arr1.map((el) => {
                     if (name === 'Manufacturers')
-                        return <Checkbox key={uuid()} pb="8px" fontSize="13px" onChange={(e) => e.target.checked ? handleManufacturer(e.target.value) : handleManufacturer("")} value={el}>{el}</Checkbox>
+                        return <Checkbox key={uuid()} pb="8px" fontSize="13px" value={el}>{el}</Checkbox>
+                })}
+                {arr2.map((el) => {
                     if (name === 'Categories')
-                        return <Checkbox key={uuid()} pb="8px" fontSize="13px">{el.category}</Checkbox>
-                }
-                )}
-
-                {/* <Checkbox >Checkbox</Checkbox>
-                <Checkbox >Checkbox</Checkbox>
-                <Checkbox >Checkbox</Checkbox>
-                <Checkbox >Checkbox</Checkbox>
-                <Checkbox >Checkbox</Checkbox>
-                <Checkbox >Checkbox</Checkbox>
-                <Checkbox >Checkbox</Checkbox>
-                <Checkbox >Checkbox</Checkbox>
-                <Checkbox >Checkbox</Checkbox>
-                <Checkbox >Checkbox</Checkbox> */}
+                        return <Checkbox key={uuid()} pb="8px" fontSize="13px" value={el} onChange={(e) => { e.target.checked ? handleSubCategory(e.target.value) : handleSubCategory('') }}>{el}</Checkbox>
+                })}
             </Box>
         </>
 

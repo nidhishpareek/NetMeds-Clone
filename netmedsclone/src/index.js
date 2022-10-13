@@ -11,13 +11,13 @@ import  Data  from "./pages/Context/DataContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Data>
       <Provider store={store}>
-        <ChakraProvider>
-          <App />
-        </ChakraProvider>
+        <Data>
+          <ChakraProvider>
+            <App />
+          </ChakraProvider>
+        </Data>
       </Provider>
-    </Data>
   </React.StrictMode>
 );
 
