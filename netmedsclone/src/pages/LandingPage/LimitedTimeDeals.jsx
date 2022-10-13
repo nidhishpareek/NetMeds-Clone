@@ -86,15 +86,15 @@ export function LimitedTimeDeals() {
                 <Text color='#fff' fontSize={'13px'}><TimeIcon fontSize='16px'/> {hour}h {minutes}m {seconds}s remaining</Text>
             </Box>
         </Box>
-        <Box h='330px'>
+        <Box h={{base: '260px', md: '330px'}}>
             <Box w='100%' position='absolute' top='100px'>
                 <Box w='95vw' m='auto'>
-                    <Box overflow={'hidden'} pb='20px'>
+                    <Box overflow={{base: 'scroll', md: 'hidden'}} pb='20px'>
                         <Box ref={ref} transition='0.3s' display='grid' gap='1vw' gridTemplateColumns={`repeat(${limitedTimeData.length},1fr)`}>
                                 {
                                     limitedTimeData.map(el => (
-                                        <Box w='18.2vw' key={el.id} p=' 30px 15px 15px 15px' boxShadow='rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px' borderRadius={'10px'} bg='#fff'>
-                                            <Center><Image w='150px' h='150px' src={el.img1}></Image></Center>
+                                        <Box w={{base: '200px', md: '18.2vw'}} key={el.id} p=' 30px 15px 15px 15px' boxShadow='rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px' borderRadius={'10px'} bg='#fff'>
+                                            <Center><Image w='150px' h={{base: '100px', md: '150px'}} src={el.img1}></Image></Center>
                                             <Text mt='30px'fontWeight={'600'} h='50px' noOfLines={[1,2]} textOverflow={'ellipsis'}>{el.title}</Text>
                                             <Flex mt='8px' alignItems={'flex-end'}>
                                                 <Text fontWeight={'600'} mr='5px'>₹ {parseFloat(el.actual_price).toFixed(2)}</Text>
@@ -108,7 +108,7 @@ export function LimitedTimeDeals() {
                         </Box>
                     </Box>
                 </Box>
-                <Box w='99%' left='0.5%' position={'absolute'} display='flex' justifyContent={'space-between'} top='50%' transform={'translateY(-50%)'}>
+                <Box w='99%' left='0.5%' position={'absolute'} display={{base: 'none', md: 'flex'}} justifyContent={'space-between'} top='50%' transform={'translateY(-50%)'}>
                     <Button disabled={count===0} onClick={() => handleClick('backward')} borderRadius={'50%'} bg='#fff' w='40px' h='40px'><span style={{fontSize:'30px'}} class="material-symbols-outlined">chevron_left</span></Button>
                     <Button disabled={count===limitedTimeData.length-5} onClick={() => handleClick('forward')} borderRadius={'50%'} bg='#fff' w='40px' h='40px'><span style={{fontSize:'30px'}} class="material-symbols-outlined">chevron_right</span></Button>
                 </Box>

@@ -37,11 +37,11 @@ export default function NewOnNetmeds() {
         <Heading as='h2' fontSize='25px' fontWeight='500'>Trending Today</Heading>
         </Box>
     </Box>
-    <Box overflow={'hidden'} >
+    <Box overflow={{base: 'scroll', md: 'hidden'}} >
     <Box transition={'0.3s'} ref={ref} display='grid' gridTemplateColumns={`repeat(${newOnNetmeds.length},1fr)`} gap='1vw'>
         {
             newOnNetmeds.map(el => (
-                <Box w='31vw' key={el.id} >
+                <Box w={{base: '200px', md: '31vw'}} h={{base: '220px', md: '100%'}} key={el.id} >
                     <Image borderRadius={'10px'} w='100%' h='100%' src={process.env.PUBLIC_URL+`/Images/netmedNON${el.id}.jpg`}></Image>
                 </Box>
             ))
@@ -50,7 +50,7 @@ export default function NewOnNetmeds() {
     </Box>
 
 </Box>
-<Box w='99%' left='0.5%' position={'absolute'} display='flex' justifyContent={'space-between'} top='55%'>
+<Box w='99%' left='0.5%' position={'absolute'} display={{base: 'none', md: 'flex'}} justifyContent={'space-between'} top='55%'>
         <Button disabled={count===0} onClick={() => handleClick('backward')} borderRadius={'50%'} bg='#fff' w='40px' h='40px'><span style={{fontSize:'30px'}} class="material-symbols-outlined">chevron_left</span></Button>
         <Button disabled={count===newOnNetmeds.length-3} onClick={() => handleClick('forward')} borderRadius={'50%'} bg='#fff' w='40px' h='40px'><span style={{fontSize:'30px'}} class="material-symbols-outlined">chevron_right</span></Button>
     </Box>

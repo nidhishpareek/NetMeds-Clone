@@ -37,10 +37,10 @@ export default function TopBrands() {
             <Heading as='h2' fontSize='25px' fontWeight='500'>Top Brands</Heading>
             </Box>
         </Box>
-        <Grid templateColumns={`repeat(${topBrandData.length},1fr)`} gap={3}>
+        <Grid overflow={{base: 'scroll', md: 'hidden'}} pb='20px' templateColumns={`repeat(${topBrandData.length},1fr)`} gap={3}>
             {
                 topBrandData.map(((el, index) => (
-                    <Box key={el.id} bg='#fff' p='30px 20px' borderRadius={6} boxShadow='md' cursor='pointer'>
+                    <Box w={{base: '200px', md: '18vw'}} key={el.id} bg='#fff' p='30px 20px' borderRadius={6} boxShadow='md' cursor='pointer'>
                         <Center><Image h='180px' w='100%' src={process.env.PUBLIC_URL+`/Images/netmedTB${index+1}.jpg`}></Image></Center>
                         <Center><Text mt='20px' fontWeight={'600'}>{el.title}</Text></Center>
                         <Center><Text mt='30px' color='#60a723' fontWeight={500} fontSize={'15px'}>{el.off}</Text></Center>

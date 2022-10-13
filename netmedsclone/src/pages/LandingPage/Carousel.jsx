@@ -69,13 +69,13 @@ export const Carousel = () => {
         borderRadius: '50%'
     }
     return (
-        <Box position='relative' w='97vw' m='auto' mb='40px'>
+        <Box position='relative' w='97vw' m='auto' mb={{base: '15px', md: '30px', lg: '40px'}}>
             <Box overflow={'hidden'}>
                 <Box ref={ref} w='400%' display={'grid'} gridTemplateColumns='repeat(4,1fr)' transition='0.3s'>
                 {
                     images.map(el => (
-                        <Box w='97vw' className="slide" h='300px'>
-                            <Image w='100%' h='100%' objectFit='cover' src={process.env.PUBLIC_URL + `/Images/netmedC${el.id}.jpg`} alt="" />
+                        <Box w='97vw' className="slide" h={{base: '200px', md: '250px', lg: '300px',}}>
+                            <Image w='100%' h='100%' src={process.env.PUBLIC_URL + `/Images/netmedC${el.id}.jpg`} alt="" />
                         </Box>
                     ))
                 }

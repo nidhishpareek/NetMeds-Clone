@@ -20,7 +20,7 @@ export const PaymentsPartner = () => {
         }
     ]
   return (
-    <Box p='8px 25px' mb='10px'>
+    <Box p='8px 25px' mb='10px' display={{base: 'none', md: 'none', lg: 'block'}}>
         <Box display={'flex'} alignItems='center' justifyContent='space-between' mb='30px'>
             <Box>
             <Heading as='h2' fontSize='25px' fontWeight='500'>Payments Partners Offers</Heading>

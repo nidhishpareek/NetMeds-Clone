@@ -4,7 +4,7 @@ import React from 'react'
 
 export default function PreviousAndBeauty() {
   return (
-    <Flex p='8px 25px' m='20px 0'>
+    <Box p='8px 25px' m='20px 0' display={{base: 'none', md: 'flex'}}>
         <Flex w='100%' borderRight='1px solid rgb(181, 181, 181)' p='0 20px 0 0'>
             <Box >
                 <Heading as='h2' fontSize='25px' mb='10px' fontWeight='500'>Previous Orders</Heading>
@@ -32,6 +32,6 @@ export default function PreviousAndBeauty() {
                 <Center><Image w='120px' h='120px' src={process.env.PUBLIC_URL+`/Images/netmedBeauty_products.svg`}></Image></Center>
             </Box>
         </Flex>
-    </Flex>
+    </Box>
   )
 }

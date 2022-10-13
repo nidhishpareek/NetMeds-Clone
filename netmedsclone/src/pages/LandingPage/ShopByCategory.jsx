@@ -34,11 +34,11 @@ export default function ShopByCategory() {
                 <Link color='red' style={{textDecoration: 'none'}} ><Text>View All <ChevronRightIcon/></Text></Link>
             </Box>
         </Box>
-        <Grid templateColumns={`repeat(${showByCategory.length},1fr)`} gap={3}>
+        <Grid overflow={{base: 'scroll', md: 'hidden'}} pb='20px' templateColumns={`repeat(${showByCategory.length},1fr)`} gap={3}>
             {
                 showByCategory.map(((el, index) => (
-                    <Box key={el.id} bg='#fff' p='30px 20px' borderRadius={6} boxShadow='md' cursor='pointer'>
-                        <Center><Image h='180px' w='100%' src={process.env.PUBLIC_URL+`/Images/netmedSBC${index+1}.jpg`}></Image></Center>
+                    <Box w={{base: '200px', md: '18vw'}} key={el.id} bg='#fff' p='30px 20px' borderRadius={6} boxShadow='md' cursor='pointer'>
+                        <Center><Image h={{base: '120px', md: '180px'}} w='100%' src={process.env.PUBLIC_URL+`/Images/netmedSBC${index+1}.jpg`}></Image></Center>
                         <Center><Text mt='20px' fontWeight={'600'}>{el.title}</Text></Center>
                     </Box>
                 )))
