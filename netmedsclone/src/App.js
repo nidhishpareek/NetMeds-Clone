@@ -4,9 +4,7 @@ import { Landing } from './pages/landing';
 function App() {
   return (
     <div className="App">
-      <Box bg='#f3f7fb'>
       <Landing/>
-      </Box>
     </div>
   );
 }
