@@ -7,9 +7,7 @@ function App() {
   return (
     <div className="App">
       <MainNavbar />
-      <Box bg='#f3f7fb'>
       <Landing/>
-      </Box>
       <Footer />
     </div>
   );
