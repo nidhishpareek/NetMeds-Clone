@@ -38,16 +38,18 @@ export default function BestInBeauty() {
             </Box>
         </Box>
         <Box h='200px' position='relative'>
-        <Grid position={'absolute'} bottom='25px' m='15px 30px' gap='10px' templateColumns={`repeat(${bestInBeautyData.length},1fr)`} g={3}>
-            {
-                bestInBeautyData.map(((el, index) => (
-                    <Box key={el.id} boxShadow='rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px' bg='#fff' p='30px 20px' borderRadius={6} cursor='pointer'>
-                        <Center><Image h='180px' w='100%' src={process.env.PUBLIC_URL+`/Images/netmedBIB${index+1}.jpg`}></Image></Center>
-                        <Center><Text mt='20px' fontWeight={'600'}>{el.title}</Text></Center>
-                    </Box>
-                )))
-            }
-        </Grid>
+            <Box overflow={'scroll'} w='100%' position={'absolute'} bottom='25px'>
+                <Grid m='15px 30px' gap='10px' templateColumns={`repeat(${bestInBeautyData.length},1fr)`} g={3}>
+                    {
+                        bestInBeautyData.map(((el, index) => (
+                            <Box w={{base: '200px', md: '100%'}}  key={el.id} boxShadow='rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px' bg='#fff' p='30px 20px' borderRadius={6} cursor='pointer'>
+                                <Center><Image h='180px' w='100%' src={process.env.PUBLIC_URL+`/Images/netmedBIB${index+1}.jpg`}></Image></Center>
+                                <Center><Text mt='20px' fontWeight={'600'}>{el.title}</Text></Center>
+                            </Box>
+                        )))
+                    }
+                </Grid>
+            </Box>
         </Box>
     </Box>
   )

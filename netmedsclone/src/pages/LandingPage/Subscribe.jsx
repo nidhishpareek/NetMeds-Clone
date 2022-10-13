@@ -3,7 +3,7 @@ import { Box, Button, Center, Flex, Grid, Heading, Image, ListItem, UnorderedLis
 export const Subscribe = () => {
   return (
     <Box borderTop='1px solid #dddde0' borderBottom='1px solid #dddde0' p='30px 0' m='0 25px 20px 25px'>
-        <Grid gridTemplateColumns={'repeat(2,1fr)'}>
+        <Grid gap={{base: '10px', md: '0'}} gridTemplateColumns={{base: 'repeat(1,1fr)', md: 'repeat(2,1fr)'}}>
             <Flex>
                 <Center>
                     <Box>
@@ -18,7 +18,7 @@ export const Subscribe = () => {
                     </UnorderedList>
                 </Box>
             </Flex>
-            <Flex alignItems={'center'} justifyContent='flex-end'>
+            <Flex alignItems={'center'} justifyContent={{base: '', md: 'flex-end'}}>
                 <Box>
                     <Button h='50px' letterSpacing={'1px'} borderRadius={'3px'} boxShadow= '0 6px 12px 0 rgb(36 174 177 / 40%)'  p='0 20px' bg='#24aeb1' color='#fff' _hover={'none'} fontSize='14px'>Subscribe</Button>
                 </Box>

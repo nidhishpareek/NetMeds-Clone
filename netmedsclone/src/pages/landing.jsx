@@ -38,12 +38,12 @@ export const Landing = () => {
     <CategoriesOnFocus/>
     <ExploreBeauty/>
     <OnlineDoctorConsultants/>
-    {/* <BestInBeauty/>
+    <BestInBeauty/>
     <PersonalCare/>
     <MensGrooming/>
     <Subscribe/>
     <HealthConcern/>
-    <HealthLibrary/>
+    {/* <HealthLibrary/>
     <AboutSome/> */}
     {/* <Check buttons={false} width={400}/> */}
     </>

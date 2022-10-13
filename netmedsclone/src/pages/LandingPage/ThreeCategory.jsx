@@ -19,7 +19,7 @@ export const ThreeCategory = () => {
             title: 'Flat 15% off'
         }
     ]
-   return  <Box p='8px 25px' mb='10px'>
+   return  <Box p='8px 25px' mb='10px' display={{base: 'none', md: 'block'}}>
    <Grid gap={{base: 2, md: 6}} gridTemplateColumns={{base: 'repeat(1,1fr)', md: 'repeat(2,1fr)', lg: 'repeat(3,1fr)'}}>
         {
             threeCategory.map(el => (

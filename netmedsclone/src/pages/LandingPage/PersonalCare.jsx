@@ -26,7 +26,7 @@ export default function PersonalCare() {
         }
     ]
   return (
-    <Box p='0 25px' mb='30px'>
+    <Box p='0 25px' mb='30px' display={{base: 'none', md: 'block'}}>
         <Box display={'flex'} alignItems='center' justifyContent='space-between' mb='30px'>
             <Box>
             <Heading as='h2' fontSize='25px' fontWeight='500'>Personal Care</Heading>

@@ -1,5 +1,5 @@
 import { ChevronRightIcon } from "@chakra-ui/icons"
-import { Box, Flex, Heading, Image, Link, Text } from "@chakra-ui/react"
+import { Box, Flex, Grid, Heading, Image, Link, Text } from "@chakra-ui/react"
 
 export const PaymentsPartner = () => {
     const paymentsdata = [
