@@ -34,7 +34,7 @@ export default function ExploreBeauty() {
             </Box>
         </Box>
         <Box h='200px' position='relative'>
-            <Box overflow={'scroll'} w='100%' position={'absolute'} bottom='25px'>
+            <Box overflow={{base: 'scroll', md: 'hidden'}} w='100%' position={'absolute'} bottom='25px'>
                 <Grid  m='15px 30px' gap='10px' templateColumns={`repeat(${exploreBeautyData.length},1fr)`} g={3}>
                     {
                         exploreBeautyData.map(((el, index) => (

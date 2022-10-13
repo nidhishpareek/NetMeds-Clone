@@ -43,8 +43,8 @@ export const Landing = () => {
     <MensGrooming/>
     <Subscribe/>
     <HealthConcern/>
-    {/* <HealthLibrary/>
-    <AboutSome/> */}
+    <HealthLibrary/>
+    {/* <AboutSome/> */}
     {/* <Check buttons={false} width={400}/> */}
     </>
 }

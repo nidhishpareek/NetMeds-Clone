@@ -33,17 +33,19 @@ export default function HealthLibrary() {
                 </Box>
             </Box>
         </Box>
-        <Box h='140px' position='relative'>
-        <Grid position={'absolute'} bottom='0px' m='15px 30px' gap='10px' templateColumns={`repeat(${healthLibraryData.length},1fr)`} g={3}>
-            {
-                healthLibraryData.map(((el, index) => (
-                    <Box key={el.id} boxShadow='rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px' bg='#fff' borderRadius={6} cursor='pointer'>
-                        <Center><Image  w='100%' borderRadius='6px 6px 0 0' src={process.env.PUBLIC_URL+`/Images/netmedHL${index+1}.jpg`}></Image></Center>
-                        <Center><Text m='15px ' fontWeight={'600'}>{el.title}</Text></Center>
-                    </Box>
-                )))
-            }
-        </Grid>
+        <Box h={{base: '90px', lg: '140px'}} position='relative'>
+            <Box overflow={{base: 'scroll', md: 'hidden'}} w='100%' position={'absolute'} bottom='25px'>
+                <Grid m='15px 30px' gap='10px' templateColumns={`repeat(${healthLibraryData.length},1fr)`} g={3}>
+                    {
+                        healthLibraryData.map(((el, index) => (
+                            <Box w={{base: '200px', md: '100%'}} h={{base: '140px', lg:'190px'}} key={el.id} boxShadow='rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px' bg='#fff' borderRadius={6} cursor='pointer'>
+                                <Center><Image  w='100%' borderRadius='6px 6px 0 0' src={process.env.PUBLIC_URL+`/Images/netmedHL${index+1}.jpg`}></Image></Center>
+                                <Center><Text noOfLines={[1,2]} textOverflow="ellipsis" m='15px' fontSize={{base: '12px', lg: '15px'}} h='40px' fontWeight={'600'}>{el.title}</Text></Center>
+                            </Box>
+                        )))
+                    }
+                </Grid>
+            </Box>
         </Box>
     </Box>
   )
