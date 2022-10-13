@@ -1,6 +1,5 @@
 import { Box, Image} from '@chakra-ui/react'
 import { useEffect, useRef, useState } from 'react'
-import '../landing.modules.css'
 export const Carousel = () => {
     const images = [
         {id: 1}, {id: 2}, {id: 3}, {id: 4}
@@ -74,8 +73,8 @@ export const Carousel = () => {
                 <Box ref={ref} w='400%' display={'grid'} gridTemplateColumns='repeat(4,1fr)' transition='0.3s'>
                 {
                     images.map(el => (
-                        <Box w='97vw' className="slide" h={{base: '200px', md: '250px', lg: '300px',}}>
-                            <Image w='100%' h='100%' src={process.env.PUBLIC_URL + `/Images/netmedC${el.id}.jpg`} alt="" />
+                        <Box borderRadius={{base: '10px', md: '0'}} w='97vw' className="slide" h={{base: '200px', md: '250px', lg: '300px',}}>
+                            <Image borderRadius={{base: '10px', md: '0'}} w='100%' h='100%' src={process.env.PUBLIC_URL + `/Images/netmedC${el.id}.jpg`} alt="" />
                         </Box>
                     ))
                 }
@@ -91,8 +90,8 @@ export const Carousel = () => {
                 </Box>
             </Box>
             <Box position={'absolute'} w='100%' display={'flex'} justifyContent='space-between' top='50%' transform='translateY(-50%)'>
-                <span style={{fontSize:'35px', cursor: 'pointer', marginLeft: '8px'}} onClick={() => handleClick('backward')} class="material-symbols-outlined">arrow_back_ios</span>
-                <span style={{fontSize:'35px', cursor: 'pointer'}} onClick={() => handleClick('forward')} class="material-symbols-outlined">arrow_forward_ios</span>
+                <span style={{fontSize:'35px', cursor: 'pointer', marginLeft: '8px', color: '#363b46'}} onClick={() => handleClick('backward')} class="material-symbols-outlined">arrow_back_ios</span>
+                <span style={{fontSize:'35px', cursor: 'pointer', color: '#363b46'}} onClick={() => handleClick('forward')} class="material-symbols-outlined">arrow_forward_ios</span>
             </Box>
            
         </Box>

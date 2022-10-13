@@ -2,9 +2,7 @@ import BestInBeauty from "./LandingPage/BestInBeauty"
 import BrandDays from "./LandingPage/BrandDays"
 import { Carousel } from "./LandingPage/Carousel"
 import CategoriesOnFocus from "./LandingPage/CategoriesOnFocus"
-import { Check } from "./chekc"
 import ExploreBeauty from "./LandingPage/ExploreBeauty"
-import { HealthSlider } from "./LandingPage/HealthSlider"
 import { LimitedTimeDeals } from "./LandingPage/LimitedTimeDeals"
 import NewOnNetmeds from "./LandingPage/NewOnNetmeds"
 import { PaymentsPartner } from "./LandingPage/PaymentsPartner"
@@ -21,10 +19,12 @@ import { AboutSome } from "./LandingPage/AboutSome"
 import { FirstMembership } from "./LandingPage/FirstMembership"
 import { OnlineDoctorConsultants } from "./LandingPage/OnlineDoctorConsultants"
 import { Subscribe } from "./LandingPage/Subscribe"
+import { FreeHomeDelivery } from "./LandingPage/FreeHomeDelivery"
 
 export const Landing = () => {
     return <>
     <Carousel/>
+    <FreeHomeDelivery/>
     <ThreeCategory/>
     <PaymentsPartner/>
     <PreviousAndBeauty/>
@@ -44,7 +44,6 @@ export const Landing = () => {
     <Subscribe/>
     <HealthConcern/>
     <HealthLibrary/>
-    {/* <AboutSome/> */}
-    {/* <Check buttons={false} width={400}/> */}
+    <AboutSome/>
     </>
 }

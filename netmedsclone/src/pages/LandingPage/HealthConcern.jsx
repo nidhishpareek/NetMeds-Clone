@@ -36,7 +36,7 @@ export default function HealthConcern() {
             {
                 healthConcernData.map(((el, index) => (
                     <Box w={{base: '200px', md: '18vw'}} key={el.id} bg='#fff' h='300px' p='30px 20px' borderRadius={6} boxShadow='md' cursor='pointer'>
-                        <Center><Image mt='30px' h='100px' w='50%' src={process.env.PUBLIC_URL+`/Images/netmedHC${index+1}.jpg`}></Image></Center>
+                        <Center><Image mt='30px' h={{base: '100%', md: '100px'}} w='50%' src={process.env.PUBLIC_URL+`/Images/netmedHC${index+1}.jpg`}></Image></Center>
                         <Center><Text  fontWeight={'600'} mt='50px'>{el.title}</Text></Center>
                     </Box>
                 )))
