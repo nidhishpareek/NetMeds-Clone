@@ -20,9 +20,10 @@ import { FirstMembership } from "./LandingPage/FirstMembership"
 import { OnlineDoctorConsultants } from "./LandingPage/OnlineDoctorConsultants"
 import { Subscribe } from "./LandingPage/Subscribe"
 import { FreeHomeDelivery } from "./LandingPage/FreeHomeDelivery"
+import { Box } from "@chakra-ui/react"
 
 export const Landing = () => {
-    return <>
+    return <Box bg={'#f3f7fb'}>
     <Carousel/>
     <FreeHomeDelivery/>
     <ThreeCategory/>
@@ -45,5 +46,5 @@ export const Landing = () => {
     <HealthConcern/>
     <HealthLibrary/>
     <AboutSome/>
-    </>
+    </Box>
 }

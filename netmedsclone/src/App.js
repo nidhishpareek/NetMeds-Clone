@@ -2,14 +2,14 @@ import './App.css';
 import MainNavbar from './Components/Navbar/MainNavbar'
 import { Box } from '@chakra-ui/react';
 import Products from './pages/ProductPage/Products';
+import Footer from './Components/Footer/Footer'
 import { Landing } from './pages/landing';
+import { AllRoutes } from './Components/AllRoutes/AllRoutes';
 function App() {
   return (
     <div className="App">
       <MainNavbar />
-      <Box bg='#f3f7fb'>
-      <Landing/>
-      </Box>
+      <AllRoutes/>
       <Footer />
     </div>
   );
