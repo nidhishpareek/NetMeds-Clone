@@ -1,8 +1,23 @@
-import { Box, Checkbox, Input } from '@chakra-ui/react'
-import React from 'react'
-import { BsSearch } from 'react-icons/bs'
+import { Box, Checkbox, Input, Text } from '@chakra-ui/react'
+import React, { useContext } from 'react'
+import { BsSearch } from 'react-icons/bs';
+import { v4 as uuid } from 'uuid';
+import { Data } from '../Context/DataContext';
 
 const Filtertype = ({ name }) => {
+    const { prod, handleManufacturer, handleCategory } = useContext(Data);
+    const setManu = new Set();
+    const setCat = new Set();
+    const arr1 = []
+    const arr2 = [];
+    const getManu = () => {
+        prod.map(el => setManu.add(el.manufacturer));
+        prod.map(el => setCat.add(el.category));
+    }
+    getManu()
+    arr1.push(...setManu)
+    arr2.push(...setCat)
+
     return (
         <>
             <Box fontSize="18px" fontWeight={700} mt="10px" letterSpacing="0.25px" color={"#151b39"} pl="20px">{name}</Box>
@@ -12,7 +27,7 @@ const Filtertype = ({ name }) => {
             </Box>
             <Box maxH={"260px"} overflowY='auto' overflowX={"hidden"} display={"flex"} flexDir="column" ml={"20px"} mr={"10px"} sx={{
                 '&::-webkit-scrollbar': {
-                    w: '1'
+                    w: '3px'
                 },
                 '&::-webkit-scrollbar-track': {
                     w: '6',
@@ -22,18 +37,19 @@ const Filtertype = ({ name }) => {
                     bg: `#6f7284`
                 },
             }}>
-                <Checkbox pb="8px" fontSize="13px">Checkbox</Checkbox>
-                <hr />
-                <Checkbox >Checkbox</Checkbox>
-                <Checkbox >Checkbox</Checkbox>
-                <Checkbox >Checkbox</Checkbox>
-                <Checkbox >Checkbox</Checkbox>
-                <Checkbox >Checkbox</Checkbox>
-                <Checkbox >Checkbox</Checkbox>
-                <Checkbox >Checkbox</Checkbox>
-                <Checkbox >Checkbox</Checkbox>
-                <Checkbox >Checkbox</Checkbox>
-                <Checkbox >Checkbox</Checkbox>
+                {
+                    arr1.map((el) => {
+                        if (name === 'Manufacturers')
+                            return <Checkbox pl="10px" key={uuid()} pb="8px" fontSize="13px" value={el} onChange={(e) => { e.target.checked ? handleManufacturer(e.target.value) : handleCategory('') }}>
+                                <Text fontSize={"13px"}>{el}</Text>
+                            </Checkbox>
+                    })}
+                {arr2.map((el) => {
+                    if (name === 'Categories')
+                        return <Checkbox pl="10px" key={uuid()} pb="8px" fontSize="13px" value={el} onChange={(e) => { e.target.checked ? handleCategory(e.target.value) : handleCategory('') }}>
+                            <Text fontSize={"13px"}>{el}</Text>
+                        </Checkbox>
+                })}
             </Box>
         </>
 

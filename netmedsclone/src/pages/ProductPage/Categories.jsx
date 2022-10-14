@@ -1,129 +1,17 @@
 import { Accordion, AccordionIcon, AccordionItem, AccordionButton, Box, AccordionPanel, Text } from '@chakra-ui/react'
 import React from 'react'
+import { useContext } from 'react'
 import { v4 as uuid } from "uuid"
+import { Data } from '../Context/DataContext'
 
 const CategoriesComp = () => {
-    const Categories = [
-        {
-            cat: "Veterinary",
-            sub_cat: ["Petcare", "Farm Animals", "Poultry", "Aquaculture"]
-        },
-        {
-            cat: "Ayush",
-            sub_cat: ['Homeopathy', 'Ayurvedic', 'Unani', 'Siddha']
-        },
-        {
-            cat: "Fitness",
-            sub_cat: ['Vitamins And Supplements',
-                'Family Nutrition',
-                'Health Food And Drinks',
-                'Ayurvedic Supplements',
-                'Sports Supplements',
-                'Smoking Cessation Support',
-                'Weight Management']
-        },
-        {
-            cat: "Mom & Baby",
-            sub_cat: ['Baby Care',
-                'Feminine Hygiene',
-                'Maternity Care',
-                'Toys & Games',
-                'Baby Bath Time',
-                'Maternity Accessories']
-        },
-        {
-            cat: "Treatments",
-            sub_cat: ['Diabetes Care',
-                'First Aid',
-                'Pain Relief Application',
-                'Usual Symptoms',
-                'General Discomfort',
-                'Cough & Cold',
-                'General Health Supplements',
-                'Smoking Cessation (T)',
-                'Skin Treatment']
-        },
-        {
-            cat: "Devices",
-            sub_cat: ['Orthopaedics',
-                'Breathe Easy',
-                'Measurements',
-                'Surgical Accessories']
-        },
-        {
-            cat: "Eyewear",
-            sub_cat: ['Contact Lenses (EW)',
-                'Eye Glasses',
-                'Reading Glasses',
-                'Sunglasses',
-                'Computer Glasses']
-        },
-        {
-            cat: "Covid Essentials",
-            sub_cat: ['Personal & Home Essentials',
-                'Mask, Gloves & Protective Equipment',
-                'Immunity Booster',
-                'Business Essentials',
-                'Travel Essentials',
-                'Oxygen Can']
-        },
-        {
-            cat: "Surgical",
-            sub_cat: ['Dressing',
-                'Gi Care',
-                'Iv Infusion',
-                'Respiratory Supplies',
-                'Surgical Consumables',
-                'Surgical Instrument',
-                'Urinary Care',
-                'Wound Treatment']
-        },
-        {
-            cat: "Diabetes Support",
-            sub_cat: ['Diabetes Care - Ayurveda',
-                'Glucometers',
-                'Lancets & Test Strips',
-                'Sugar Substitutes',
-                'Diabetes Management Supplements']
-        },
-        {
-            cat: "Skin Care",
-            sub_cat: ['Cleansers',
-                'Masks',
-                'Moisturizers',
-                'Sunscreen',
-                'Eye Care',
-                'Toners & Serums',
-                'Aromatherapy',
-                'Face Skin Care']
-        },
-        {
-            cat: "Tools & Appliances",
-            sub_cat: ['Hair Styling Tools',
-                'Face/Skin Tools',
-                'Massage Tools']
-        },
-        {
-            cat: "Personal Care",
-            sub_cat: ['Bathing Accessories',
-                'Face Personal Care',
-                'Body Care',
-                'Senior Care',
-                'Lip Care',
-                'Oral Care',
-                'Bath & Shower',
-                'Hands & Feet',
-                'Home & Health',
-                'Personal Care Tools & Accessories',
-                'Eye Care Lens']
-        }
-    ]
+    const { Categories, handleSubCategory } = useContext(Data);
 
     return (
-        <Box pr="15px" bgColor="#ffffff" borderRadius={"10px"}>
+        <Box pr="15px" bgColor="#ffffff" borderRadius={"10px"} display={{ base: "none", lg: "block" }}>
             <Box borderRadius={"10px"} overflowY={'scroll'} height={"350px"} bgColor="#ffffff" p="0 0px 15px 15px" sx={{
                 '&::-webkit-scrollbar': {
-                    w: '1'
+                    w: '3px'
                 },
                 '&::-webkit-scrollbar-track': {
                     w: '6',
@@ -148,7 +36,7 @@ const CategoriesComp = () => {
                                 </AccordionButton>
                             </h2>
                             {el.sub_cat.map((subs) => {
-                                return <AccordionPanel key={uuid()} p="2px 26px" textAlign="left" color="#6f7284" _hover={{ color: "#151b39", cursor: "pointer" }} >
+                                return <AccordionPanel key={uuid()} p="2px 26px" textAlign="left" color="#6f7284" _hover={{ color: "#151b39", cursor: "pointer" }} onClick={(e) => handleSubCategory(e.target.innerHTML)} >
                                     {subs}
                                 </AccordionPanel>
                             })}

@@ -1,4 +1,5 @@
 import './App.css';
+import { AllRoutes } from './Components/AllRoutes/AllRoutes';
 import MainNavbar from './Components/Navbar/MainNavbar'
 import LoginPage from './/pages/Login/LoginPage'
 import Products from './pages/ProductPage/Products';
@@ -10,6 +11,7 @@ function App() {
   return (
     <div className="App">
       <MainNavbar />
+      <AllRoutes/>
       <LoginPage />
       {/* <Products /> */}
       <Landing/>
