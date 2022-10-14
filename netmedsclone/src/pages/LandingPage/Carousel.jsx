@@ -68,7 +68,7 @@ export const Carousel = () => {
         borderRadius: '50%'
     }
     return (
-        <Box position='relative' w='97vw' m='auto' mb={{base: '15px', md: '30px', lg: '40px'}}>
+        <Box position='relative' w='97vw' pt='20px' m='auto' mb={{base: '15px', md: '30px', lg: '40px'}}>
             <Box overflow={'hidden'}>
                 <Box ref={ref} w='400%' display={'grid'} gridTemplateColumns='repeat(4,1fr)' transition='0.3s'>
                 {

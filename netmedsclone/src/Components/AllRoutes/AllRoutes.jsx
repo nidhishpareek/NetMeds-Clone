@@ -6,8 +6,6 @@ import Signin from '../../pages/Login/LoginPage'
 // import Products from '../../pages/ProductPage/Products'
 import LoginPage from '../../pages/Login/LoginPage'
 import Products from '../../pages/ProductPage/Products'
-// import { Landing } from '../../pages/landing'
-// import Products from '../../pages/ProductPage/Products'
 
 export const AllRoutes = () => {
     return (

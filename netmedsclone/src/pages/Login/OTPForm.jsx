@@ -83,8 +83,9 @@ const OTPform = ({ number, toggleMobileAuthenticate }) => {
     SigninAuthentication(formEntries)
       .then(() => {
         console.log("done");
-        navigate('/')
-
+        localStorage.setItem("userDetails", JSON.stringify(formEntries));
+        localStorage.setItem("isLoggedIn", true);
+        navigate("/");
       })
       .catch(() => {
         console.log("failed");
