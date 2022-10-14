@@ -8,9 +8,9 @@ import { Cart } from './pages/Cart/Cart';
 function App() {
   return (
     <div className="App">
-      {/* <MainNavbar />
+      <MainNavbar />
       <Landing/>
-      <Footer /> */}
+      <Footer />
       <Cart></Cart>
     </div>
   );
