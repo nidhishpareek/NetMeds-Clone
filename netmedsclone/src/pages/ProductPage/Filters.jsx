@@ -5,7 +5,7 @@ import PriceDiscount from './PriceDiscount'
 
 const Filters = () => {
     return (
-        <Box pr="15px" bgColor="#ffffff" borderRadius={"10px"}>
+        <Box pr="15px" bgColor="#ffffff" borderRadius={"10px"} pb="20px" display={{ base: "none", lg: "block" }}>
             <Text textAlign="left" fontSize="20px" p={"10px 20px"}>Filters</Text>
             <hr />
             {/* <Filtertype name={'Brands'} prod={prod} /> */}

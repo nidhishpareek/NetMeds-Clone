@@ -8,7 +8,7 @@ const CategoriesComp = () => {
     const { Categories, handleSubCategory } = useContext(Data);
 
     return (
-        <Box pr="15px" bgColor="#ffffff" borderRadius={"10px"}>
+        <Box pr="15px" bgColor="#ffffff" borderRadius={"10px"} display={{ base: "none", lg: "block" }}>
             <Box borderRadius={"10px"} overflowY={'scroll'} height={"350px"} bgColor="#ffffff" p="0 0px 15px 15px" sx={{
                 '&::-webkit-scrollbar': {
                     w: '3px'

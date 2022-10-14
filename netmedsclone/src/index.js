@@ -5,6 +5,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import {store} from "./Redux/store"
+import {BrowserRouter} from "react-router-dom"
 import { Provider } from "react-redux";
 import  Data  from "./pages/Context/DataContext";
 
@@ -13,9 +14,11 @@ root.render(
   <React.StrictMode>
       <Provider store={store}>
         <Data>
-          <ChakraProvider>
-            <App />
-          </ChakraProvider>
+          <BrowserRouter>
+            <ChakraProvider>
+              <App />
+            </ChakraProvider>
+          </BrowserRouter>
         </Data>
       </Provider>
   </React.StrictMode>

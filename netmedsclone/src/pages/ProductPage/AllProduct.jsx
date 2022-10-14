@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { Data } from '../Context/DataContext';
 import ErrorPage from '../ErrorPage';
 const AllProduct = () => {
-    const { page, currItem, total, loading, setval, sortCategory, prod, handleAdd, handlePage } = useContext(Data);
+    const { page, total, loading, sortCategory, prod, handleAdd, handlePage } = useContext(Data);
     console.log(sortCategory, 'sortedone')
     const { error } = useSelector((state) => state);
     return loading ? <Box h="100vh">
@@ -16,7 +16,7 @@ const AllProduct = () => {
                 <>
                     <Box p={"15px"} bgColor="#ffffff" borderRadius={"10px"} >
                         <Text fontSize={"13px"} fontWeight='700' color={"rgba(21,27,57,.6)"} letterSpacing="1px" textTransform={"uppercase"} mb="10px">All Product</Text>
-                        <Grid templateColumns="repeat(4,1fr)" gap="13px">
+                        <Grid templateColumns={{ base: "repeat(2,1fr)", lg: "repeat(4,1fr)" }} gap="13px">
                             {prod.map((el) => {
                                 const { title, id, img1, actual_price, crossed_price, manufacturer, category, sub_category } = el;
                                 const discount = Math.round(((crossed_price - actual_price) / crossed_price) * 100);
