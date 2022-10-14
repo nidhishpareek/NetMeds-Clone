@@ -42,6 +42,10 @@ const MobileNoForm = ({ toggleMobileAuthenticate }) => {
   const handlesubmit = (event) => {
     event.preventDefault();
     if (!validator.isEmpty && !validator.notProperLength) {
+      if (validator.number.length == 0) {
+        setValidator({ ...validator, isEmpty: true });
+        return;
+      }
       console.log("authenticate");
       toggleMobileAuthenticate(validator.number);
     }
@@ -49,7 +53,7 @@ const MobileNoForm = ({ toggleMobileAuthenticate }) => {
   ////////////////////////////////////////////////////////////////////return statement///////////////////
   return (
     <Box padding="30px 48px">
-      <Box >
+      <Box>
         <Text fontSize={"24px"} fontWeight="bold" mb={"8px"}>
           Sign In / Sign Up
         </Text>

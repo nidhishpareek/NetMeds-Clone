@@ -44,6 +44,7 @@ const Signin = () => {
         width="80%"
         maxW="4xl"
         margin={"60px"}
+        mb='20px'
       >
         <Flex>
           <Box>
@@ -54,13 +55,16 @@ const Signin = () => {
             />
           </Box>
           <Box maxW={"468px"}>
+
+            {(mobileAuthenticated || true) ?
+            <OTPform
+              number={mobilenumber ? mobilenumber : 8696861773}
+              toggleMobileAuthenticate={toggleMobileAuthenticate}
+            />:
             <MobileNoForm
               toggleMobileAuthenticate={toggleMobileAuthenticate}
             />
-            {/* <OTPform
-              number={mobilenumber ? mobilenumber : 8696861773}
-              toggleMobileAuthenticate={toggleMobileAuthenticate}
-            /> */}
+            }
           </Box>
         </Flex>
       </Container>
