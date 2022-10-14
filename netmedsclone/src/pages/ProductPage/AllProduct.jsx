@@ -1,12 +1,29 @@
 import { Box, Text, Grid, GridItem, Image, Button } from '@chakra-ui/react'
-import React from 'react'
+import React, { useState } from 'react'
 import { useContext } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Data } from '../Context/DataContext';
 import ErrorPage from '../ErrorPage';
+import axios from 'axios';
+import { setCartProduct } from '../../Redux/action';
 const AllProduct = () => {
-    const { page, total, loading, sortCategory, prod, handleAdd, handlePage } = useContext(Data);
+    const { page, total, loading, sortCategory, prod, handlePage } = useContext(Data);
     console.log(sortCategory, 'sortedone')
+    const cartApi = 'https://netmedsdata.onrender.com/cart'
+    // const [cartProd, setCartProd] = useState([]);
+    const cart = useSelector((state) => state.cart);
+    const dispatch = useDispatch();
+    const handleAdd = (item) => {
+        // console.log(cart.length, "cart")
+        const check = cart.filter(allItem => allItem.id === item.id)
+        // console.log(check.length, "checjk")
+        if (check.length === 0) {
+            axios.post(cartApi, item)
+                .then(() => dispatch(setCartProduct(item)))
+                .catch((err) => console.log(err))
+        }
+    }
+
     const { error } = useSelector((state) => state);
     return loading ? <Box h="100vh">
         <Image pos={"absolute"} top="20%" left="50%" m="100px auto" bgColor={"transparent"} src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.giff" />
@@ -23,10 +40,10 @@ const AllProduct = () => {
                                 return <GridItem key={id} w="100%" p={'14px 16px 15px 16px'} border='solid 1px rgba(112,112,112,.38)' borderRadius={"8px"} position="relative">
                                     {crossed_price && <Text as='span' position={"absolute"} bg="#84be52" fontSize={"9px"} lineHeight="11px" p="4px 5px 2px 5px" borderRadius={"4px"} color="white" top="8px" left="8px">{discount}% OFF</Text>}
                                     <Image h={'150px'} objectFit="contain" margin={"0 auto"} src={img1} />
-                                    <Text overflow={"hidden"} fontSize={"14px"} fontWeight={"700"} h={"42px"} color="#151b39">{title}</Text>
-                                    <Box overflow={"hidden"} h='24px' m="5px 0">
+                                    <Text mt="5px" overflow={"hidden"} fontSize={"14px"} fontWeight={"700"} h={"42px"} color="#151b39">{title}</Text>
+                                    <Box overflow={"hidden"} h='30px' w="100%" mt="5px" >
                                         <Text as="span" color={"#24aeb1"} fontSize="10px" borderRadius={"40px"} mr="4px" p='4px 10px' bgColor={"#f3f7fb"}>{category}</Text>
-                                        <Text as="span" color={"#24aeb1"} fontSize="10px" borderRadius={"40px"} mr="4px" p='4px 10px' bgColor={"#f3f7fb"}>{sub_category}</Text>
+                                        <Text as="span" color={"#24aeb1"} fontSize="10px" borderRadius={"40px"} mr="4px" p='4px 10px' w="max-content" bgColor={"#f3f7fb"}>{sub_category}</Text>
                                     </Box>
                                     <Text w="auto" fontStyle={"italic"} lineHeight="16px" color={'#6f7284'} fontSize="13px" m="5px 0">Mkt: {manufacturer}</Text>
                                     <Text fontSize={"14px"} color="#6f7284" fontWeight={"700"}>Best price* <Text as='span' fontSize="16px" color="#ef4281">₹{actual_price}</Text></Text>

@@ -7,25 +7,29 @@ export const Data = createContext()
 
 const updatedUrl = (api, sort, order, subcategory, sortCategory, manufacturer, sliderVal) => {
     // console.log(sortCategory, "sortcategory");
-    return sortCategory && subcategory ?
-        `${api}&category=${sortCategory}&sub_category=${subcategory}` :
-        sort && subcategory ?
-            `${api}&_sort=${sort}&_order=${order}&sub_category=${subcategory}` :
-            sort && sliderVal ?
-                `${api}&_sort=${sort}&_order=${order}${api}&actual_price_gte=${sliderVal[0]}&actual_price_lte=${sliderVal[1]}` :
-                sort ?
-                    `${api}&_sort=${sort}&_order=${order}` :
-                    subcategory && sliderVal ?
-                        `${api}&sub_category=${subcategory}&actual_price_gte=${sliderVal[0]}&actual_price_lte=${sliderVal[1]}` :
-                        subcategory ?
-                            `${api}&sub_category=${subcategory}` :
-                            sortCategory ?
-                                `${api}&category=${sortCategory}` :
-                                manufacturer ?
-                                    `${api}&manufacturer=${manufacturer}` :
-                                    sliderVal ?
-                                        `${api}&actual_price_gte=${sliderVal[0]}&actual_price_lte=${sliderVal[1]}` :
-                                        api
+    return sort && sortCategory && subcategory ?
+        `${api}&_sort=${sort}&_order=${order}&category=${sortCategory}&sub_category=${subcategory}` :
+        sortCategory && subcategory && manufacturer ?
+            `${api}&category=${sortCategory}&sub_category=${subcategory}&manufacturer=${manufacturer}` :
+            sortCategory && subcategory ?
+                `${api}&category=${sortCategory}&sub_category=${subcategory}` :
+                sort && subcategory ?
+                    `${api}&_sort=${sort}&_order=${order}&sub_category=${subcategory}` :
+                    sort && sliderVal ?
+                        `${api}&_sort=${sort}&_order=${order}&actual_price_gte=${sliderVal[0]}&actual_price_lte=${sliderVal[1]}` :
+                        sort ?
+                            `${api}&_sort=${sort}&_order=${order}` :
+                            subcategory && sliderVal ?
+                                `${api}&sub_category=${subcategory}&actual_price_gte=${sliderVal[0]}&actual_price_lte=${sliderVal[1]}` :
+                                subcategory ?
+                                    `${api}&sub_category=${subcategory}` :
+                                    sortCategory ?
+                                        `${api}&category=${sortCategory}` :
+                                        manufacturer ?
+                                            `${api}&manufacturer=${manufacturer}` :
+                                            sliderVal ?
+                                                `${api}&actual_price_gte=${sliderVal[0]}&actual_price_lte=${sliderVal[1]}` :
+                                                api
 }
 
 
@@ -170,7 +174,6 @@ const DataContext = ({ children }) => {
     const [manufacturer, setManufacturer] = useState('');
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
-    const cartApi = 'https://netmedsdata.onrender.com/cart'
     const getProduct = () => {
         setLoading(true)
         const api = updatedUrl(`https://netmedsdata.onrender.com/products?_page=${page}&_limit=20`, sort, order, subCategory, sortCategory, manufacturer, sliderVal)
@@ -210,12 +213,7 @@ const DataContext = ({ children }) => {
         const newVal = val;
         setManufacturer(newVal)
     }
-    const handleAdd = (item) => {
-        console.log(item);
-        // dispatch(setCartProduct(item))
-        axios.post(cartApi, item)
-            .then((res) => dispatch(setCartProduct(res.data)))
-    }
+
     const handlePage = (val) => {
         setPage(val);
     }
@@ -227,7 +225,7 @@ const DataContext = ({ children }) => {
     }
 
     const val = {
-        Categories, setval, handleAdd, handlePage, handleManufacturer, handleSubCategory, getProduct, handleCategory, sortCategory, loading, prod, page, sort, currItem, total, manufacturer, order, handlePriceRange, sliderVal
+        Categories, setval, handlePage, handleManufacturer, handleSubCategory, getProduct, handleCategory, sortCategory, loading, prod, page, sort, currItem, total, manufacturer, order, handlePriceRange, sliderVal
     }
     return (
         <Data.Provider value={val}>

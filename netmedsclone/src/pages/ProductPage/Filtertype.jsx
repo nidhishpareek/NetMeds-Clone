@@ -40,13 +40,13 @@ const Filtertype = ({ name }) => {
                 {
                     arr1.map((el) => {
                         if (name === 'Manufacturers')
-                            return <Checkbox key={uuid()} pb="8px" fontSize="13px" value={el} onChange={(e) => { e.target.checked ? handleManufacturer(e.target.value) : handleManufacturer('') }}>
+                            return <Checkbox pl="10px" key={uuid()} pb="8px" fontSize="13px" value={el} onChange={(e) => { e.target.checked ? handleManufacturer(e.target.value) : handleCategory('') }}>
                                 <Text fontSize={"13px"}>{el}</Text>
                             </Checkbox>
                     })}
                 {arr2.map((el) => {
                     if (name === 'Categories')
-                        return <Checkbox key={uuid()} pb="8px" fontSize="13px" value={el} onChange={(e) => { e.target.checked ? handleCategory(e.target.value) : handleCategory('') }}>
+                        return <Checkbox pl="10px" key={uuid()} pb="8px" fontSize="13px" value={el} onChange={(e) => { e.target.checked ? handleCategory(e.target.value) : handleCategory('') }}>
                             <Text fontSize={"13px"}>{el}</Text>
                         </Checkbox>
                 })}
