@@ -1,4 +1,4 @@
-import { ERRORSTATE, LOADINGSTATE, SUCCESSSTATE } from "./action"
+import {  ERRORSTATE, LOADINGSTATE, SETCART } from "./action"
 
 const initState={
     loading:false,
@@ -8,13 +8,25 @@ const initState={
 function reducer(state=initState,{type,payload}){
     switch(type){
         case LOADINGSTATE:{
-            return {...state.loading=false}
+            return {
+                loading:true,
+                error:false,
+                cart:[]
+            }
         }
         case ERRORSTATE:{
-            return {...state.error=false}
+            return {
+                loading:false,
+                error:true,
+                cart:[]
+            }
         }
-        case SUCCESSSTATE:{
-            return {...state.cart=payload}//doubt
+        case SETCART:{
+            return {
+                loading:false,
+                error:false,
+                cart:[...state.cart,payload]
+            }
         }
         default:{
             return state;

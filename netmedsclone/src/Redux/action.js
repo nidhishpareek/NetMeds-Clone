@@ -1,6 +1,7 @@
 export const LOADINGSTATE='LOADINGSTATE';
 export const ERRORSTATE='ERRORSTATE';
-export const SUCCESSSTATE='SUCCESSSTATE';
+export const SETCART='SETCART';
+
 
 export const loadingState=()=>({
     type:LOADINGSTATE
@@ -8,7 +9,7 @@ export const loadingState=()=>({
 export const errorState=()=>({
     type:ERRORSTATE
 })
-export const succesState=(data)=>({
-    type:SUCCESSSTATE,
+export const setCartProduct=(data)=>({
+    type:SETCART,
     payload:data
 })

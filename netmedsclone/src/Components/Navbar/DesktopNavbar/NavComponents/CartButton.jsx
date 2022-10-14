@@ -26,12 +26,15 @@ const CartButton = () => {
             icon={<HiShoppingCart />}
             bg='"rgb(50,174,177)"'
             boxSize={"30px"}
+            position='relative'
           >
             <AvatarBadge
               boxSize="15px"
               bg="red.500"
               border={"0px"}
               fontSize="10px"
+              position={'absolute'}
+              top='0'
             >
               {count}
             </AvatarBadge>
