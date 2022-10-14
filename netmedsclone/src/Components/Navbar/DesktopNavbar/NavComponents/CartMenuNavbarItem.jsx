@@ -4,7 +4,6 @@ import { Box, Flex, Text } from "@chakra-ui/react";
 
 const CartMenueObject = ({ ele }) => {
   const { title, actual_price, count } = ele;
-  console.log(title)
   return (
     <Box>
       <Flex justifyContent={"space-between"}>

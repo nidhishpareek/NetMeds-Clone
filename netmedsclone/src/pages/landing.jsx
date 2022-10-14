@@ -23,7 +23,7 @@ import { FreeHomeDelivery } from "./LandingPage/FreeHomeDelivery"
 import { Box } from "@chakra-ui/react"
 
 export const Landing = () => {
-    return <Box bg={'#f3f7fb'}>
+    return <Box bg='#f3f7fb'>
     <Carousel/>
     <FreeHomeDelivery/>
     <ThreeCategory/>
