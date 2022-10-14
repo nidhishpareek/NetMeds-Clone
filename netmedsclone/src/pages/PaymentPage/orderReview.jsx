@@ -4,6 +4,7 @@ import { OrderStatus } from "./orderStatus";
 import React from "react"
 import { SimpleGrid, Box, Text, Image, Flex, Input,Button,Icon,Progress } from "@chakra-ui/react";
 import { SpinnerIcon,CheckCircleIcon,RepeatIcon,EmailIcon } from '@chakra-ui/icons'
+import { Navigate, useNavigate } from "react-router-dom";
 export const OrderReview = () => {
 
   const[posts,setPosts]=React.useState([]);
@@ -22,8 +23,11 @@ export const OrderReview = () => {
   }
 
 }
+const navigateToDetails = useNavigate();
+const handleNavigate = () => {
+  navigateToDetails('/payment/details');
 
-
+}
 
   
   return (
@@ -143,6 +147,7 @@ export const OrderReview = () => {
                   variant="solid"
                   size='lg'
                   colorScheme='teal'
+                  onClick={handleNavigate}
                   
                 >
                   Pay
