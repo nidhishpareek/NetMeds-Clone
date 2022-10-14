@@ -1,9 +1,21 @@
 import './App.css';
-import MainNavbar from './Components/Navbar/MainNavbar'
+
+import {SlideAddress} from "./PaymentPage/rSlideAddressPage"
+import {NewUseraddress} from "./PaymentPage/newUserPayAddress"
+import{OrderReview} from "./PaymentPage/orderReview"
+import {PymentDetails} from "./PaymentPage/paymentDetails"
+import {OrderStatus} from "./PaymentPage/orderStatus"
+
 function App() {
   return (
     <div className="App">
-      <MainNavbar></MainNavbar>
+      <h1>in React app</h1>
+      <OrderStatus/>
+      <OrderReview/>
+      {/* <SlideAddress/>
+      <NewUseraddress/>
+      
+      <PymentDetails/> */}
     </div>
   );
 }
