@@ -1,9 +1,10 @@
-import {  ERRORSTATE, LOADINGSTATE, SETCART } from "./action"
+import {  ERRORSTATE, LOADINGSTATE, SETCART, TOGGLEVIEW } from "./action"
 
 const initState={
-    loading:false,
+    loading:false, 
     error:false,
-    cart:[]
+    cart:[],
+    mobileView:false,
 }
 function reducer(state=initState,{type,payload}){
     switch(type){
@@ -14,7 +15,7 @@ function reducer(state=initState,{type,payload}){
                 cart:[]
             }
         }
-        case ERRORSTATE:{
+        case ERRORSTATE:{ 
             return {
                 loading:false,
                 error:true,
@@ -28,6 +29,11 @@ function reducer(state=initState,{type,payload}){
                 cart:[...state.cart,payload]
             }
         }
+        case TOGGLEVIEW:{
+            console.log('view altered')
+            return{...state, mobileView: payload}
+        }
+        
         default:{
             return state;
         }

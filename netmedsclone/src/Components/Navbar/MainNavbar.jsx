@@ -1,15 +1,19 @@
-import { Box } from "@chakra-ui/react"
-import DesktopNavbar from "./DesktopNavbar/DesktopNavbar"
-import MobileNavbar from "./MobileNavbar/MobileNavbar"
-
+import { Box } from "@chakra-ui/react";
+import DesktopNavbar from "./DesktopNavbar/DesktopNavbar";
+import MobileNavbar from "./MobileNavbar/MobileNavbar";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 const Navbar = () => {
-
-    return (
-        <Box>
-        {/* <DesktopNavbar></DesktopNavbar> */}
+  const mobileView = useSelector((state) => state.mobileView);
+  return (
+    <Box>
+      {mobileView ? (
         <MobileNavbar></MobileNavbar>
-        </Box>
-    )
-}
+      ) : (
+        <DesktopNavbar></DesktopNavbar>
+      )}
+    </Box>
+  );
+};
 
-export default Navbar
+export default Navbar;
