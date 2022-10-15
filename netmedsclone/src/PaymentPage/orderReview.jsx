@@ -1,11 +1,12 @@
 import { Grid, GridItem } from "@chakra-ui/react";
 import {SlideAddress} from "./rSlideAddressPage"
 import { OrderStatus } from "./orderStatus";
+import React from "react"
 import { SimpleGrid, Box, Text, Image, Flex, Input,Button,Icon,Progress } from "@chakra-ui/react";
 import { SpinnerIcon,CheckCircleIcon,RepeatIcon,EmailIcon } from '@chakra-ui/icons'
 export const OrderReview = () => {
 
-  const[posts,setPosts]=useState([]);
+  const[posts,setPosts]=React.useState([]);
   async function GetData(){
     const key="";
     // const url="https://jsonplaceholder.typicode.com/posts?_limit=10";

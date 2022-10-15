@@ -9,6 +9,7 @@ import {OrderStatus} from "./PaymentPage/orderStatus"
 function App() {
   return (
     <div className="App">
+      {/* <NewUseraddress/> */}
       <OrderReview/>
        <PymentDetails/>
     </div>
