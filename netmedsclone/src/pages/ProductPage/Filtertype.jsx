@@ -1,11 +1,27 @@
 import { Box, Checkbox, Input, Text } from '@chakra-ui/react'
 import React, { useContext } from 'react'
 import { BsSearch } from 'react-icons/bs';
+import { useSelector } from 'react-redux';
 import { v4 as uuid } from 'uuid';
 import { Data } from '../Context/DataContext';
 
 const Filtertype = ({ name }) => {
-    const { prod, handleManufacturer, handleCategory } = useContext(Data);
+    const { prod, handleFilter, handleManufacturer, handleCategory } = useContext(Data);
+    const allProduct = useSelector(state => state.allProduct)
+
+    // console.log(allProduct, "here")
+    const handleclick = (val) => {
+        if (val) {
+            const filtered = allProduct.filter(item => {
+                return item.manufacturer === val
+            })
+            console.log(filtered)
+            // handleFilter(filtered)
+        } else {
+            return allProduct
+        }
+    }
+
     const setManu = new Set();
     const setCat = new Set();
     const arr1 = []
@@ -40,7 +56,7 @@ const Filtertype = ({ name }) => {
                 {
                     arr1.map((el) => {
                         if (name === 'Manufacturers')
-                            return <Checkbox pl="10px" key={uuid()} pb="8px" fontSize="13px" value={el} onChange={(e) => { e.target.checked ? handleManufacturer(e.target.value) : handleCategory('') }}>
+                            return <Checkbox pl="10px" key={uuid()} pb="8px" fontSize="13px" value={el} onChange={(e) => { e.target.checked ? handleclick(e.target.value) : handleclick('') }}>
                                 <Text fontSize={"13px"}>{el}</Text>
                             </Checkbox>
                     })}

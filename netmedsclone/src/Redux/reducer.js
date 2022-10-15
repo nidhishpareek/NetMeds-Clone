@@ -1,8 +1,9 @@
-import {  ERRORSTATE, LOADINGSTATE, SETCART } from "./action"
+import {  ERRORSTATE, GETPRODUCT, LOADINGSTATE, SETCART } from "./action"
 
 const initState={
     loading:false,
     error:false,
+    allProduct:[],
     cart:[]
 }
 function reducer(state=initState,{type,payload}){
@@ -19,6 +20,11 @@ function reducer(state=initState,{type,payload}){
                 loading:false,
                 error:true,
                 cart:[]
+            }
+        }
+        case GETPRODUCT:{
+            return {
+                ...state,allProduct:payload
             }
         }
         case SETCART:{

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { createContext } from 'react'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
-import { errorState, setCartProduct } from '../../Redux/action'
+import { errorState, getAllProducts } from '../../Redux/action'
 export const Data = createContext()
 
 const updatedUrl = (api, sort, order, subcategory, sortCategory, manufacturer, sliderVal) => {
@@ -173,7 +173,15 @@ const DataContext = ({ children }) => {
     const [order, setOrder] = useState("");
     const [manufacturer, setManufacturer] = useState('');
     const [loading, setLoading] = useState(false);
+    const [currProduct, setCurrProduct] = useState({});
     const dispatch = useDispatch();
+    // const getallProducts = () => {
+    //     const api = "https://netmedsdata.onrender.com/products";
+    //     axios.get(api).then(res => dispatch(getAllProducts(res.data)))
+    // }
+    // useEffect(() => {
+    //     getallProducts()
+    // }, [])
     const getProduct = () => {
         setLoading(true)
         const api = updatedUrl(`https://netmedsdata.onrender.com/products?_page=${page}&_limit=20`, sort, order, subCategory, sortCategory, manufacturer, sliderVal)
@@ -192,6 +200,9 @@ const DataContext = ({ children }) => {
     }
     const handlePriceRange = (val) => {
         setSliderVal(val)
+    }
+    const handlecurrProduct = (item) => {
+        setCurrProduct(item)
     }
 
     useEffect(() => {
@@ -217,15 +228,22 @@ const DataContext = ({ children }) => {
     const handlePage = (val) => {
         setPage(val);
     }
+    // const handleFilter = (val) => {
+    //     const newVal = val;
+    //     setProd(newVal)
+    // }
     // console.log(prod.length)
     const setval = (sortval, orderval) => {
         setSort(sortval);
         setOrder(orderval)
         console.log('sortcalled', sort, order)
     }
+    // useEffect(() => {
+    //     set
+    // }, [])
 
     const val = {
-        Categories, setval, handlePage, handleManufacturer, handleSubCategory, getProduct, handleCategory, sortCategory, loading, prod, page, sort, currItem, total, manufacturer, order, handlePriceRange, sliderVal
+        Categories, setval, handlePage, handleManufacturer, handleSubCategory, getProduct, handleCategory, handlecurrProduct, currProduct, sortCategory, loading, prod, page, sort, currItem, total, manufacturer, order, handlePriceRange, sliderVal
     }
     return (
         <Data.Provider value={val}>

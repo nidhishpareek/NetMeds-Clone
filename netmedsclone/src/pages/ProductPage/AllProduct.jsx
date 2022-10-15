@@ -1,28 +1,55 @@
-import { Box, Text, Grid, GridItem, Image, Button } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import { Box, Text, Grid, GridItem, Image, Button, useToast } from '@chakra-ui/react'
+import React, { useEffect } from 'react'
 import { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Data } from '../Context/DataContext';
 import ErrorPage from '../ErrorPage';
 import axios from 'axios';
 import { setCartProduct } from '../../Redux/action';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 const AllProduct = () => {
-    const { page, total, loading, sortCategory, prod, handlePage } = useContext(Data);
+    const { page, total, loading, sortCategory, prod, handlePage, handlecurrProduct } = useContext(Data);
     console.log(sortCategory, 'sortedone')
     const cartApi = 'https://netmedsdata.onrender.com/cart'
-    // const [cartProd, setCartProd] = useState([]);
     const cart = useSelector((state) => state.cart);
     const dispatch = useDispatch();
+    let [search, setSearchParam] = useSearchParams();
     const handleAdd = (item) => {
-        // console.log(cart.length, "cart")
         const check = cart.filter(allItem => allItem.id === item.id)
-        // console.log(check.length, "checjk")
         if (check.length === 0) {
             axios.post(cartApi, item)
-                .then(() => dispatch(setCartProduct(item)))
-                .catch((err) => console.log(err))
+                .then(() => {
+                    dispatch(setCartProduct(item))
+                    toast({
+                        title: 'Item added to cart',
+                        status: 'success',
+                        isClosable: true,
+                    })
+                })
+                .catch((err) => {
+                    console.log(err)
+
+                })
+        } else if (check.length === 1) {
+            toast({
+                title: 'Item is already in cart',
+                status: 'error',
+                isClosable: true,
+            })
         }
     }
+    const toast = useToast()
+    const navigate = useNavigate();
+    const handleProductDetail = (productDetails) => {
+        console.log(productDetails.id)
+        // return <Navigate to={`/products/${productDetails.id}`} />
+        handlecurrProduct(productDetails)
+        navigate(`/products/${productDetails.id}`)
+    }
+    useEffect(() => {
+        setSearchParam({ page: page })
+    }, [page])
+
 
     const { error } = useSelector((state) => state);
     return loading ? <Box h="100vh">
@@ -39,8 +66,8 @@ const AllProduct = () => {
                                 const discount = Math.round(((crossed_price - actual_price) / crossed_price) * 100);
                                 return <GridItem key={id} w="100%" p={'14px 16px 15px 16px'} border='solid 1px rgba(112,112,112,.38)' borderRadius={"8px"} position="relative">
                                     {crossed_price && <Text as='span' position={"absolute"} bg="#84be52" fontSize={"9px"} lineHeight="11px" p="4px 5px 2px 5px" borderRadius={"4px"} color="white" top="8px" left="8px">{discount}% OFF</Text>}
-                                    <Image h={'150px'} objectFit="contain" margin={"0 auto"} src={img1} />
-                                    <Text mt="5px" overflow={"hidden"} fontSize={"14px"} fontWeight={"700"} h={"42px"} color="#151b39">{title}</Text>
+                                    <Image h={'150px'} objectFit="cover" margin={"0 auto"} src={img1 ? img1 : "https://www.netmeds.com/images/product-v1/600x600/default/no_image.png"} cursor="pointer" onClick={() => handleProductDetail(el)} />
+                                    <Text mt="5px" overflow={"hidden"} fontSize={"14px"} fontWeight={"700"} h={"42px"} color="#151b39" cursor="pointer" onClick={() => handleProductDetail(el)} >{title}</Text>
                                     <Box overflow={"hidden"} h='30px' w="100%" mt="5px" >
                                         <Text as="span" color={"#24aeb1"} fontSize="10px" borderRadius={"40px"} mr="4px" p='4px 10px' bgColor={"#f3f7fb"}>{category}</Text>
                                         <Text as="span" color={"#24aeb1"} fontSize="10px" borderRadius={"40px"} mr="4px" p='4px 10px' w="max-content" bgColor={"#f3f7fb"}>{sub_category}</Text>
@@ -50,7 +77,10 @@ const AllProduct = () => {
                                     <Box h="40px">
                                         {crossed_price && <Text fontSize={"13px"} padding="5px 0" color="#6f7284">MRP<Text as="span" textDecor={"line-through"} p="0 5px">Rs.{crossed_price}</Text></Text>}
                                     </Box>
-                                    <Button w="100%" bgColor={"#24aeb1"} color="white" textTransform={"uppercase"} _hover={{ bgColor: "#24aeb1", color: "white" }} onClick={() => handleAdd(el)} >Add to cart</Button>
+                                    <Button w="100%" bgColor={"#24aeb1"} color="white" textTransform={"uppercase"} _hover={{ bgColor: "#24aeb1", color: "white" }} onClick={() => {
+                                        handleAdd(el)
+
+                                    }} >Add to cart</Button>
                                 </GridItem >
                             })}
                         </Grid>
