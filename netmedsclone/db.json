@@ -1,4 +1,5 @@
 {
+  "user": [],
   "products": [
     {
       "id": 1,
@@ -22711,6 +22712,6 @@
       "category": "HealthAid Digeston (Papaya & Digestive Enzymes) Tablet 60's",
       "sub_category": "General Discomfort"
     }
-   ],
-  "cart":[]
+  ],
+  "cart": []
 }
