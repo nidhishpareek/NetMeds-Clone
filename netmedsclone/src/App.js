@@ -9,13 +9,8 @@ import {OrderStatus} from "./PaymentPage/orderStatus"
 function App() {
   return (
     <div className="App">
-      <h1>in React app</h1>
-      <OrderStatus/>
       <OrderReview/>
-      {/* <SlideAddress/>
-      <NewUseraddress/>
-      
-      <PymentDetails/> */}
+       <PymentDetails/>
     </div>
   );
 }

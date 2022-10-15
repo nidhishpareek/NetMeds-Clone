@@ -5,7 +5,7 @@ import { useDisclosure,Button,
     DrawerOverlay,DrawerContent,
     DrawerCloseButton, DrawerFooter,
     DrawerHeader,DrawerBody,
-    InputGroup,InputLeftAddon, Flex,Text} from '@chakra-ui/react' 
+    InputGroup,InputLeftAddon, Flex,Text,Progress} from '@chakra-ui/react' 
  
  import { SpinnerIcon,CheckCircleIcon,RepeatIcon } from '@chakra-ui/icons'
 
@@ -18,20 +18,24 @@ export const OrderStatus=()=>{
           
           <Box h="fit-content" display='flex' justifyContent='space-around' w="300px">
             
-            <Box >
-            <SpinnerIcon m='5px'/>
-            <Text fontSize='12px'>Your cart</Text>
+            <Box align='center'>
+            <SpinnerIcon m='5px' />
+            <Text fontSize='10px'>Your cart</Text>
 
             </Box>
-            <Box>
+
+
+            
+            
+            <Box align='center'>
             <RepeatIcon m='5px'/>
-            <Text fontSize='12px'>Order review</Text>
+            <Text fontSize='10px'>Order review</Text>
             </Box>
           
 
-          <Box>
+          <Box align='center'>
           <CheckCircleIcon m='5px'/>
-          <Text fontSize='12px'>Payment Details </Text>
+          <Text fontSize='10px'>Payment Details </Text>
           </Box>
          
           </Box>

@@ -1,14 +1,36 @@
 import { Grid, GridItem } from "@chakra-ui/react";
 import {SlideAddress} from "./rSlideAddressPage"
-import { SimpleGrid, Box, Text, Image, Flex, Input,Button,Icon } from "@chakra-ui/react";
+import { OrderStatus } from "./orderStatus";
+import { SimpleGrid, Box, Text, Image, Flex, Input,Button,Icon,Progress } from "@chakra-ui/react";
 import { SpinnerIcon,CheckCircleIcon,RepeatIcon,EmailIcon } from '@chakra-ui/icons'
 export const OrderReview = () => {
 
+  const[posts,setPosts]=useState([]);
+  async function GetData(){
+    const key="";
+    // const url="https://jsonplaceholder.typicode.com/posts?_limit=10";
+     const url=``;
+  try{
+      const res= await fetch(url)
+      const data=await res.json();
+       console.log(data);
+      return data;
+  }
+  catch(err){
+     console.log("err",err);
+  }
+
+}
+
+
+
   
   return (
+    <Box>
+    <OrderStatus/>
     <Box w='70%' m="auto" mt='30px'>
-      
-      <Flex   justifyContent='space-between' >
+    
+      <Flex   justifyContent='space-between' wrap='wrap' >
         
 
         <SimpleGrid columns={1}  >
@@ -82,7 +104,7 @@ export const OrderReview = () => {
 
 
       
-        <Box  width='35%' height='auto' padding='10px' id='boxshadow2'>
+        <Box   height='auto' padding='10px' id='boxshadow2' w={{ base: '100%', md: '100%', lg: '30%' }}>
             <Text color='rgba(21,27,57,.6)'fontSize='12px'>PAYMENT DETAILS</Text>
             <Box   lineHeight='40px'  >
             <Flex justifyContent="space-between">
@@ -134,6 +156,8 @@ export const OrderReview = () => {
 
 
       </Flex>
+    </Box>
+
     </Box>
   );
 };

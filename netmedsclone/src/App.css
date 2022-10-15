@@ -47,6 +47,6 @@
 #boxshadow2{
   box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
   height: fit-content;
-  width:30%;
+  
   padding: 20px;
 }
