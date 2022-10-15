@@ -1,17 +1,25 @@
 import './App.css';
-
-import {SlideAddress} from "./PaymentPage/rSlideAddressPage"
-import {NewUseraddress} from "./PaymentPage/newUserPayAddress"
-import{OrderReview} from "./PaymentPage/orderReview"
-import {PymentDetails} from "./PaymentPage/paymentDetails"
-import {OrderStatus} from "./PaymentPage/orderStatus"
-
+import { AllRoutes } from './Components/AllRoutes/AllRoutes';
+import MainNavbar from './Components/Navbar/MainNavbar'
+import LoginPage from './/pages/Login/LoginPage'
+import Products from './pages/ProductPage/Products';
+import Footer from './Components/Footer/Footer';
+import { Box } from '@chakra-ui/react';
+import Products from './pages/ProductPage/Products';
+import Footer from './Components/Footer/Footer'
+import { Landing } from './pages/landing';
+import { AllRoutes } from './Components/AllRoutes/AllRoutes';
+import { Cart } from './pages/Cart/Cart';
 function App() {
   return (
     <div className="App">
-      {/* <NewUseraddress/> */}
-      <OrderReview/>
-       <PymentDetails/>
+      <MainNavbar />
+      <AllRoutes/>
+      <LoginPage />
+      {/* <Products /> */}
+      <Landing/>
+      <Footer />
+      <Cart></Cart>
     </div>
   );
 }
