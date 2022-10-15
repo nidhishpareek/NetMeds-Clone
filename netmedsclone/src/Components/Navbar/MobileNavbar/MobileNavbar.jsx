@@ -35,7 +35,8 @@ const MobileNavbar = () => {
                 border={"0px"}
                 fontSize="10px"
                 position={"absolute"}
-                top="10px"
+                top="5px"
+                right={'8px'}
               >
                 {count}
               </AvatarBadge>
