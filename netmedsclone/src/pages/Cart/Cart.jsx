@@ -1,13 +1,18 @@
 import { AddIcon } from '@chakra-ui/icons';
-import { Box, Button, Center, Checkbox, Flex, Heading, Image, Select, Spinner, Text } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react'
+import { Box, Button, Center, Checkbox, Flex, Heading, Image, Input, Select, Spinner, Text } from '@chakra-ui/react';
+import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 export const Cart = () => {
     const [cartData, setCartData] = useState([0]);
     const [saveForLaterData, setSaveForLaterData] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [showHidden, setShowHidden] = useState('show')
     const [error, setError] = useState(false);
+    const [promoCode, setPromoCode] = useState('');
+    const [validPromoCode, setValidPromoCode] = useState(true);
+    const [promoCodeDiscount, setPromoCodeDiscount] = useState(0);
+    const promeRef = useRef(null);
     const [totalMRP, setTotalMRP] = useState(0);
     const [discount, setDiscount] = useState(0);
     const date = Date(Date.now());
@@ -128,6 +133,25 @@ export const Cart = () => {
     const handleAddProducts = () => {
         gotToProceed('/')
     }
+    const handlePromo = (val) => {
+        if(val==='hidden') {
+            promeRef.current.style.display = 'none'
+            setShowHidden('show')
+        }
+        else {
+            promeRef.current.style.display = 'block'
+            setShowHidden('hidden')
+        }
+    }
+    const ApplyPromoCode = () => {
+        if(promoCode==='Hurray!') {
+            setPromoCodeDiscount(((totalMRP-discount)*20)/100)
+            setValidPromoCode(true);
+        }
+        else {
+            setValidPromoCode(false);
+        }
+    }
     return (
     <Box position={'relative'} bg='#F6F6F7'>
         {
@@ -198,10 +222,10 @@ export const Cart = () => {
                 {
                     loading && <Box zIndex={'2'} opacity='0.8' display={'grid'} position='fixed' bottom='0px' placeContent='center' w='100vw' h='110vh' bg='black'><Spinner color='#fff' size='xl' /></Box>
                 }
-                <Box w='40%' pt='20px'>
-                    <Heading as='h4' color='black' textAlign={'center'} fontSize='25px' fontWeight={'600'}>Order Summary</Heading>
+                <Box>
+                    <Heading as='h4' color='black' pt='20px' textAlign={'center'} fontSize='25px' fontWeight={'600'}>Order Summary</Heading>
                 </Box>
-                <Box border='1px solid red' display='flex'  w='80%' m='auto' gap='25px' mt='30px'>
+                <Box display={{base: 'block', lg: 'flex'}}  w='80%' m='auto' gap='25px' mt='30px'>
                     <Box w='100%'>
                         <Box bg='#fff' borderRadius={'7px'}>
                             <Box p='15px'>
@@ -210,14 +234,14 @@ export const Cart = () => {
                                     {
                                         cartData.map(el => (
                                             <Box key={el.id} borderBottom='1px solid #dddde0' p='15px 0'>
-                                                <Flex>
-                                                    <Box><Image w='40px' h='40px' src={el.img1}></Image></Box>
+                                                <Box display={{base: 'block', lg: 'flex'}}>
+                                                    <Box><Image w={{base: '120px', lg: '40px'}} h={{base: '100px', lg: '40px'}} src={el.img1}></Image></Box>
                                                     <Box ml='20px'>
                                                         <Text mb='-5px'>{el.title}</Text>
                                                         <Text fontSize={'12px'} color='#151B3999' as='i'>Mfr: {el.manufacturer}</Text>
                                                     </Box>
-                                                </Flex>
-                                                <Box ml='60px' mt='10px' display={'flex'} justifyContent='space-between' position={'relative'}>
+                                                </Box>
+                                                <Box ml={{base: '20px', lg: '60px'}} mt='10px' display={'flex'} justifyContent='space-between' position={'relative'}>
                                                     <Flex alignItems={'flex-end'}>
                                                         <Text fontWeight={'600'} color='#ef4281' mr='5px'>Rs. {parseFloat(el.actual_price).toFixed(2)}</Text>
                                                         {
@@ -235,11 +259,11 @@ export const Cart = () => {
                                                         </Select>
                                                     </Box>
                                                 </Box>
-                                                <Box display='flex' ml='60px' mt='20px'>
+                                                <Box display={{base: 'block', lg: 'flex'}} ml={{base: '20px', lg: '60px'}} mt='20px'>
                                                     <Box borderRight='1px solid #dddde0' display={'grid'} alignContent='center' w='100%' mr='15px'>
                                                         <Text fontSize={'12px'}>Delivery between <span style={{fontSize: '13px'}}>{date.toString().substring(0, 8)}{date.toString().substring(8, 10)}-{date.toString().substring(0, 8)}{+date.toString().substring(8, 10)+1}</span></Text>
                                                     </Box>
-                                                    <Box w='70%' display={'flex'} justifyContent='space-between'>
+                                                    <Box w={{base: '100%', lg: '70%'}} display={'flex'} justifyContent='space-between' gap='10px'>
                                                         <Button bg='#F6F6F7' fontSize={'12px'} color='#151B3999' size='sm' _hover={'none'} letterSpacing={'1px'} onClick={() => removeCart('https://netmedsdata.onrender.com/cart/',el.id)}>REMOVE</Button>
                                                         <Button onClick={() => handleSaveForLater(el)} bg='#F6F6F7' fontSize={'12px'} color='#151B3999' size='sm' _hover='none' letterSpacing={'1px'}>SAVE FOR LATER</Button>
                                                     </Box>
@@ -254,20 +278,28 @@ export const Cart = () => {
                             </Flex>
                             </Box>
                         </Box>
-                        <Box mt='20px' p='15px' bg='#fff' borderRadius={'7px'}>
+                        <Box m='20px 0' p='15px' bg='#fff' borderRadius={'7px'}>
                             <Text color='#151B3999' as='b' fontSize={'15px'} letterSpacing='1px'>SAVED FOR LATER</Text>
                             {
                                 saveForLaterData ?  
                                 <Box>
                                     {
                                         saveForLaterData.map(el => (
-                                            <Flex borderBottom='1px solid #dddde0' p='15px' gap='10px'>
+                                            <Box display={{base: 'block', lg: 'flex'}} borderBottom='1px solid #dddde0' p='15px' gap='10px'>
                                                 <Box>
-                                                    <Image w='120px' h='100%' src={el.img1}></Image>
+                                                    <Image w='120px' h={{base: '100px', lg: '100%'}} src={el.img1}></Image>
                                                 </Box>
-                                                <Flex w='100%'>
+                                                <Box w='100%' >
                                                     <Box w='100%'>
-                                                        <Text fontWeight={'600'} mb='5px'>{el.title}</Text>
+                                                        <Box display={{base: 'block', lg: 'flex'}} justifyContent='space-between'>
+                                                            <Box>
+                                                                <Text fontWeight={'600'} mb='5px'>{el.title}</Text>
+                                                            </Box>
+                                                            <Box>
+                                                                <Text fontWeight={'600'} color='#ef4281'>Rs.{el.actual_price.toFixed(2)}</Text>
+                                                                {el.crossed_price && <Text color='#151B3999' fontWeight={'400'} textDecoration={'line-through'} fontSize={'12px'}>Rs.{el.crossed_price.toFixed(2)}</Text>}
+                                                            </Box>
+                                                        </Box>
                                                         <Text fontSize={'12px'} color='#151B3999'>QTY: {el.quantity ? el.quantity : 1}</Text>
                                                         <Text fontSize={'12px'} color='#151B3999'>Mfr: {el.manufacturer}</Text>
                                                         <Flex mt='20px'>
@@ -275,12 +307,9 @@ export const Cart = () => {
                                                             <Button bg='#24aeb1' color='#fff' borderRadius={'3px'} fontSize={'12px'} size='sm' _hover={'none'} letterSpacing={'1px'} onClick={() => AddToCartFromSave(el)}>ADD TO CART</Button>
                                                         </Flex>
                                                     </Box>
-                                                    <Box w='20%'>
-                                                        <Center><Text fontWeight={'600'} color='#ef4281'>Rs.{el.actual_price.toFixed(2)}</Text></Center>
-                                                        {el.crossed_price && <Center><Text color='#151B3999' fontWeight={'400'} textDecoration={'line-through'} fontSize={'12px'}>Rs.{el.crossed_price.toFixed(2)}</Text></Center>}
-                                                    </Box>
-                                                </Flex>
-                                            </Flex>
+                                                    
+                                                </Box>
+                                            </Box>
                                         ))
                                     }
                                 </Box> :
@@ -288,16 +317,24 @@ export const Cart = () => {
                             }
                         </Box>
                     </Box>
-                    <Box w='45%'>
-                        <Box border='1px solid red' p='10px' pb='20px' borderRadius={'5px'} bg='#fff' mb='15px'>
+                    <Box w={{base: '100%', lg: '45%'}}>
+                        <Box p='10px' pb='20px' borderRadius={'5px'} bg='#fff' mb='15px'>
                             <Box>
                                 <Text fontSize={'12px'} color='#151B3999' fontWeight='600' letterSpacing='1px' mb='10px'>APPLY PROMOCODE / NMS SUPERCASH</Text>
-                                <Checkbox colorScheme={'teal'}>Apply Promo Code</Checkbox>
+                                <Checkbox onChange={() => handlePromo(showHidden)} colorScheme={'teal'}>Apply Promo Code</Checkbox>
                                 <Center><Text color='#151B3999' w='80%' mt='10px' fontSize={'12px'}>Get flat discount! Vouchers applicable in payment options.</Text></Center>
                             </Box>
-                            <Box>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi blanditiis eaque atque inventore rem, animi facere voluptatum? Nulla at eos culpa alias, nesciunt earum, eaque quia fuga reiciendis sapiente cum!
-                                Perferendis laudantium doloribus voluptatum harum, id pariatur inventore est ad dignissimos nisi recusandae a quasi iusto porro illum mollitia minima nostrum similique sit quos nam sequi beatae corrupti impedit? Commodi?
+                            <Box  mt='30px' pos='relative'>
+                                <Box ref={promeRef} display='none'>
+                                    <Text color='#24aeb1' fontSize={'12px'} fontWeight='600'>PROMOCODE</Text>
+                                    <Box>
+                                        <Input onChange={(e) => setPromoCode(e.target.value)} size={'xs'} variant='flushed' placeholder='Have a promocode? Enter here' />
+                                        <Button onClick={ApplyPromoCode} pos='absolute' right='0' bottom='-5px' bg='none' _hover='none' color='#ef4281'>Apply</Button>
+                                    </Box>
+                                    {
+                                        validPromoCode===false && <Text color='red'>Invalid promocode</Text>
+                                    }
+                                </Box>
                             </Box>
                         </Box>
                         <Box p='10px' pb='20px' borderRadius={'5px'} bg='#fff' mb='15px'>
@@ -311,9 +348,16 @@ export const Cart = () => {
                                     <Text>Netmeds Discount</Text>
                                     <Text>-Rs.{parseFloat(discount).toFixed(2)}</Text>
                                 </Flex>
+                                {
+                                    promoCodeDiscount==0? <Box></Box> : 
+                                    <Flex fontSize={'14px'} mb='10px' justifyContent={'space-between'}>
+                                        <Text>Promocode Discount</Text>
+                                        <Text>-Rs.{parseFloat(promoCodeDiscount).toFixed(2)}</Text>
+                                    </Flex>
+                                }
                                 <Flex fontSize={'14px'} mb='20px' justifyContent={'space-between'}>
                                     <Text as='b'>Total Amount *</Text>
-                                    <Text as='b'>Rs.{parseFloat(totalMRP-discount).toFixed(2)}</Text>
+                                    <Text as='b'>Rs.{parseFloat(totalMRP-discount-promoCodeDiscount).toFixed(2)}</Text>
                                 </Flex>
                             </Box>
                             <Box bg='#f3f8ec' p='10px 15px' mb='30px'>
@@ -322,7 +366,7 @@ export const Cart = () => {
                             <Flex justifyContent={'space-between'} p='5px'>
                                 <Box>
                                     <Text fontSize={'11px'} letterSpacing='1px' fontWeight={'600'} color='#151B3999'>TOTAL AMOUNT</Text>
-                                    <Text fontSize={'20px'} as='b'>Rs.{parseFloat(totalMRP-discount).toFixed(2)}</Text>
+                                    <Text fontSize={'20px'} as='b'>Rs.{parseFloat(totalMRP-discount-promoCodeDiscount).toFixed(2)}</Text>
                                 </Box>
                                 <Box>
                                     <Button onClick={handleProcced} bg='#24aeb1' borderRadius={'2px'} color='#fff' letterSpacing={'1px'} _hover='none' p='0 30px'>PROCEED</Button>
