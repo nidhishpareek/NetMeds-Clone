@@ -51,7 +51,6 @@ export const Carousel = () => {
     }
     const dotStyleTrue = {
         border: '1px solid #24aeb1',
-        background: '#24aeb1',
         height: '8px',
         width: '8px',
         border: '1px solid gray',
@@ -60,7 +59,6 @@ export const Carousel = () => {
     }
     const dotStyleFalse = {
         border: '1px solid gray',
-        background: '#fff',
         height: '8px',
         width: '8px',
         border: '1px solid gray',
