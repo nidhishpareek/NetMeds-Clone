@@ -100,19 +100,18 @@ const CartNavbar = () => {
                 : "78.36"}
             </Text>
           </Box>
-          <Box>
-            <Link to={'/Cart'}>
-              <Button
+                
+          <Flex justifyContent={'center'} alignItems='center' bg="rgb(50,174,177)" height='40px' paddingInline='5px' borderRadius={'5px'}>
+              <Text
                 _hover={{ bg: "rgb(50,174,177)" }}
                 fontSize={"12px"}
-                size="sm"
+                paddingInline='5px'
                 color={"white"}
-                bg="rgb(50,174,177)"
+                
               >
                 PROCEED TO CART
-              </Button>
-            </Link>
-          </Box>
+              </Text>
+          </Flex>
         </MenuItem>
       </MenuList>
     </Menu>

@@ -21,7 +21,7 @@ const BottomList = () => {
         <Flex margin={"auto"} justifyContent="center" gap={"4%"}>
           {ListArray.map((ele, index) => {
             return (
-              <Link key={index} to={`/${ele}`}>
+              <Link key={index} to={`/products`}>
                 <Text fontSize={"13px"} whiteSpace='nowrap'>
                   {ele}
                 </Text>

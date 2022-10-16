@@ -51,7 +51,6 @@ export const Carousel = () => {
     }
     const dotStyleTrue = {
         border: '1px solid #24aeb1',
-        background: '#24aeb1',
         height: '8px',
         width: '8px',
         border: '1px solid gray',
@@ -60,7 +59,6 @@ export const Carousel = () => {
     }
     const dotStyleFalse = {
         border: '1px solid gray',
-        background: '#fff',
         height: '8px',
         width: '8px',
         border: '1px solid gray',
@@ -68,7 +66,7 @@ export const Carousel = () => {
         borderRadius: '50%'
     }
     return (
-        <Box position='relative' w='97vw' m='auto' mb={{base: '15px', md: '30px', lg: '40px'}}>
+        <Box position='relative' w='97vw' pt='20px' m='auto' mb={{base: '15px', md: '30px', lg: '40px'}}>
             <Box overflow={'hidden'}>
                 <Box ref={ref} w='400%' display={'grid'} gridTemplateColumns='repeat(4,1fr)' transition='0.3s'>
                 {

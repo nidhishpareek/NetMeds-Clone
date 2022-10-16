@@ -1,14 +1,14 @@
 import './App.css';
 import MainNavbar from './Components/Navbar/MainNavbar'
-import { Box } from '@chakra-ui/react';
-import Products from './pages/ProductPage/Products';
-import { Landing } from './pages/landing';
+import Footer from './Components/Footer/Footer';
+import { AllRoutes } from './Components/AllRoutes/AllRoutes';
 function App() {
   return (
     <div className="App">
       <MainNavbar />
-      <Landing/>
+      <AllRoutes/>
       <Footer />
+
     </div>
   );
 }
