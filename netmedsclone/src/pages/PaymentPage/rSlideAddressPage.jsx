@@ -1,10 +1,13 @@
 import { useDisclosure,Button,
-   Drawer,Stack,Box,FormLabel,
+   Drawer,Stack,Box,
    Input,Select,Textarea,
    DrawerOverlay,DrawerContent,
    DrawerCloseButton, DrawerFooter,
    DrawerHeader,DrawerBody,
-   InputGroup,InputLeftAddon, Flex} from '@chakra-ui/react'
+   InputGroup,InputLeftAddon, Flex,FormControl,
+   FormLabel,
+   FormErrorMessage,
+   FormHelperText,} from '@chakra-ui/react'
 
 import { PhoneIcon, AddIcon, WarningIcon } from '@chakra-ui/icons'
 import React from "react"
@@ -13,9 +16,11 @@ import React from "react"
 
       const { isOpen, onOpen, onClose } = useDisclosure()
       const firstField = React.useRef()
-    
+
+      // console.log("useref",firstField.current)
+      const isError = Input === ''
       return (
-        <>
+        <FormControl isInvalid={isError}>
    
           <Button leftIcon={<AddIcon />} colorScheme='teal' onClick={onOpen}>
             Change Address
@@ -114,7 +119,14 @@ import React from "react"
               </DrawerFooter>
             </DrawerContent>
           </Drawer>
-        </>
+          {/* {!isError ? (
+        <FormHelperText>
+         
+        </FormHelperText>
+      ) : (
+        <FormErrorMessage>Email is required.</FormErrorMessage>
+      )} */}
+          </FormControl>
       )
     }
   

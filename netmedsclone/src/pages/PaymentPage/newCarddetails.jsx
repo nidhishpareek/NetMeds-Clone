@@ -7,7 +7,7 @@ import { useDisclosure,Button,
     InputGroup,InputLeftAddon, Flex,Text,Alert,
     AlertIcon,
     AlertTitle,
-    AlertDescription,CloseButton} from '@chakra-ui/react'
+    AlertDescription,CloseButton,FormControl} from '@chakra-ui/react'
  
  import { PhoneIcon, AddIcon, WarningIcon } from '@chakra-ui/icons'
  import React from "react"
@@ -25,7 +25,7 @@ import { useDisclosure,Button,
       
     
        return (
-         <>
+        <FormControl isRequired>
     
            <Button w="40%" colorScheme='teal' onClick={onOpen}>
             Add New Card
@@ -59,10 +59,10 @@ import { useDisclosure,Button,
  
  
                 l<Flex>
-                <Input htmlSize={5} width='auto' placeholder='MM' required/>
-                <Input htmlSize={5} width='auto' placeholder='YY' required/>
+                <Input type="text" htmlSize={5} width='auto' placeholder='MM' required/>
+                <Input type="text" htmlSize={5} width='auto' placeholder='YY' required/>
                 
-                <Input htmlSize={5} width='auto' placeholder='CVV' required/>
+                <Input type="text" htmlSize={5} width='auto' placeholder='CVV' required/>
                 </Flex>
  
  
@@ -92,17 +92,17 @@ import { useDisclosure,Button,
                  <Button colorScheme='green' width='100%' disabled={isAnonymous ? true : false} onClick={()=>{
                     
                     if(message.length==16){
-                        alert(" Payment Sucsses ")
+                        alert(" Payment successful :) ")
                     }
                     else{
-                        alert("Wrong Details")
+                        alert("Wrong Details !")
                     }
                 }}
                     >Pay</Button>
                </DrawerFooter>
              </DrawerContent>
            </Drawer>
-         </>
+         </FormControl>
        )
      }
    

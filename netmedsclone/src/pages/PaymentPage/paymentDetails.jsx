@@ -29,15 +29,25 @@ const{Change,setChange}=React.useState(false)
     }
 
 
+    const PaymentDetails={
+      MrpTotal:"560.00",
+      Discount:"112.00",
+      TotalAmount:"4490.00",
+      SAVINGS :"112.00"
+    }
+
+
+
+
     return (
         <Box>
     <OrderStatus/>
-    <Box w='70%' m="auto" mt='30px' >
+    <Box w={{ base: '100%', md: '100%', lg: '70%' }} m="auto" mt='30px' >
     
       <Flex   justifyContent='space-between' wrap='wrap' >
         
 
-        <SimpleGrid columns={1}  w={{ base: '100%', md: '100%', lg: '67%' }} >
+        <SimpleGrid columns={1}  w={{  md: '70%'}} >
           <Box   >
             <Box  padding='20px' mb='50px' id='boxshadow' >
             <Flex align='center'>
@@ -53,7 +63,7 @@ const{Change,setChange}=React.useState(false)
               <Flex justifyContent="space-between" >
                 <Flex align='center'>
                 <Image h='30px' mr='15px'src='https://www.netmeds.com/assets/pgicon/googlepaylogo.png' alt='img'/>
-                <Text  fontSize='14px' >Googel Pay</Text>
+                <Text  fontSize='14px' >Google Pay</Text>
                 </Flex>
                 <Checkbox size='md' colorScheme='green' >
                    
@@ -203,35 +213,35 @@ const{Change,setChange}=React.useState(false)
 
 
       
-        <Box   height='auto' padding='10px' id='boxshadow2' w={{ base: '100%', md: '100%', lg: '30%' }}>
+        <Box   height='auto' padding='10px' id='boxshadow2'  w={{ base: '100%', md: 'auto', lg: '30%' }}>
             <Text color='rgba(21,27,57,.6)'fontSize='12px'>PAYMENT DETAILS</Text>
             <Box   lineHeight='40px'  >
             <Flex justifyContent="space-between">
               <Text>MRP Total</Text>
-              <Text>Rs.560.00</Text>
+              <Text>Rs.{PaymentDetails.MrpTotal}</Text>
             </Flex>
 
 
             <Flex justifyContent="space-between">
               <Text>Netmeds Discount</Text>
-              <Text>- Rs.112.00</Text>
+              <Text>- Rs.{PaymentDetails.Discount}</Text>
             </Flex>
 
 
             <Flex justifyContent="space-between" fontWeight='bold'>
               <Text >Total Amount</Text>
-              <Text > *Rs.448.00</Text>
+              <Text > *Rs.{PaymentDetails.TotalAmount}</Text>
             </Flex>
             </Box>
             <Box bg='#f3f8ec' mt='20px' p='10px'>
-              <Text color='#378f30' fontSize='14px'> TOTAL SAVINGS   RS.112.00</Text>
+              <Text color='#378f30' fontSize='14px'> TOTAL SAVINGS   RS.{PaymentDetails.SAVINGS}</Text>
             </Box>
 
             <Flex justifyContent='space-between' mt='30px'>
 
               <Box >
                 <Text>TOTAL AMOUNT</Text>
-                <Text fontWeight='bold' fontSize='20px'> Rs.448.00</Text>
+                <Text fontWeight='bold' fontSize='20px'>Rs.{PaymentDetails.TotalAmount}</Text>
               </Box>
 
               
