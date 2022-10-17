@@ -124,15 +124,6 @@ export const Cart = () => {
             setShowHidden('hidden')
         }
     }
-    // const ApplyPromoCode = () => {
-    //     if(promoCode==='Hurray!') {
-    //         setPromoCodeDiscount(((totalMRP-discount)*20)/100)
-    //         setValidPromoCode(true);
-    //     }
-    //     else {
-    //         setValidPromoCode(false);
-    //     }
-    // }
     if(error) {
         return <ErrorPage></ErrorPage>
     }
