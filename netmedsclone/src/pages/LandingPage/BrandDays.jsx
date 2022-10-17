@@ -55,7 +55,7 @@ export default function () {
             <Box w='100%' position='absolute' top='70px'>
                 <Box w='95vw' m='auto'>
                     <Box overflow={{base: 'scroll', md: 'hidden'}} pb='20px'>
-                        <Box ref={ref} transition='0.3s' display='grid' gap='1vw' gridTemplateColumns={`repeat(${limitedTimeData.length},1fr)`}>
+                        <Box ref={ref} transition='0.3s' display='grid' gap={{base: '10px', md: '1vw'}} gridTemplateColumns={`repeat(${limitedTimeData.length},1fr)`}>
                                 {
                                     limitedTimeData.map(el => (
                                         <Box w={{base: '200px', md: '18.2vw'}} key={el.id} p=' 30px 15px 15px 15px' boxShadow='rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px' borderRadius={'10px'} bg='#fff'>

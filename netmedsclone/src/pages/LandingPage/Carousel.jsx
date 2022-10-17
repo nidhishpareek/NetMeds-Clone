@@ -50,7 +50,6 @@ export const Carousel = () => {
         setCount(value);
     }
     const dotStyleTrue = {
-        border: '1px solid #24aeb1',
         height: '8px',
         width: '8px',
         border: '1px solid gray',
@@ -58,7 +57,6 @@ export const Carousel = () => {
         borderRadius: '50%'
     }
     const dotStyleFalse = {
-        border: '1px solid gray',
         height: '8px',
         width: '8px',
         border: '1px solid gray',
@@ -71,7 +69,7 @@ export const Carousel = () => {
                 <Box ref={ref} w='400%' display={'grid'} gridTemplateColumns='repeat(4,1fr)' transition='0.3s'>
                 {
                     images.map(el => (
-                        <Box borderRadius={{base: '10px', md: '0'}} w='97vw' className="slide" h={{base: '200px', md: '250px', lg: '300px',}}>
+                        <Box key={el.id} borderRadius={{base: '10px', md: '0'}} w='97vw' className="slide" h={{base: '200px', md: '250px', lg: '300px',}}>
                             <Image borderRadius={{base: '10px', md: '0'}} w='100%' h='100%' src={process.env.PUBLIC_URL + `/Images/netmedC${el.id}.jpg`} alt="" />
                         </Box>
                     ))
