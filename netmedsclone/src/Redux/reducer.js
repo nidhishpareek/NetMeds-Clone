@@ -1,4 +1,4 @@
-import {  ERRORSTATE, LOADINGSTATE, SETCART, TOGGLEVIEW,SETCARTBYREDUCER } from "./action"
+import {  ERRORSTATE, LOADINGSTATE, SETCART, TOGGLEVIEW,SETCARTBYREDUCER,EMPTYCART } from "./action"
 
 const initState={
     loading:false, 
@@ -28,6 +28,13 @@ function reducer(state=initState,{type,payload}){
                 loading:false,
                 error:false,
                 cart:[...state.cart,payload]
+            }
+        }
+        case EMPTYCART:{
+            return {
+                loading:false,
+                error:false,
+                cart:[]
             }
         }
         case SETCARTBYREDUCER:{

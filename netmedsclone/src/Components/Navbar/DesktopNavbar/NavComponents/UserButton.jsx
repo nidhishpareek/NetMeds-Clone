@@ -1,18 +1,22 @@
 //Change isLoggedIn and name according to Redux.
 
-import { Avatar, Box, Flex, IconButton, Text } from "@chakra-ui/react";
-import { Link, useNavigate } from "react-router-dom";
+import { Avatar, Box, Flex, Text } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { EmptyCart } from "../../../../Redux/action";
 
 const UserButton = () => {
   const isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn")) || false;
-  const navigate = useNavigate();
   const userDetails = JSON.parse(localStorage.getItem("userDetails")) || [];
+  const dispatch = useDispatch();
+
   const name = userDetails.firstName;
   const handleClickOnUserButton = () => {
     if (isLoggedIn) {
       localStorage.removeItem("isLoggedIn");
       localStorage.removeItem("userDetails");
+      dispatch(EmptyCart())
     }
   };
   return (

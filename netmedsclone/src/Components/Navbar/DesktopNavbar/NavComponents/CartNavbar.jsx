@@ -16,7 +16,6 @@ import { useSelector, useDispatch } from "react-redux";
 const CartNavbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cart = useSelector((state) => state.cart);
-
   return (
     <Menu isOpen={isOpen} isLazy={true} placement="bottom-end">
       <MenuButton
@@ -44,17 +43,17 @@ const CartNavbar = () => {
           <Text>{cart.length} item(s)</Text>
         </MenuItem>
         {cart &&
-          cart.map((ele, index) => (
+          cart.map((ele) => { return(
             <MenuItem
               value="ele"
-              key={uuid()}
+              key={ele.id}
               fontSize={"14px"}
               width="320px"
               _hover={{ bg: "white" }}
             >
               <CartMenuNavbarItem ele={ele} />
             </MenuItem>
-          ))}
+          )})}
         <MenuItem
           fontSize={"14px"}
           justifyContent={"space-between"}
