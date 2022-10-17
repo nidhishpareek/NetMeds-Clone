@@ -1,4 +1,4 @@
-import { Grid, GridItem } from "@chakra-ui/react";
+import { Grid, GridItem, Spinner } from "@chakra-ui/react";
 import {SlideAddress} from "./rSlideAddressPage"
 import { OrderStatus } from "./orderStatus";
 import React, { useContext } from "react"
@@ -13,21 +13,21 @@ var userDetails=JSON.parse(localStorage.getItem("userDetails"))
 
 
 
-async function GetData(){
-  const key="";
-  // const url="https://jsonplaceholder.typicode.com/posts?_limit=10";
-   const url=`https://netmedsdata.onrender.com/cart`;
-try{
-    const res= await fetch(url)
-    const data=await res.json();
-    //  console.log(data);
-    return data;
-}
-catch(err){
-   console.log("err",err);
-}
+// async function GetData(){
+//   const key="";
+//   // const url="https://jsonplaceholder.typicode.com/posts?_limit=10";
+//    const url=`https://netmedsdata.onrender.com/cart`;
+// try{
+//     const res= await fetch(url)
+//     const data=await res.json();
+//     //  console.log(data);
+//     return data;
+// }
+// catch(err){
+//    console.log("err",err);
+// }
 
-}
+// }
 
 
 
@@ -44,29 +44,30 @@ export const OrderReview = () => {
   const[posts,setPosts]=React.useState([]);
   const[page,setPage]=React.useState(1);
   
-  const {totalMRP,discount,promoCodeDiscount,userAddressdata}= useContext(AppContext);
+  const {totalMRP,discount,promoCodeDiscount,userAddressdata,getData,cartData,loading}= useContext(AppContext);
 
   // const{FirstName,LastName,Address,Landmark,Phonenumber,City,State,PinCode}=userAddressdata;
 
     React.useEffect(()=>{
-        Data1()
-        cartDataPrice()
+        // Data1()
+        // cartDataPrice()
         // cartData()
         // console.log("calling useeffect")
+        getData();
     },[])
 
 
-    const Data1=async ()=>{
-        try{
-            const items= await GetData();
-            // console.log(items)
-            setPosts(items);
-        }
-        catch(err){
-            console.log("err");
-        }
+    // const Data1=async ()=>{
+    //     try{
+    //         const items= await getData();
+    //         // console.log(items)
+    //         setPosts(items);
+    //     }
+    //     catch(err){
+    //         console.log("err");
+    //     }
         
-    }
+    // }
  
  
 
@@ -74,21 +75,21 @@ export const OrderReview = () => {
 
 const[Productprice,setProductprice]=React.useState('');
 
-let TotalPrice=0;
+// let TotalPrice=0;
 
 
-const cartDataPrice=()=>{
-  {posts.map((post)=>
-    (
-      TotalPrice=TotalPrice+parseInt(post.actual_price)
+// const cartDataPrice=()=>{
+//   {posts.map((post)=>
+//     (
+//       TotalPrice=TotalPrice+parseInt(post.actual_price)
     
-    )
-    )}
-    // console.log(TotalPrice);
-   setProductprice(TotalPrice);
+//     )
+//     )}
+//     // console.log(TotalPrice);
+//    setProductprice(TotalPrice);
     
-    // console.log("heee",Productprice);
-}
+//     // console.log("heee",Productprice);
+// }
 
 
 
@@ -141,13 +142,16 @@ const PaymentDetails={
   
   return (
     <Box>
+      {
+                    loading && <Box zIndex={'2'} opacity='0.8' display={'grid'} position='fixed' bottom='0px' placeContent='center' w='100vw' h='110vh' bg='black'><Spinner color='#fff' size='xl' /></Box>
+                }
     <OrderStatus/>
-    <Box w={{ base: '100%', md: '100%', lg: '70%' }} m="auto" mt='30px'>
+    <Box w={{ base: '100%', md: '100%', lg: '70%' }} m="auto" mt='30px' border="1px solid blue">
     
-      <Flex   justifyContent='space-between' wrap='wrap' >
+      <Box   justifyContent='space-between' wrap='wrap' border="1px solid red" display={{base:"block", lg:"flex"}} >
         
 
-        <SimpleGrid columns={1} w={{  md: '70%'}} >
+        <SimpleGrid columns={1} w={{  md: '100%'}} >
           <Box   >
           <Text color='rgba(21,27,57,.6)'fontSize='12px'>PRODUCTS</Text>
             <Box  padding='10px' mb='50px' id='boxshadow'>
@@ -155,7 +159,7 @@ const PaymentDetails={
               <Text fontSize='14px' color='#151b39' fontWeight='bold' mb='10px'>{ProductData.DeliveryDate}</Text>
 
 
-              {posts.map((post)=>
+              {cartData.map((post)=>
     (
       <Box  mb="10px" key={post.title}>
       <Flex >
@@ -240,7 +244,7 @@ const PaymentDetails={
 
 
       
-        <Box   height='auto' padding='10px' id='boxshadow2' w={{ base: '100%', md: 'auto', lg: '30%' }}>
+        <Box   height='auto' padding='10px' id='boxshadow2' w={{base:"100%",lg:"30%"}} border="1px solid blue">
             <Text color='rgba(21,27,57,.6)'fontSize='12px'>PAYMENT DETAILS</Text>
             <Box   lineHeight='40px'  >
             <Flex justifyContent="space-between">
@@ -298,7 +302,7 @@ const PaymentDetails={
 
 
 
-      </Flex>
+      </Box>
     </Box>
 
     </Box>
