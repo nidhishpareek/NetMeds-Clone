@@ -245,7 +245,7 @@ const PaymentDetails={
 
 
       
-        <Box   height='auto' padding='10px' id='boxshadow2' w={{base:"100%",lg:"35%"} } mt="20px">
+        <Box   height='auto' padding='10px' id='boxshadow2' w={{base:"100%",lg:"50%"} } mt="20px">
             <Text color='rgba(21,27,57,.6)'fontSize='12px'>PAYMENT DETAILS</Text>
             <Box   lineHeight='40px'  >
             <Flex justifyContent="space-between">

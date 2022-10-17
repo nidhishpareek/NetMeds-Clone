@@ -127,11 +127,11 @@ import { AppContext } from '../../context/AppContext'
                         alert(" Wrong Card Number  You Enter !  "+message.length)
                     }
                     else if(mmdata.length!=2 || parseInt(mmdata)>12){
-                      alert(" Wrong Month Details Must Be 2 digit And Month Value Must LessThan  12! ")
+                      alert(" Wrong Month Details, Must Be 2 Digit And Month Value Must Be Less Than 12! ")
                     }
                     else if(yydata.length!=2 || parseInt(yydata)<22){
                       
-                      alert(" Wrong Year Details Must Be Year Last 2 digit And Exp.Year Must Be LessThan 2022 ! ")
+                      alert(" Wrong Year Details, Must Be Year Last 2 digit And Exp. Year Must Be Greater Than 2022! ")
                     }
                     else if(cvvdata.length!=3){
                       

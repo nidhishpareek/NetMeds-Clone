@@ -226,7 +226,7 @@ const {totalMRP,discount,promoCodeDiscount,getData,cartData,loading}= useContext
 
 
       
-        <Box   height='auto' padding='10px' id='boxshadow2'   w={{base:"100%",lg:"30%"}} >
+        <Box   height='auto' padding='10px' id='boxshadow2'   w={{base:"100%",lg:"50%"}} >
             <Text color='rgba(21,27,57,.6)'fontSize='12px'>PAYMENT DETAILS</Text>
             <Box   lineHeight='40px'  >
             <Flex justifyContent="space-between">
