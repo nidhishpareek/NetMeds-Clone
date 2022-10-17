@@ -1,9 +1,11 @@
 import { ChevronRightIcon } from '@chakra-ui/icons'
 import { Box, Button, Center, Flex, Grid, Heading, Image, Link, Text, useToast } from '@chakra-ui/react'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { setCartProduct } from '../../Redux/action';
+import { useNavigate } from 'react-router-dom';
+import { Data } from '../Context/DataContext';
 
 export default function () {
     const [limitedTimeData, setLimitedTimeData] = useState([]);
@@ -11,6 +13,7 @@ export default function () {
     const ref = useRef();
     const [cartData, setCartData] = useState([]);
     const dispatch = useDispatch();
+    const {handlecurrProduct} = useContext(Data);
 
     const getData = () => {
         fetch('https://netmedsdata.onrender.com/home?_page=2&_limit=10')
@@ -84,6 +87,11 @@ export default function () {
             })
         }
     } 
+    const navigate = useNavigate();
+    const showProduct = (el) => {
+        handlecurrProduct(el)
+        navigate(`/products/${el.id}`)
+    }
 
     return (
         <Box position={'relative'}>
@@ -105,7 +113,7 @@ export default function () {
                                     {
                                         limitedTimeData.map(el => (
                                             <Box w={{base: '200px', md: '18.2vw'}} key={el.id} p=' 30px 15px 15px 15px' boxShadow='rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px' borderRadius={'10px'} bg='#fff'>
-                                                <Center><Image w='150px'  h={{base: '100px', md: '150px'}} src={el.img1}></Image></Center>
+                                                <Center><Image onClick={() => showProduct(el)} w='150px'  h={{base: '100px', md: '150px'}} src={el.img1}></Image></Center>
                                                 <Text mt='30px'fontWeight={'600'} h='53px' noOfLines={[1,2]} textOverflow={'ellipsis'}>{el.title}</Text>
                                                 <Flex mt='8px' alignItems={'flex-end'}>
                                                     <Text fontWeight={'600'} mr='5px'>₹ {parseFloat(el.actual_price).toFixed(2)}</Text>
