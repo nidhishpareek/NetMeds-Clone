@@ -8,6 +8,7 @@ import {store} from "./Redux/store"
 import {BrowserRouter} from "react-router-dom"
 import { Provider } from "react-redux";
 import  Data  from "./pages/Context/DataContext";
+import { AppContextProvider } from "./context/AppContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -16,7 +17,9 @@ root.render(
         <Data>
           <BrowserRouter>
             <ChakraProvider>
-              <App />
+              <AppContextProvider>
+                <App />
+              </AppContextProvider>
             </ChakraProvider>
           </BrowserRouter>
         </Data>

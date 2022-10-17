@@ -1,7 +1,9 @@
 import { AddIcon } from '@chakra-ui/icons';
 import { Box, Button, Center, Checkbox, Flex, Heading, Image, Input, Select, Spinner, Text } from '@chakra-ui/react';
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { AppContext } from '../../context/AppContext';
+import DataContext from '../Context/DataContext';
 
 export const Cart = () => {
     const [cartData, setCartData] = useState([0]);
@@ -11,11 +13,10 @@ export const Cart = () => {
     const [error, setError] = useState(false);
     const [promoCode, setPromoCode] = useState('');
     const [validPromoCode, setValidPromoCode] = useState(true);
-    const [promoCodeDiscount, setPromoCodeDiscount] = useState(0);
     const promeRef = useRef(null);
-    const [totalMRP, setTotalMRP] = useState(0);
-    const [discount, setDiscount] = useState(0);
     const date = Date(Date.now());
+    const {totalMRP, setTotalMRP, discount, setDiscount, promoCodeDiscount, setPromoCodeDiscount} = useContext(AppContext);
+    console.log(totalMRP, 'value')
     const getData = () => {
         setLoading(true);
         fetch('https://netmedsdata.onrender.com/cart')
