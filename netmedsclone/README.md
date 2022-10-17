@@ -1,70 +1,89 @@
-# Getting Started with Create React App
+# Clone of Netmeds
+## Question statement
+We have given the project to clone the official site of Netmeds.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introduction
+Hello, we are learning Full stack Web Development at Masai School. During Unit 6 on this web development journey, we got a group project with our batchmates to clone the website of Netmeds, which is a pharmaceutical company that offers medicines at a reasonable price. We have tried to clone the website in the time span of 10 days only.
 
-## Available Scripts
+## Tech Stack Used
+Reactjs
+CSS3
+JavaScript
+Chakra UI
+JSON server(Back-end)
+## Home Page
+We have created the navigation bar which has dropdown menus on hover, a cart section where the user can see the total number of products in the cart in real-time, and a login/signup button.
+![image](https://user-images.githubusercontent.com/108894016/196271579-0e16f0ba-0819-45be-876d-ca9a9512eeb4.png)
 
-In the project directory, you can run:
+The Homepage of Netmeds website shows the various medicines of different categories like diabetic, ayurvedic, homeopathy and treatments, etc.
 
-### `npm start`
+![image](https://user-images.githubusercontent.com/108894016/196271764-5a1c11f8-c8c1-4a89-acae-8581d68f248d.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+A user can see the Navbar on the top section, and in the middle section of the website, the user will be able to see some carousals and some popular products which are listed on the home page of the website. These products are dynamic, which means all the CRUD ( Create, Read, Update, Delete ) are available for these products.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+![image](https://user-images.githubusercontent.com/108894016/196271811-d427e12a-81b2-4b16-bac1-081b3118a1e7.png)
 
-### `npm test`
+We have also included the responsiveness to our site for all the screens.
+## Login Page
+On the home page, there is an option for signup on the right top of the page clicking that option will redirect the user to the signup/login page.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![image](https://user-images.githubusercontent.com/108894016/196271875-4f84b2cd-be20-4ca5-aedc-5c35814cdd45.png)
 
-### `npm run build`
+On the Signup page, the mobile number is asked for along with the email address and name after submitting the user will get an OTP in the mail. After the successful submission of OTP, the user will be logged in.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![image](https://user-images.githubusercontent.com/108894016/196271968-944fc92e-0af9-4ad2-8aac-4f5b9dfe0465.png)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+##Product Page
+The product page of the website contains all the products with their respective category and price.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![image](https://user-images.githubusercontent.com/108894016/196272089-515a1ff9-b5cb-4d0b-a451-5a04d534e801.png)
 
-### `npm run eject`
+A user can easily sort those products according to their will or choice.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+![image](https://user-images.githubusercontent.com/108894016/196272054-bcaf7f7b-4b63-4df6-a48d-4468facac69a.png)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+A user can see the products page and add or remove products from there. Choosing the product will redirect the user products details page, where all the data related to the product like price, manufacturer, and country of origin are shown.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+![image](https://user-images.githubusercontent.com/108894016/196272129-a6a819cb-4199-4545-a8c9-4786067c4500.png)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Clicking on the add to cart button will add the product to the cart and then after clicking on the cart icon of the navigation bar, the user will be redirected to the cart page.
 
-## Learn More
+## Cart Page
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![image](https://user-images.githubusercontent.com/108894016/196272185-57ac29e7-8400-438d-ab7b-d99381f2cc30.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+After going to the cart page user can change the quantity and also can remove the item if he/she wants to remove it.
 
-### Code Splitting
+![image](https://user-images.githubusercontent.com/108894016/196272233-13558508-7359-4d1b-83cb-894bbbd86a05.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Finally, the cart page will give the user the option to proceed with the payments by clicking proceed.
+## Payment Page
 
-### Analyzing the Bundle Size
+![image](https://user-images.githubusercontent.com/108894016/196272307-7f6a33e1-0474-446d-ac29-723838749be9.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+After successfully adding the product and if the user is signed in already then he/she will be redirected to the signup page or else to the payment page.
 
-### Making a Progressive Web App
+![image](https://user-images.githubusercontent.com/108894016/196272342-2fff6535-16c8-40fe-93c9-5f8cf1945b6e.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+On the payment page, the user will be informed about the order details and asked about the payment methods to proceed further.
+On the payment page user will be asked to fill in the basic payment details i.e, card number, expiry date, and CVV, which includes validation also.
 
-### Advanced Configuration
+![image](https://user-images.githubusercontent.com/108894016/196272395-ee3b565f-5ca6-4203-a418-8d5c5a611715.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+After filling in the card details, on a successful transaction user will be redirected to the home page of netmeds.
 
-### Deployment
+## Roles and Responsibilities
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- On the first day of the project, we decided the role of every member of the team.
+- We have divided the task wisely among the team members.
+- We organize a meeting daily to know the progress and error if any.
 
-### `npm run build` fails to minify
+## Challenges
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The main challenge of the whole project was to manage the state of the application and avoid infinite re-rendering. We have solved it wisely.
+The second challenge was to merge the different files in the same final folder.
+
+## Conclusions
+
+learning technology is a different thing and showing what you have learned is a different thing. This project has given us the confidence to showcase whatever we have learned so far. This project also help us to learn those concepts, which can be gained only by practically doing, that can’t be taught during class. Lastly, I would like to thank all the team members of the group who coordinate remotely and let the project go smoothly.
+
