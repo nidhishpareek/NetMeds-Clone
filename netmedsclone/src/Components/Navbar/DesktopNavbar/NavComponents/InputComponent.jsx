@@ -16,7 +16,6 @@ const InputComponent = () => {
   const {handlecurrProduct} = useContext(Data)
 
   const handleChange = (e) => {
-    console.log(e.target.value, 'event')
     setInput(e.target.value);
     displayRelated();
   }

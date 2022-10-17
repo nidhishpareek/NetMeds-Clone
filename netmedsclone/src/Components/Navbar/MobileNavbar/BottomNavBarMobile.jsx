@@ -14,7 +14,6 @@ const BottomNavBarMobile = () => {
   const name = "Nidhish";
 
   const handleChange = (e) => {
-    console.log(e.target.value, 'event')
     setInput(e.target.value);
     displayRelated();
   }
