@@ -26,6 +26,12 @@ const CartNavbar = () => {
 
   },[])
   const cart = useSelector((state) => state.cart);
+
+ 
+  useEffect(()=>{
+    getData();
+
+  },[isOpen])
   return (
     <Menu isOpen={isOpen} isLazy={true} placement="bottom-end">
       <MenuButton
