@@ -13,10 +13,19 @@ import CartButton from "./CartButton";
 import { v4 as uuid } from "uuid";
 import CartMenuNavbarItem from "./CartMenuNavbarItem";
 import { useSelector, useDispatch } from "react-redux";
+import { useContext } from "react";
+import { useEffect } from "react";
+import { AppContext } from "../../../../context/AppContext";
+
 const CartNavbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const cart = useSelector((state) => state.cart);
+  const {discount, totalMRP,getData} =  useContext(AppContext);
 
+  useEffect(()=>{
+    getData();
+
+  },[])
+  const cart = useSelector((state) => state.cart);
   return (
     <Menu isOpen={isOpen} isLazy={true} placement="bottom-end">
       <MenuButton
@@ -44,32 +53,30 @@ const CartNavbar = () => {
           <Text>{cart.length} item(s)</Text>
         </MenuItem>
         {cart &&
-          cart.map((ele, index) => (
+          cart.map((ele) => { return(
             <MenuItem
               value="ele"
-              key={uuid()}
+              key={ele.id}
               fontSize={"14px"}
               width="320px"
               _hover={{ bg: "white" }}
             >
               <CartMenuNavbarItem ele={ele} />
             </MenuItem>
-          ))}
+          )})}
         <MenuItem
           fontSize={"14px"}
           justifyContent={"space-between"}
           _hover={{ bg: "white" }}
         >
           <Box>
-            <Text fontSize={"16px"}>
-              Rs. {cart.cart_actual_price ? cart.cart_actual_price : 783}
+            <Text fontSize={"16px"} color='#ef4281'>
+              Rs. {cart.cart_actual_price ? cart.cart_actual_price : totalMRP}
             </Text>
             <Text fontSize={"12px"}>
               {" "}
               You save Rs.{" "}
-              {cart.cart_crossed_price
-                ? cart.cart_crossed_price - cart.cart_actual_price
-                : "78.36"}
+              {discount.toFixed(2)}
             </Text>
           </Box>
                 

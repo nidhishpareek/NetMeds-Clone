@@ -9,6 +9,7 @@ import Footer from "../Footer/Footer";
 import LoginPage from '../../pages/Login/LoginPage'
 import { OrderReview } from '../../pages/PaymentPage/orderReview'
 import { PymentDetails } from '../../pages/PaymentPage/paymentDetails'
+import ProductDetail from '../../pages/ProductDetailPage/ProductDetail'
 import Products from '../../pages/ProductPage/Products'
 import { useSelector } from 'react-redux'
 import { PrivateRoute } from '../../context/PrivateRoute'
@@ -18,8 +19,9 @@ export const AllRoutes = () => {
     const mobileView = useSelector((state) => state.mobileView);
     return (
         <Routes>
-            <Route path='/' element={<><Landing></Landing>{!mobileView && <Footer />}</>}></Route>
-            <Route path='/products' element={<><Products></Products>{!mobileView && <Footer />}</>}></Route>
+            <Route path='/' element={<Landing></Landing>}></Route>
+            <Route path='/products' element={<Products></Products>}></Route>
+            <Route path='/products/:id' element={<ProductDetail />}></Route>
             <Route path='/Login' element={<LoginPage></LoginPage>}></Route>
             <Route path='/cart' element={<Cart></Cart>}></Route>
             <Route path='/payment' element={<PrivateRoute><OrderReview></OrderReview></PrivateRoute>}></Route>

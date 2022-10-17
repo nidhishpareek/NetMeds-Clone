@@ -6,22 +6,22 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 const Navbar = () => {
   const mobileView = useSelector((state) => state.mobileView);
-
+  const isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn")) || false;
   const dispatch = useDispatch();
-  const getData = () => {
+  const MountgetData = () => {
     fetch("https://netmedsdata.onrender.com/cart")
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         dispatch(setCartProductRReducer(res));
       });
   };
   useEffect(() => {
-    getData();
+    MountgetData();
   }, []);
 
   return (
-    <Box>
+    <Box >
       {mobileView ? (
         <MobileNavbar></MobileNavbar>
       ) : (
