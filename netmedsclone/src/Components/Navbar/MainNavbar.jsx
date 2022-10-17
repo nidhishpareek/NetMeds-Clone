@@ -5,7 +5,7 @@ const Navbar = () => {
 
     return (
         <Box>
-        <DesktopNavbar></DesktopNavbar>
+            <DesktopNavbar></DesktopNavbar>
         </Box>
     )
 }

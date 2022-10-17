@@ -1,4 +1,4 @@
-import { Box, Input } from '@chakra-ui/react'
+import { Box, Button, Checkbox, Input } from '@chakra-ui/react'
 import React, { useContext } from 'react'
 import { useState } from 'react';
 import { BsSearch } from 'react-icons/bs';
@@ -30,15 +30,6 @@ const Filtertype = ({ name }) => {
     getManu()
     arr1.push(...setManu)
     arr2.push(...setCat)
-    const style = {
-        color: "black",
-        border: "none",
-        backgroundColor: "white",
-        textAlign: 'left',
-        fontSize: '13px',
-        marginBottom: "5px",
-        marginLeft: "10px"
-    }
 
     return (
         <>
@@ -61,15 +52,15 @@ const Filtertype = ({ name }) => {
             }}>
                 {arr1.map((el) => {
                     if (name === 'Manufacturers')
-                        return <button style={style} key={el} value={el}
-                            onClick={(e) => handleToggle(e.target.value)}
-                        >{el}</button>
+                        return <Checkbox ml="10px" key={el} value={el}
+                            onChange={(e) => handleToggle(e.target.value)}
+                        >{el}</Checkbox>
                 })}
                 {arr2.map((el) => {
                     if (name === 'Categories')
-                        return <button style={style} key={el} value={el}
-                            onClick={(e) => handleToggleCategory(e.target.value)}
-                        >{el}</button>
+                        return <Checkbox ml="10px" key={el} value={el}
+                            onChange={(e) => handleToggleCategory(e.target.value)}
+                        >{el}</Checkbox>
                 })}
             </Box>
         </>
