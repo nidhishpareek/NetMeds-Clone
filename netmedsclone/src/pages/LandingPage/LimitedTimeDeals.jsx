@@ -5,6 +5,8 @@ import { useState } from 'react';
 import { useRef } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
+import { setCartProduct } from '../../Redux/action';
+import { useDispatch } from 'react-redux';
 
 export function LimitedTimeDeals() {
     const [hour, setHour] = useState(22);
@@ -15,6 +17,7 @@ export function LimitedTimeDeals() {
     const ref = useRef();
     const timeref = useRef(null);
     const [cartData, setCartData] = useState([]);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         clearInterval(timeref.current);
@@ -90,6 +93,7 @@ export function LimitedTimeDeals() {
         if (check.length === 0) {
             axios.post(cartApi, item)
             .then(() => {
+                dispatch(setCartProduct(item))
                 toast({
                     title: 'Item added to cart',
                     status: 'success',

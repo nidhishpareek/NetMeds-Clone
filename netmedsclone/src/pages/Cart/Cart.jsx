@@ -1,8 +1,10 @@
 import { AddIcon } from '@chakra-ui/icons';
 import { Box, Button, Center, Checkbox, Flex, Heading, Image, Input, Select, Spinner, Text } from '@chakra-ui/react';
 import React, { useContext, useEffect, useRef, useState } from 'react'
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
 import { AppContext } from '../../context/AppContext';
+import { removeCartRedux, setCartProduct } from '../../Redux/action';
 import DataContext from '../Context/DataContext';
 
 export const Cart = () => {
@@ -15,6 +17,7 @@ export const Cart = () => {
     const [validPromoCode, setValidPromoCode] = useState(true);
     const promeRef = useRef(null);
     const date = Date(Date.now());
+    const dispatch = useDispatch();
     const {totalMRP, setTotalMRP, discount, setDiscount, promoCodeDiscount, setPromoCodeDiscount} = useContext(AppContext);
     const getData = () => {
         setLoading(true);
@@ -65,6 +68,9 @@ export const Cart = () => {
             method: 'DELETE',
         }).then(() => {
             setLoading(false)
+            if(url==='https://netmedsdata.onrender.com/cart/') {
+                dispatch(removeCartRedux(id));
+            }
             getData();
             getSaveData();
         }).catch((err) => {
@@ -104,6 +110,7 @@ export const Cart = () => {
                 'Content-Type': 'application/json'
             }
         }).then((() => {
+            dispatch(setCartProduct(el));
             setLoading(false);
         })).catch((err) => {
             setLoading(false);
