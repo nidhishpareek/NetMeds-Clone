@@ -13,21 +13,26 @@ import { useDisclosure,Button,
  
  import { PhoneIcon, AddIcon, WarningIcon } from '@chakra-ui/icons'
  import React from "react"
+import { useContext } from 'react'
+import { AppContext } from '../../context/AppContext'
  
   export const NewCarddetails=()=>{
            
-       const { isOpen, onOpen, onClose } = useDisclosure()
-       const firstField = React.useRef()
-     
-       const [message, setMessage] = React.useState('');
-       const [cvvdata, setcvvdata] = React.useState('');
-       const [yydata, setyydata] = React.useState('');
-       const [mmdata, setmmdata] = React.useState('');
-       const isAnonymous = false;
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    const firstField = React.useRef()
+  
+    const [message, setMessage] = React.useState('');
+    const [cvvdata, setcvvdata] = React.useState('');
+    const [yydata, setyydata] = React.useState('');
+    const [mmdata, setmmdata] = React.useState('');
+    const isAnonymous = false;
+    const {deleteAll} = useContext(AppContext);
+
         
         
        const navigateToDetails = useNavigate();
        const handleNavigate = () => {
+        console.log('here')
          navigateToDetails('/');
        
        }
@@ -134,14 +139,16 @@ import { useDisclosure,Button,
                     }
                     else{
                         alert(" Payment successful :)")
-                       
                         handleNavigate()
+                        deleteAll();
+                       
+                  
 
                     }
                     }
                    
                 }}
-                    >Pay</Button>
+                   >Pay</Button>
                </DrawerFooter>
              </DrawerContent>
            </Drawer>
