@@ -4,7 +4,7 @@ npm i @chakra-ui/react @emotion/react @emotion/styled framer-motion
 npm i @chakra-ui/icons
 npm install react-icons --save
 npm install redux react-redux
-
+npm install @emailjs/browser
 
 
 optional- 
