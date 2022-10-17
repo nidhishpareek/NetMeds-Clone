@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 const Navbar = () => {
     const mobileView = useSelector((state) => state.mobileView);
-
+    const isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn")) || false;
     const dispatch = useDispatch();
     const getData = () => {
         fetch("https://netmedsdata.onrender.com/cart")
@@ -17,7 +17,8 @@ const Navbar = () => {
             });
     };
     useEffect(() => {
-        getData();
+        (isLoggedIn &&
+            getData())
     }, []);
 
     return (
