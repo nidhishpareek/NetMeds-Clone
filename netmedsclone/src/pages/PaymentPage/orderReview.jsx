@@ -267,7 +267,7 @@ const PaymentDetails={
 
             <Flex justifyContent="space-between" fontWeight='bold'>
               <Text >Total Amount</Text>
-              <Text > *Rs.{totalMRP.toFixed(2)-discount.toFixed(2)}</Text>
+              <Text > *Rs.{(totalMRP-discount).toFixed(2)}</Text>
             </Flex>
             </Box>
             <Box bg='#f3f8ec' mt='20px' p='10px'>
@@ -278,7 +278,7 @@ const PaymentDetails={
 
               <Box >
                 <Text>TOTAL AMOUNT</Text>
-                <Text fontWeight='bold' fontSize='20px'> Rs.{totalMRP.toFixed(2)-discount.toFixed(2)}</Text>
+                <Text fontWeight='bold' fontSize='20px'> Rs.{(totalMRP-discount).toFixed(2)}</Text>
               </Box>
 
               <Box >

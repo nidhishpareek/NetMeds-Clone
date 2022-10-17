@@ -6,6 +6,7 @@ import { SpinnerIcon,CheckCircleIcon,RepeatIcon,EmailIcon } from '@chakra-ui/ico
 import React, { useContext } from "react"
 import {NewCarddetails} from"./newCarddetails"
 import { AppContext } from "../../context/AppContext";
+import { useEffect } from "react";
 
 
 export const PymentDetails=()=>{
@@ -41,6 +42,10 @@ const {totalMRP,discount,promoCodeDiscount,getData,cartData,loading}= useContext
       SAVINGS :"112.00"
     }
 
+
+    useEffect(()=>{
+      getData()
+    },[])
 
 
 
@@ -247,7 +252,7 @@ const {totalMRP,discount,promoCodeDiscount,getData,cartData,loading}= useContext
 
             <Flex justifyContent="space-between" fontWeight='bold'>
               <Text >Total Amount</Text>
-              <Text > *Rs.{totalMRP.toFixed(2)-discount.toFixed(2)}</Text>
+              <Text > *Rs.{(totalMRP-discount).toFixed(2)}</Text>
             </Flex>
             </Box>
             <Box bg='#f3f8ec' mt='20px' p='10px'>
@@ -258,7 +263,7 @@ const {totalMRP,discount,promoCodeDiscount,getData,cartData,loading}= useContext
 
               <Box >
                 <Text>TOTAL AMOUNT</Text>
-                <Text fontWeight='bold' fontSize='20px'>Rs.{totalMRP.toFixed(2)-discount.toFixed(2)}</Text>
+                <Text fontWeight='bold' fontSize='20px'>Rs.{(totalMRP-discount).toFixed(2)}</Text>
               </Box>
 
               
