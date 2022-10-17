@@ -2,12 +2,15 @@ import { ChevronRightIcon } from '@chakra-ui/icons'
 import { Box, Button, Center, Flex, Grid, Heading, Image, Link, Text, useToast } from '@chakra-ui/react'
 import React, { useEffect, useRef, useState } from 'react'
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { setCartProduct } from '../../Redux/action';
 
 export default function () {
     const [limitedTimeData, setLimitedTimeData] = useState([]);
     const [count, setCount] = useState(0);
     const ref = useRef();
     const [cartData, setCartData] = useState([]);
+    const dispatch = useDispatch();
 
     const getData = () => {
         fetch('https://netmedsdata.onrender.com/home?_page=2&_limit=10')
@@ -56,6 +59,7 @@ export default function () {
         if (check.length === 0) {
             axios.post(cartApi, item)
             .then(() => {
+                dispatch(setCartProduct(item))
                 toast({
                     title: 'Item added to cart',
                     status: 'success',

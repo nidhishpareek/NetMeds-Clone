@@ -11,6 +11,8 @@ import { OrderReview } from '../../pages/PaymentPage/orderReview'
 import { PymentDetails } from '../../pages/PaymentPage/paymentDetails'
 import Products from '../../pages/ProductPage/Products'
 import { useSelector } from 'react-redux'
+import { PrivateRoute } from '../../context/PrivateRoute'
+import ErrorPage from '../../pages/ErrorPage'
 
 export const AllRoutes = () => {
     const mobileView = useSelector((state) => state.mobileView);
@@ -20,9 +22,9 @@ export const AllRoutes = () => {
             <Route path='/products' element={<><Products></Products>{!mobileView && <Footer />}</>}></Route>
             <Route path='/Login' element={<LoginPage></LoginPage>}></Route>
             <Route path='/cart' element={<Cart></Cart>}></Route>
-            <Route path='/payment' element={<OrderReview></OrderReview>}></Route>
-            <Route path='/payment/details' element={<PymentDetails></PymentDetails>}></Route>
-            {/* <Route path='/membership' element={<MemberShip></MemberShip>}></Route> */}
+            <Route path='/payment' element={<PrivateRoute><OrderReview></OrderReview></PrivateRoute>}></Route>
+            <Route path='/payment/details' element={<PrivateRoute><PymentDetails></PymentDetails></PrivateRoute>}></Route>
+            <Route path='*' element={<ErrorPage></ErrorPage>}></Route>
         </Routes>
     )
 }
