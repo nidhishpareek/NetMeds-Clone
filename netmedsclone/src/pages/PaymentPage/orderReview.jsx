@@ -9,7 +9,8 @@ import { AppContext } from "../../context/AppContext";
 
 
 var userAddress=JSON.parse(localStorage.getItem("userAddress")) || {};
-var userDetails=JSON.parse(localStorage.getItem("userDetails"))
+// var userDetails=JSON.parse(localStorage.getItem("userDetails"))
+
 
 
 
@@ -41,7 +42,7 @@ export const OrderReview = () => {
 
   
 
-  const[posts,setPosts]=React.useState([]);
+  const[userDetails,setuserDetails]=React.useState(JSON.parse(localStorage.getItem("userDetails")));
   const[page,setPage]=React.useState(1);
   
   const {totalMRP,discount,promoCodeDiscount,userAddressdata,getData,cartData,loading}= useContext(AppContext);
@@ -151,7 +152,7 @@ const PaymentDetails={
       <Box   justifyContent='space-between' wrap='wrap'  display={{base:"block", lg:"flex"} } >
         
 
-        <SimpleGrid columns={1} w={{ lg:"80%",  md: '100%'}} mr="20px" >
+        <SimpleGrid columns={1} w={{   md: '100%'}} mr="20px"  padding={{base:"20px", lg:"0px"}}>
           <Box   >
           <Text color='rgba(21,27,57,.6)'fontSize='12px'>PRODUCTS</Text>
             <Box  padding='10px' mb='50px' id='boxshadow'>

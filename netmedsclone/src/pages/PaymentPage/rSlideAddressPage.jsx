@@ -58,7 +58,7 @@ var userAddress=JSON.parse(localStorage.getItem("userAddress")) || {};
 
 
     var userDetails=JSON.parse(localStorage.getItem("userDetails"))
-
+      
       return (
         <FormControl isInvalid={isError}>
    
@@ -102,7 +102,7 @@ var userAddress=JSON.parse(localStorage.getItem("userAddress")) || {};
 
 
                   <Box>
-                    <FormLabel htmlFor='username'></FormLabel>
+                    <FormLabel htmlFor='username'>First Name</FormLabel>
                     <Input
                       ref={firstField}
                       id='FirstName'
@@ -113,7 +113,7 @@ var userAddress=JSON.parse(localStorage.getItem("userAddress")) || {};
                     />
                   </Box>
                   <Box>
-                    <FormLabel htmlFor='username'></FormLabel>
+                    <FormLabel htmlFor='username'>Last Name</FormLabel>
                     <Input
                       ref={firstField}
                       id='LastName'
@@ -150,7 +150,7 @@ var userAddress=JSON.parse(localStorage.getItem("userAddress")) || {};
 
                   <InputGroup>
                      <InputLeftAddon children='+91' />
-                      <Input required type="number" placeholder='phone number' name="Phonenumber" value={Phonenumber}  onChange={handelChange} />
+                      <Input required type="number" placeholder='phone number' name="Phonenumber" value={userDetails.mobileNumber}  onChange={handelChange} />
                   </InputGroup>
     
                   {/* <Box>

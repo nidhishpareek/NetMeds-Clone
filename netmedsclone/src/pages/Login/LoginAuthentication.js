@@ -26,7 +26,7 @@ export const SigninAuthentication = async (formEntries) => {
     },
     body: JSON.stringify(formEntries),
   }).then((res) => {
-    sendEmail();
+    // sendEmail();
     return res.json();
   });
 };
