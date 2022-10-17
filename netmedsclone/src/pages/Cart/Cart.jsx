@@ -1,13 +1,14 @@
 import { AddIcon } from '@chakra-ui/icons';
 import { Box, Button, Center, Checkbox, Flex, Heading, Image, Input, Select, Spinner, Text } from '@chakra-ui/react';
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
 import { AppContext } from '../../context/AppContext';
 import { removeCartRedux, setCartProduct } from '../../Redux/action';
 import ErrorPage from '../ErrorPage';
 
 export const Cart = () => {
+    const mobileView = useSelector((state) => state.mobileView);
     const [saveForLaterData, setSaveForLaterData] = useState([]);
     const [showHidden, setShowHidden] = useState('show')
     const promeRef = useRef(null);
@@ -169,8 +170,8 @@ export const Cart = () => {
                                                             <Text fontSize={'12px'} color='#151B3999'>QTY: {el.quantity ? el.quantity : 1}</Text>
                                                             <Text fontSize={'12px'} color='#151B3999'>Mfr: {el.manufacturer}</Text>
                                                             <Flex mt='20px'>
-                                                                <Button bg='#e7e8eb' mr='10px' borderRadius={'3px'} fontSize={'12px'} color='#151B3999' size='sm' _hover={'none'} letterSpacing={'1px'} onClick={() => removeCart('https://netmedsdata.onrender.com/saveForlater/', el.id)}>REMOVE</Button>
-                                                                <Button bg='#24aeb1' color='#fff' borderRadius={'3px'} fontSize={'12px'} size='sm' _hover={'none'} letterSpacing={'1px'} onClick={() => AddToCartFromSave(el)}>ADD TO CART</Button>
+                                                                <Button bg='#e7e8eb' mr='10px'  borderRadius={'3px'} fontSize={'12px'} color='#151B3999' size='xs' _hover={'none'} letterSpacing={'1px'} onClick={() => removeCart('https://netmedsdata.onrender.com/saveForlater/', el.id)}>REMOVE</Button>
+                                                                <Button bg='#24aeb1' color='#fff' borderRadius={'3px'} fontSize={'12px'} size='xs' _hover={'none'} letterSpacing={'1px'} onClick={() => AddToCartFromSave(el)}>ADD TO CART</Button>
                                                             </Flex>
                                                         </Box>
                                                         <Box w='20%'>
@@ -224,7 +225,7 @@ export const Cart = () => {
                                                         }
                                                     </Flex>
                                                     <Box>
-                                                        <Text position={'absolute'} top='10px' right='75px'>QTY: </Text>
+                                                        <Text position={'absolute'} top='10px' right='90px' fontSize={'20px'}>QTY: </Text>
                                                     <Select placeholder={el.quantity ? el.quantity : 1} onChange={(e) => handleQuantity(e, el.id)}>
                                                         {
                                                             [1,2,3,4,5,6,7,8,9,10].map(el => (
@@ -270,7 +271,7 @@ export const Cart = () => {
                                                             <Box>
                                                                 <Text fontWeight={'600'} mb='5px'>{el.title}</Text>
                                                             </Box>
-                                                            <Box>
+                                                            <Box display={{base:'block', md:'flex-column'}} >
                                                                 <Text fontWeight={'600'} color='#ef4281'>Rs.{el.actual_price.toFixed(2)}</Text>
                                                                 {el.crossed_price && <Text color='#151B3999' fontWeight={'400'} textDecoration={'line-through'} fontSize={'12px'}>Rs.{el.crossed_price.toFixed(2)}</Text>}
                                                             </Box>

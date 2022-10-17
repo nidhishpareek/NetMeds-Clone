@@ -30,16 +30,4 @@ export const removeCartRedux = (data) => ({
   type: REMOVECART,
   payload: data
 })
-export const getAllProducts=(data)=>({
-    type:GETPRODUCT,
-    payload:data
-})
 
-export const filterProduct=(data)=>({
-    type:FILTERPRODUCT,
-    payload:data
-})
-export const filterUncheckProduct=(data)=>({
-    type:FILTERUNCHECKPRODUCT,
-    payload:data
-})

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { createContext } from 'react'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
-import { errorState, getAllProducts } from '../../Redux/action'
+import { errorState } from '../../Redux/action'
 export const Data = createContext()
 
 const updatedUrl = (api, sort, order, subcategory, sortCategory, manufacturer, sliderVal) => {
@@ -189,13 +189,7 @@ const DataContext = ({ children }) => {
     const [loading, setLoading] = useState(false);
     const [currProduct, setCurrProduct] = useState({});
     const dispatch = useDispatch();
-    const getallProducts = () => {
-        const api = "https://netmedsdata.onrender.com/products";
-        axios.get(api).then(res => dispatch(getAllProducts(res.data)))
-    }
-    useEffect(() => {
-        getallProducts()
-    }, [])
+    
     const getProduct = () => {
         setLoading(true)
         const api = updatedUrl(`https://netmedsdata.onrender.com/products?_page=${page}&_limit=20`, sort, order, subCategory, sortCategory, manufacturer, sliderVal)

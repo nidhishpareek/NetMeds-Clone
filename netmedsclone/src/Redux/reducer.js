@@ -22,31 +22,15 @@ function reducer(state=initState,{type,payload}){
                 cart:[]
             }
         }
-        case GETPRODUCT:{
-            return {
-                ...state,allProduct:payload
-            }
-        }
+      
         case SETCART:{
-            // console.log('setcart called', [...state.cart, payload])
             return {
                 loading:false,
                 error:false,
                 cart:[...state.cart,payload],
-                allProduct:[...state.allProduct],
-                filteredProduct:[...state.filteredProduct]
             }
         }
-        case FILTERUNCHECKPRODUCT:{
-            return {
-                ...state,filteredProduct:payload
-            }
-        }
-        case FILTERPRODUCT:{
-            return{
-                ...state,filteredProduct:[...state.filteredProduct,...payload]
-            }
-        }
+    
         case EMPTYCART:{
             return {
                 loading:false,
