@@ -32,6 +32,7 @@ import { AppContext } from '../../context/AppContext'
         
        const navigateToDetails = useNavigate();
        const handleNavigate = () => {
+        console.log('here')
          navigateToDetails('/');
        
        }
@@ -137,9 +138,10 @@ import { AppContext } from '../../context/AppContext'
                     }
                     else{
                         alert(" Payment successful :)")
+                        handleNavigate()
                         deleteAll();
                        
-                        handleNavigate()
+                  
 
                     }
                     }

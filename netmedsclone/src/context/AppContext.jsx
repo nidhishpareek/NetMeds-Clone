@@ -1,5 +1,7 @@
 import { createContext, useState } from "react";
 import axios from 'axios'
+import { useDispatch } from "react-redux";
+import { EmptyCart, removeCartRedux } from "../Redux/action";
 export const AppContext = createContext();
 
 export const AppContextProvider = ({children}) => {
@@ -11,6 +13,7 @@ export const AppContextProvider = ({children}) => {
     const [cartData, setCartData] = useState([0]);
     const [validPromoCode, setValidPromoCode] = useState(true);
     const [promoCode, setPromoCode] = useState('');
+    const dispatch = useDispatch();
 
     const getData = () => {
         setLoading(true);
@@ -44,9 +47,10 @@ export const AppContextProvider = ({children}) => {
     }
     const deleteAll = () => {
         cartData.map(el => {
+            dispatch(removeCartRedux(el.id))
             axios.delete(`https://netmedsdata.onrender.com/cart/${el.id}`)
         }).then((res) => {
-            console.log(res, 'res')
+            
         })
     }
 
