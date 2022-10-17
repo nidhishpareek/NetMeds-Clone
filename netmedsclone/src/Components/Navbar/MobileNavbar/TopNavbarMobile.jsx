@@ -1,9 +1,10 @@
 import { Avatar, AvatarBadge, Box, Flex, Icon, Image } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { HiShoppingCart } from "react-icons/hi";
+import { useSelector } from "react-redux";
 
 const MobileNavbar = () => {
-  const count = 2;
+  const cart = useSelector((state) => state.cart);
   return (
     <Box>
       <Flex
@@ -43,7 +44,7 @@ const MobileNavbar = () => {
                 top="5px"
                 right={"8px"}
               >
-                {count}
+                {cart.length}
               </AvatarBadge>
             </Avatar>
           </Link>

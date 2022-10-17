@@ -9,30 +9,14 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
 import CartButton from "./CartButton";
 import { v4 as uuid } from "uuid";
 import CartMenuNavbarItem from "./CartMenuNavbarItem";
-import { useEffect, useState } from "react";
-import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import { useSelector, useDispatch } from "react-redux";
-import { setCartProductRReducer } from "../../../../Redux/action";
 const CartNavbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cart = useSelector((state) => state.cart);
-  const dispatch = useDispatch();
 
-  const getData = () => {
-    fetch("https://netmedsdata.onrender.com/cart")
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        dispatch(setCartProductRReducer(res));
-      });
-  };
-  useEffect(() => {
-    getData();
-  }, []);
   return (
     <Menu isOpen={isOpen} isLazy={true} placement="bottom-end">
       <MenuButton
