@@ -12,7 +12,7 @@ const Navbar = () => {
     fetch("https://netmedsdata.onrender.com/cart")
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         dispatch(setCartProductRReducer(res));
       });
   };

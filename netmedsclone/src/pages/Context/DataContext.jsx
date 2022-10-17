@@ -193,14 +193,14 @@ const DataContext = ({ children }) => {
     const getProduct = () => {
         setLoading(true)
         const api = updatedUrl(`https://netmedsdata.onrender.com/products?_page=${page}&_limit=20`, sort, order, subCategory, sortCategory, manufacturer, sliderVal)
-        console.log(api)
+        // console.log(api)
         axios.get(api)
             .then(res => {
                 setLoading(false)
                 setTotal(res.headers['x-total-count'])
                 setCurrItem(res.data.length)
                 setProd(res.data)
-                console.log(total, currItem, prod)
+                // console.log(total, currItem, prod)
             })
             .catch(() => dispatch(errorState()))
             .finally(() => setLoading(false))
