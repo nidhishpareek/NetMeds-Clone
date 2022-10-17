@@ -1,5 +1,5 @@
 import { Box, Text, Grid, GridItem, Image, Button, useToast } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Data } from '../Context/DataContext';
@@ -11,10 +11,11 @@ const AllProduct = () => {
     const { page, total, loading, sortCategory, prod, handlePage, handlecurrProduct } = useContext(Data);
     console.log(sortCategory, 'sortedone')
     const cartApi = 'https://netmedsdata.onrender.com/cart'
-    const cart = useSelector((state) => state.cart);
+    const [cart, setCart] = useState([]);
     const dispatch = useDispatch();
     let [search, setSearchParam] = useSearchParams();
     const handleAdd = (item) => {
+        axios.get(cartApi).then((res) => setCart(res.data))
         const check = cart.filter(allItem => allItem.id === item.id)
         if (check.length === 0) {
             axios.post(cartApi, item)
@@ -28,7 +29,11 @@ const AllProduct = () => {
                 })
                 .catch((err) => {
                     console.log(err)
-
+                    toast({
+                        title: 'Item is already in cart',
+                        status: 'error',
+                        isClosable: true,
+                    })
                 })
         } else if (check.length === 1) {
             toast({
@@ -39,13 +44,10 @@ const AllProduct = () => {
         }
     }
 
-    const allProduct = useSelector(state => state.allProduct)
-    // console.log(allProduct, "here")
     const toast = useToast()
     const navigate = useNavigate();
     const handleProductDetail = (productDetails) => {
         console.log(productDetails.id)
-        // return <Navigate to={`/products/${productDetails.id}`} />
         handlecurrProduct(productDetails)
         navigate(`/products/${productDetails.id}`)
     }
@@ -88,7 +90,6 @@ const AllProduct = () => {
                         </Grid>
                         {total >= 20 && <Box textAlign={"center"} mt="30px" display="flex" gap='5px' justifyContent={"center"}>
                             {page !== 1 && <Button size={"sm"} border="1px solid #d4d5d9" bgColor="white" p="0 20px" fontWeight={"400"} _hover={{ color: '#0298a7', bgColor: 'white' }} fontSize={"13px"} color="#151b39" onClick={() => handlePage(page - 1)}>PREV</Button>}
-                            {/* <span>{page}</span> */}
                             {<Button onClick={(e) => handlePage(+e.target.innerHTML)} size={"sm"} _hover={{ color: '#0298a7', bgColor: '#D4D5D940' }} bgColor="white" fontWeight={"400"} fontSize={"13px"} color="#151b39">{page}</Button>}
                             {page !== Math.ceil(total / 20) && <Button size={"sm"} border="1px solid #d4d5d9" bgColor="white" p="0 20px" fontWeight={"400"} _hover={{ color: '#0298a7', bgColor: 'white' }} fontSize={"13px"} color="#151b39" onClick={() => handlePage(page + 1)}>NEXT</Button>}
                         </Box>}

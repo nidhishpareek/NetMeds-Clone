@@ -1,42 +1,24 @@
-import { Box, Checkbox, Input, Text } from '@chakra-ui/react'
+import { Box, Input } from '@chakra-ui/react'
 import React, { useContext } from 'react'
-import { useRef } from 'react';
+import { useState } from 'react';
 import { BsSearch } from 'react-icons/bs';
-import { useDispatch, useSelector } from 'react-redux';
-import { v4 as uuid } from 'uuid';
-import { filterProduct, filterUncheckProduct } from '../../Redux/action';
 import { Data } from '../Context/DataContext';
 
 const Filtertype = ({ name }) => {
-    const { prod, handleFilter, handleManufacturer, handleCategory } = useContext(Data);
-    const { allProduct, filteredProduct } = useSelector(state => state)
-    const dispatch = useDispatch();
-    // console.log(allProduct, "here")
-    const handleclick = (val) => {
-        console.log(val)
-        // if (val) {
-        //     const filtered = allProduct.filter(item => {
-        //         return item.manufacturer === val
-        //     })
-        //     // console.log(filtered)
-        //     dispatch(filterProduct(filtered))
-        //     // handleFilter(filtered)
-        // } else {
-        //     const newFilter = filteredProduct.filter(item => {
-        //         return item.manufacturer !== val
-        //     })
-        //     dispatch(filterUncheckProduct(newFilter))
-        //     console.log(newFilter, "herefilter")
-        // }
+    const { prod, handleManufacturer, handleCategory } = useContext(Data);
+    const [clickVal, setClickVal] = useState(true)
+    const [clickCateg, setClickCateg] = useState(true)
+    const handleToggle = (val) => {
+        setClickVal(!clickVal)
+        console.log(clickVal);
+        clickVal ? handleManufacturer(val) : handleManufacturer("")
     }
-    // console.log(filteredProduct)
-
-
-    const checkbox = useRef(null);
-    const handlecheck = (val) => {
-
-        console.log(checkbox.current.checked)
+    const handleToggleCategory = (val) => {
+        setClickCateg(!clickCateg)
+        console.log(clickCateg)
+        clickCateg ? handleCategory(val) : handleCategory("")
     }
+
     const setManu = new Set();
     const setCat = new Set();
     const arr1 = []
@@ -48,6 +30,15 @@ const Filtertype = ({ name }) => {
     getManu()
     arr1.push(...setManu)
     arr2.push(...setCat)
+    const style = {
+        color: "black",
+        border: "none",
+        backgroundColor: "white",
+        textAlign: 'left',
+        fontSize: '13px',
+        marginBottom: "5px",
+        marginLeft: "10px"
+    }
 
     return (
         <>
@@ -68,19 +59,17 @@ const Filtertype = ({ name }) => {
                     bg: `#6f7284`
                 },
             }}>
-                {
-                    arr1.map((el) => {
-                        if (name === 'Manufacturers')
-                            return <Checkbox pl="10px" key={uuid()} pb="8px" fontSize="13px" value={el} onChange={(e) => { e.target.checked ? handleManufacturer(e.target.value) : handleManufacturer('') }}>
-                                {/* // return <Checkbox pl="10px" key={uuid()} pb="8px" fontSize="13px" value={el} onChange={(e) => { e.target.checked ? handleclick(e.target.value) : handleclick('') }}> */}
-                                <Text fontSize={"13px"}>{el}</Text>
-                            </Checkbox>
-                    })}
+                {arr1.map((el) => {
+                    if (name === 'Manufacturers')
+                        return <button style={style} key={el} value={el}
+                            onClick={(e) => handleToggle(e.target.value)}
+                        >{el}</button>
+                })}
                 {arr2.map((el) => {
                     if (name === 'Categories')
-                        return <Checkbox pl="10px" key={uuid()} pb="8px" fontSize="13px" value={el} onChange={(e) => { e.target.checked ? handleCategory(e.target.value) : handleCategory('') }}>
-                            <Text fontSize={"13px"}>{el}</Text>
-                        </Checkbox>
+                        return <button style={style} key={el} value={el}
+                            onClick={(e) => handleToggleCategory(e.target.value)}
+                        >{el}</button>
                 })}
             </Box>
         </>
