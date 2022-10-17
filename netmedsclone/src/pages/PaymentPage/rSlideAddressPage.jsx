@@ -88,13 +88,14 @@ var userAddress=JSON.parse(localStorage.getItem("userAddress")) || {};
                       placeholder='Pin Code'
                       type="number"
                       name="PinCode" value={PinCode}  onChange={handelChange}
+                      required
                     />
                   </Box>
 
 
                l<Flex>
-               <Input htmlSize={5} width='auto' type="text" placeholder='City' name="City" value={City}  onChange={handelChange} />
-               <Input htmlSize={5} width='auto' type="text" placeholder='State' name="State" value={State}  onChange={handelChange} />
+               <Input htmlSize={5} width='auto' type="text" placeholder='City' name="City" value={City} required onChange={handelChange} />
+               <Input htmlSize={5} width='auto' type="text" placeholder='State' name="State" value={State} required onChange={handelChange} />
                </Flex>
 
 
@@ -108,6 +109,7 @@ var userAddress=JSON.parse(localStorage.getItem("userAddress")) || {};
                       placeholder='First Name'
                       type="text"
                       name="FirstName" value={userDetails.firstName}  
+                      required
                     />
                   </Box>
                   <Box>
@@ -117,7 +119,8 @@ var userAddress=JSON.parse(localStorage.getItem("userAddress")) || {};
                       id='LastName'
                       placeholder='Last Name'
                       type="text"
-                      name="LastName" value={userDetails.lastName}   
+                      name="LastName" value={userDetails.lastName}  
+                      required 
                     />
                   </Box>
 
@@ -129,6 +132,7 @@ var userAddress=JSON.parse(localStorage.getItem("userAddress")) || {};
                       placeholder='Address'
                       type="text"
                       name="Address" value={Address}  onChange={handelChange}
+                      required
                     />
                   </Box>
 
@@ -140,12 +144,13 @@ var userAddress=JSON.parse(localStorage.getItem("userAddress")) || {};
                       placeholder='Landmark'
                       type="text"
                       name="Landmark" value={Landmark}  onChange={handelChange}
+                      required
                     />
                   </Box>
 
                   <InputGroup>
                      <InputLeftAddon children='+91' />
-                      <Input  type="number" placeholder='phone number' name="Phonenumber" value={Phonenumber}  onChange={handelChange} />
+                      <Input required type="number" placeholder='phone number' name="Phonenumber" value={Phonenumber}  onChange={handelChange} />
                   </InputGroup>
     
                   {/* <Box>

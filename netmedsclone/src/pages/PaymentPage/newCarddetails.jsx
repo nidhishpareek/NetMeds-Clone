@@ -8,6 +8,8 @@ import { useDisclosure,Button,
     AlertIcon,
     AlertTitle,
     AlertDescription,CloseButton,FormControl} from '@chakra-ui/react'
+
+    import { Navigate, useNavigate } from "react-router-dom";
  
  import { PhoneIcon, AddIcon, WarningIcon } from '@chakra-ui/icons'
  import React from "react"
@@ -24,7 +26,11 @@ import { useDisclosure,Button,
        const isAnonymous = false;
         
         
-        
+       const navigateToDetails = useNavigate();
+       const handleNavigate = () => {
+         navigateToDetails('/');
+       
+       }
       
     
        return (
@@ -106,8 +112,12 @@ import { useDisclosure,Button,
      
                <DrawerFooter borderTopWidth='1px'>
                  <Button colorScheme='green' width='100%' disabled={isAnonymous ? true : false} onClick={()=>{
-                    
-                    if(message.length!=16 ){
+                    if(message.length==0 || mmdata.length==0 || yydata.length==0 || cvvdata.length==0  ){
+                      alert("Fill All The Details")
+                    }
+                    else{
+
+                      if(message.length!=16 ){
                         alert(" Wrong Card Number  You Enter !  "+message.length)
                     }
                     else if(mmdata.length!=2){
@@ -123,7 +133,12 @@ import { useDisclosure,Button,
                     }
                     else{
                         alert(" Payment successful :)")
+                       
+                        handleNavigate()
+
                     }
+                    }
+                   
                 }}
                     >Pay</Button>
                </DrawerFooter>
@@ -133,4 +148,4 @@ import { useDisclosure,Button,
        )
      }
    
-  
+     
