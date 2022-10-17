@@ -1,9 +1,10 @@
 import { ChevronRightIcon, TimeIcon } from '@chakra-ui/icons'
-import { Box, Button, Center, Flex, Heading, Image, Link, Text } from '@chakra-ui/react'
+import { Box, Button, Center, Flex, Heading, Image, Link, Text, useToast } from '@chakra-ui/react'
 import React from 'react'
 import { useState } from 'react';
 import { useRef } from 'react';
 import { useEffect } from 'react';
+import axios from 'axios';
 
 export function LimitedTimeDeals() {
     const [hour, setHour] = useState(22);
@@ -13,6 +14,7 @@ export function LimitedTimeDeals() {
     const [count, setCount] = useState(0);
     const ref = useRef();
     const timeref = useRef(null);
+    const [cartData, setCartData] = useState([]);
 
     useEffect(() => {
         clearInterval(timeref.current);
@@ -39,38 +41,79 @@ export function LimitedTimeDeals() {
         }
     },[seconds])
     const getData = () => {
-        console.log('here')
+        // console.log('here')
         fetch('https://netmedsdata.onrender.com/home?_page=1&_limit=10')
         .then((res) => res.json())
         .then((res) => {
+            // console.log(res, 'res')
             setLimitedTimeData(res);
         })
     }
+    const getCartData = () => {
+        fetch('https://netmedsdata.onrender.com/cart')
+        .then((res) => res.json())
+        .then((res) => {
+            setCartData(res);
+        })
+    }
+
     useEffect(() => {
         getData();
+        getCartData();
     },[])
     const handleClick = (val) => {
         let newCount = count;
-            if (val === 'forward') {
-                newCount++;
-                setCount(newCount);
-            } else if (val === 'backward') {
-                newCount--;
-                setCount(newCount);
-            }
-    
-            if (newCount === limitedTimeData.length-4) {
-                setCount(0);
-                ref.current.style.transform = 'translate(0%)';
-                return;
-            }
-            if (newCount === -1) {
-                setCount(0);
-                ref.current.style.transform = `translate(0%)`;
-                return;
-            }
-            ref.current.style.transform = `translate(-${newCount*20.2}%)`;
+        if (val === 'forward') {
+            newCount++;
+            setCount(newCount);
+        } else if (val === 'backward') {
+            newCount--;
+            setCount(newCount);
+        }
+
+        if (newCount === limitedTimeData.length-4) {
+            setCount(0);
+            ref.current.style.transform = 'translate(0%)';
+            return;
+        }
+        if (newCount === -1) {
+            setCount(0);
+            ref.current.style.transform = `translate(0%)`;
+            return;
+        }
+        ref.current.style.transform = `translate(-${newCount*20.2}%)`;
     }
+    const cartApi = 'https://netmedsdata.onrender.com/cart'
+    const toast = useToast();
+    const handleAdd = (item) => {
+        const check = cartData.filter(allItem => allItem.id === item.id)
+        if (check.length === 0) {
+            axios.post(cartApi, item)
+            .then(() => {
+                toast({
+                    title: 'Item added to cart',
+                    status: 'success',
+                    isClosable: true,
+                })
+            })
+            .catch((err) => {
+                console.log(err)
+                toast({
+                    title: 'Item is already in cart',
+                    status: 'error',
+                    isClosable: true,
+                })
+            })
+        }
+        else {
+            toast({
+                title: 'Item is already in cart',
+                status: 'error',
+                isClosable: true,
+            })
+        }
+    }    
+
   return (
     <Box position={'relative'}>
         <Box bg='#24aeb1' h='200px' p='15px 30px'>
@@ -90,7 +133,7 @@ export function LimitedTimeDeals() {
             <Box w='100%' position='absolute' top='100px'>
                 <Box w='95vw' m='auto'>
                     <Box overflow={{base: 'scroll', md: 'hidden'}} pb='20px'>
-                        <Box ref={ref} transition='0.3s' display='grid' gap='1vw' gridTemplateColumns={`repeat(${limitedTimeData.length},1fr)`}>
+                        <Box ref={ref} transition='0.3s' display='grid' gap={{base: '10px', md: '1vw'}} gridTemplateColumns={`repeat(${limitedTimeData.length},1fr)`}>
                                 {
                                     limitedTimeData.map(el => (
                                         <Box w={{base: '200px', md: '18.2vw'}} key={el.id} p=' 30px 15px 15px 15px' boxShadow='rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px' borderRadius={'10px'} bg='#fff'>
@@ -101,7 +144,7 @@ export function LimitedTimeDeals() {
                                                 <Text color='gray' fontWeight={'600'} textDecoration={'line-through'} fontSize={'10px'}>₹ {parseFloat(el.crossed_price).toFixed(2)}</Text>
                                             </Flex>
                                             <Text m='5px 0' color='#60a723' fontSize='15px' fontWeight={'500'}>UPTO 25% off</Text>
-                                            <Center><Button h='35px' borderRadius={'3px'} bg='#24aeb1' color='#fff' _hover={'none'} fontSize='14px' w='100%'>ADD TO CART</Button></Center>
+                                            <Center><Button onClick={() => handleAdd(el)} h='35px' borderRadius={'3px'} bg='#24aeb1' color='#fff' _hover={'none'} fontSize='14px' w='100%'>ADD TO CART</Button></Center>
                                         </Box>
                                     ))
                                 }
@@ -109,8 +152,8 @@ export function LimitedTimeDeals() {
                     </Box>
                 </Box>
                 <Box w='99%' left='0.5%' position={'absolute'} display={{base: 'none', md: 'flex'}} justifyContent={'space-between'} top='50%' transform={'translateY(-50%)'}>
-                    <Button disabled={count===0} onClick={() => handleClick('backward')} borderRadius={'50%'} bg='#fff' w='40px' h='40px'><span style={{fontSize:'30px'}} class="material-symbols-outlined">chevron_left</span></Button>
-                    <Button disabled={count===limitedTimeData.length-5} onClick={() => handleClick('forward')} borderRadius={'50%'} bg='#fff' w='40px' h='40px'><span style={{fontSize:'30px'}} class="material-symbols-outlined">chevron_right</span></Button>
+                    <Button disabled={count===0} onClick={() => handleClick('backward')} borderRadius={'50%'} bg='#fff' w='40px' h='40px'><span style={{fontSize:'30px'}} className="material-symbols-outlined">chevron_left</span></Button>
+                    <Button disabled={count===limitedTimeData.length-5} onClick={() => handleClick('forward')} borderRadius={'50%'} bg='#fff' w='40px' h='40px'><span style={{fontSize:'30px'}} className="material-symbols-outlined">chevron_right</span></Button>
                 </Box>
             </Box>
         </Box>

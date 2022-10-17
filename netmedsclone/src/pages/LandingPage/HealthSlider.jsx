@@ -5,7 +5,6 @@ export const HealthSlider = () => {
     // const [right, setRight] = useState(0);
     const ref = useRef(null);
     const handleScroll = (value) => {
-        console.log('here');
         if(value==='left') {
            ref.current.style.right = '500'
         console.log(ref.current);  

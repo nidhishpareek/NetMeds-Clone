@@ -1,33 +1,160 @@
 import { AddIcon } from '@chakra-ui/icons';
-import { Box, Button, Center, Flex, Heading, Image, Select, Text } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react'
-import { Carousel } from '../LandingPage/Carousel';
+import { Box, Button, Center, Checkbox, Flex, Heading, Image, Input, Select, Spinner, Text } from '@chakra-ui/react';
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { AppContext } from '../../context/AppContext';
+import DataContext from '../Context/DataContext';
 
 export const Cart = () => {
-    const [cartData, setCartData] = useState([5]);
+    const [cartData, setCartData] = useState([0]);
+    const [saveForLaterData, setSaveForLaterData] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [showHidden, setShowHidden] = useState('show')
     const [error, setError] = useState(false);
+    const [promoCode, setPromoCode] = useState('');
+    const [validPromoCode, setValidPromoCode] = useState(true);
+    const promeRef = useRef(null);
+    const date = Date(Date.now());
+    const {totalMRP, setTotalMRP, discount, setDiscount, promoCodeDiscount, setPromoCodeDiscount} = useContext(AppContext);
+    console.log(totalMRP, 'value')
     const getData = () => {
+        setLoading(true);
         fetch('https://netmedsdata.onrender.com/cart')
         .then((res) => res.json())
         .then((res) => {
-            console.log(res);
+            setLoading(false);
+            setTotalMRP(0);
+            setDiscount(0);
+            res.map(el => {
+                if(el.quantity && el.crossed_price) {
+                    setTotalMRP((prev) => prev+ (Number(el.crossed_price)*Number(el.quantity)))
+                    setDiscount((prev) => prev+ ((Number(el.crossed_price)-Number(el.actual_price))*Number(el.quantity)))
+                }
+                else if(el.quantity && el.actual_price) {
+                    setTotalMRP((prev) => prev+ (Number(el.actual_price)*Number(el.quantity)))
+                }
+                else if(el.crossed_price) {
+                    setTotalMRP((prev) => prev+ (Number(el.crossed_price)))
+                    setDiscount((prev) => prev+ (Number(el.crossed_price)-Number(el.actual_price)))
+                }
+                else {
+                    setTotalMRP((prev) => prev+ (Number(el.actual_price)))
+                }
+            })
             setCartData(res);
+        }).catch((err) => {
+            setLoading(false);
+            setError(true);
         })
     }
-    const removeCart = (id) => {
-        console.log(id);
-        fetch(`https://netmedsdata.onrender.com/cart/${id}`, {
+    const getSaveData = () => {
+        setLoading(true);
+        fetch('https://netmedsdata.onrender.com/saveForlater')
+        .then((res) => res.json())
+        .then((res) => {
+            setLoading(false);
+            setSaveForLaterData(res);
+        }).catch((err) => {
+            setLoading(false);
+            setError(true);
+        })
+    }
+    const removeCart = (url,id) => {
+        console.log(url, 'url');
+        setLoading(true);
+        fetch(`${url}${id}`, {
             method: 'DELETE',
         }).then(() => {
+            setLoading(false)
             getData();
+            getSaveData();
+        }).catch((err) => {
+            setError(true)
         })
     }
     useEffect(() => {
         getData();
+        getSaveData();
     },[])
-  return (
-    <Box position={'relative'} top='100px' bg='#F6F6F7'>
+    
+    const handleQuantity = (e, id) => {
+        setLoading(true);
+        const body = {
+            quantity:  e.target.value
+        };
+        fetch(`https://netmedsdata.onrender.com/cart/${id}`, {
+            method: 'PATCH',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(() => {
+            setLoading(false)
+            getData();
+        }).catch((err) => {
+            setError(true)
+        })
+    }
+    const AddToCartFromSave = (el) => {
+        setLoading(true);
+        removeCart('https://netmedsdata.onrender.com/saveForlater/', el.id)
+        fetch(`https://netmedsdata.onrender.com/cart`, {
+            method: 'POST',
+            body: JSON.stringify(el),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then((() => {
+            setLoading(false);
+        })).catch((err) => {
+            setLoading(false);
+            setError(true);
+        })
+    }
+    const handleSaveForLater =  (el) => {
+        setLoading(true);
+        removeCart('https://netmedsdata.onrender.com/cart/',el.id);
+        fetch(`https://netmedsdata.onrender.com/saveForlater`, {
+            method: 'POST',
+            body: JSON.stringify(el),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(() => {
+            getSaveData();
+            setLoading(false);
+        }).catch(() => {
+            setError(true);
+        })
+    }
+    const gotToProceed = useNavigate();
+    const handleProcced = () => {
+        gotToProceed('/payment')
+    }
+    const handleAddProducts = () => {
+        gotToProceed('/')
+    }
+    const handlePromo = (val) => {
+        if(val==='hidden') {
+            promeRef.current.style.display = 'none'
+            setShowHidden('show')
+        }
+        else {
+            promeRef.current.style.display = 'block'
+            setShowHidden('hidden')
+        }
+    }
+    const ApplyPromoCode = () => {
+        if(promoCode==='Hurray!') {
+            setPromoCodeDiscount(((totalMRP-discount)*20)/100)
+            setValidPromoCode(true);
+        }
+        else {
+            setValidPromoCode(false);
+        }
+    }
+    return (
+    <Box position={'relative'} bg='#F6F6F7'>
         {
             cartData.length===0 ? 
             <Box>
@@ -47,78 +174,209 @@ export const Cart = () => {
                                 <Text mt='10px' fontWeight={'400'} textAlign={'center'} color='#8a9095' fontSize={'14px'} w='62%'>You have no items added in the cart. Explore and add products you like!</Text>
                             </Center>
                             <Center>
-                                <Button mt='20px' bg='#24aeb1' h='46px' fontSize={'15px'} color='#fff' borderRadius={'3px'} w='70%'>ADD PRODUCTS</Button>
+                                <Button onClick={handleAddProducts} _hover='none' mt='20px' bg='#24aeb1' h='46px' fontSize={'15px'} color='#fff' borderRadius={'3px'} w='70%'>ADD PRODUCTS</Button>
                             </Center>
                         </Box>
                     </Box>
                     <Box mt='50px'>
-                        <Center>
-                            <Box w='50%' p='15px' borderRadius={'10px'} bg='#fff'>
-                                <Text color='#151B3999' as='b' letterSpacing='1px'>SAVED FOR LATER</Text>
-                                <Text fontSize={'12px'} color='#151B3999' mt='10px'>No items in save for later</Text>
-                            </Box>
-                        </Center>
+                        <Box w='50%' p='15px' m='auto' borderRadius={'10px'} bg='#fff'>
+                            {
+                                saveForLaterData ?  
+                                    <Box>
+                                        {
+                                            saveForLaterData.map(el => (
+                                                <Flex key={el.id} borderBottom='1px solid #dddde0' p='15px' gap='10px'>
+                                                    <Box>
+                                                        <Image w='120px' h='100%' src={el.img1}></Image>
+                                                    </Box>
+                                                    <Flex w='100%'>
+                                                        <Box w='100%'>
+                                                            <Text fontWeight={'600'} mb='5px'>{el.title}</Text>
+                                                            <Text fontSize={'12px'} color='#151B3999'>QTY: {el.quantity ? el.quantity : 1}</Text>
+                                                            <Text fontSize={'12px'} color='#151B3999'>Mfr: {el.manufacturer}</Text>
+                                                            <Flex mt='20px'>
+                                                                <Button bg='#e7e8eb' mr='10px' borderRadius={'3px'} fontSize={'12px'} color='#151B3999' size='sm' _hover={'none'} letterSpacing={'1px'} onClick={() => removeCart('https://netmedsdata.onrender.com/saveForlater/', el.id)}>REMOVE</Button>
+                                                                <Button bg='#24aeb1' color='#fff' borderRadius={'3px'} fontSize={'12px'} size='sm' _hover={'none'} letterSpacing={'1px'} onClick={() => AddToCartFromSave(el)}>ADD TO CART</Button>
+                                                            </Flex>
+                                                        </Box>
+                                                        <Box w='20%'>
+                                                            <Center><Text fontWeight={'600'} color='#ef4281'>Rs.{el.actual_price.toFixed(2)}</Text></Center>
+                                                            {el.crossed_price && <Center><Text color='#151B3999' fontWeight={'400'} textDecoration={'line-through'} fontSize={'12px'}>Rs.{el.crossed_price.toFixed(2)}</Text></Center>}
+                                                        </Box>
+                                                    </Flex>
+                                                </Flex>
+                                            ))
+                                        }
+                                    </Box> :
+                                    <Center>
+                                        <Box>
+                                            <Text color='#151B3999' as='b' letterSpacing='1px'>SAVED FOR LATER</Text>
+                                            <Text fontSize={'12px'} color='#151B3999' mt='10px'>No items in save for later</Text>
+                                        </Box>
+                                    </Center> 
+                            }
+                        </Box>
                     </Box>
                 </Box>
             </Box> : 
             <Box>
-                <Box w='40%' pt='20px'>
-                    <Heading as='h4' color='black' textAlign={'center'} fontSize='25px' fontWeight={'600'}>Order Summary</Heading>
+                {
+                    loading && <Box zIndex={'2'} opacity='0.8' display={'grid'} position='fixed' bottom='0px' placeContent='center' w='100vw' h='110vh' bg='black'><Spinner color='#fff' size='xl' /></Box>
+                }
+                <Box>
+                    <Heading as='h4' color='black' pt='20px' textAlign={'center'} fontSize='25px' fontWeight={'600'}>Order Summary</Heading>
                 </Box>
-                <Box border='1px solid red' display='flex'  w='80%' m='auto' gap='30px' mt='30px'>
-                    <Box w='100%' bg='#fff' borderRadius={'7px'}>
-                        <Box p='15px'>
-                            <Text color='#151B3999' as='b' fontSize={'13px'} letterSpacing='1px'>PRODUCTS</Text>
-                            <Box>
-                                {
-                                    cartData.map(el => (
-                                        <Box borderBottom='1px solid #dddde0' p='15px 0'>
-                                            <Flex>
-                                                <Box><Image w='40px' h='40px' src={el.img1}></Image></Box>
-                                                <Box ml='20px'>
-                                                    <Text mb='-5px'>{el.title}</Text>
-                                                    <Text fontSize={'12px'} color='#151B3999' as='i'>Mfr: {el.manufacturer}</Text>
+                <Box display={{base: 'block', lg: 'flex'}}  w='80%' m='auto' gap='25px' mt='30px'>
+                    <Box w='100%'>
+                        <Box bg='#fff' borderRadius={'7px'}>
+                            <Box p='15px'>
+                                <Text color='#151B3999' as='b' fontSize={'13px'} letterSpacing='1px'>PRODUCTS</Text>
+                                <Box>
+                                    {
+                                        cartData.map(el => (
+                                            <Box key={el.id} borderBottom='1px solid #dddde0' p='15px 0'>
+                                                <Box display={{base: 'block', lg: 'flex'}}>
+                                                    <Box><Image w={{base: '120px', lg: '40px'}} h={{base: '100px', lg: '40px'}} src={el.img1}></Image></Box>
+                                                    <Box ml='20px'>
+                                                        <Text mb='-5px'>{el.title}</Text>
+                                                        <Text fontSize={'12px'} color='#151B3999' as='i'>Mfr: {el.manufacturer}</Text>
+                                                    </Box>
                                                 </Box>
-                                            </Flex>
-                                            <Box ml='60px' mt='10px' display={'flex'} justifyContent='space-between' position={'relative'}>
-                                                <Flex alignItems={'flex-end'}>
-                                                    <Text fontWeight={'600'} color='#ef4281' mr='5px'>Rs. {parseFloat(el.actual_price).toFixed(2)}</Text>
-                                                    {
-                                                        el.crossed_price && <Text color='#151B3999' fontWeight={'400'} textDecoration={'line-through'} fontSize={'12px'}>₹ {parseFloat(el.crossed_price).toFixed(2)}</Text>
-                                                    }
-                                                </Flex>
-                                                <Box>
-                                                    <Text position={'absolute'} top='10px' right='75px'>QTY: </Text>
-                                                <Select placeholder={1}>
-                                                    {
-                                                        [2,3,4,4,5,6,7,8,9,10].map(el => (
-                                                            <option value={el}>{el}</option>
-                                                        ))
-                                                    }
-                                                    </Select>
+                                                <Box ml={{base: '20px', lg: '60px'}} mt='10px' display={'flex'} justifyContent='space-between' position={'relative'}>
+                                                    <Flex alignItems={'flex-end'}>
+                                                        <Text fontWeight={'600'} color='#ef4281' mr='5px'>Rs. {parseFloat(el.actual_price).toFixed(2)}</Text>
+                                                        {
+                                                            el.crossed_price && <Text color='#151B3999' fontWeight={'400'} textDecoration={'line-through'} fontSize={'12px'}>Rs. {parseFloat(el.crossed_price).toFixed(2)}</Text>
+                                                        }
+                                                    </Flex>
+                                                    <Box>
+                                                        <Text position={'absolute'} top='10px' right='75px'>QTY: </Text>
+                                                    <Select placeholder={el.quantity ? el.quantity : 1} onChange={(e) => handleQuantity(e, el.id)}>
+                                                        {
+                                                            [1,2,3,4,5,6,7,8,9,10].map(el => (
+                                                                <option key={el} value={el}>{el}</option>
+                                                            ))
+                                                        }
+                                                        </Select>
+                                                    </Box>
+                                                </Box>
+                                                <Box display={{base: 'block', lg: 'flex'}} ml={{base: '20px', lg: '60px'}} mt='20px'>
+                                                    <Box borderRight='1px solid #dddde0' display={'grid'} alignContent='center' w='100%' mr='15px'>
+                                                        <Text fontSize={'12px'}>Delivery between <span style={{fontSize: '13px'}}>{date.toString().substring(0, 8)}{date.toString().substring(8, 10)}-{date.toString().substring(0, 8)}{+date.toString().substring(8, 10)+1}</span></Text>
+                                                    </Box>
+                                                    <Box w={{base: '100%', lg: '70%'}} display={'flex'} justifyContent='space-between' gap='10px'>
+                                                        <Button bg='#F6F6F7' fontSize={'12px'} color='#151B3999' size='sm' _hover={'none'} letterSpacing={'1px'} onClick={() => removeCart('https://netmedsdata.onrender.com/cart/',el.id)}>REMOVE</Button>
+                                                        <Button onClick={() => handleSaveForLater(el)} bg='#F6F6F7' fontSize={'12px'} color='#151B3999' size='sm' _hover='none' letterSpacing={'1px'}>SAVE FOR LATER</Button>
+                                                    </Box>
                                                 </Box>
                                             </Box>
-                                            <Box display='flex' ml='60px' mt='20px'>
-                                                <Box borderRight='1px solid #dddde0' display={'grid'} alignContent='center' w='100%' mr='15px'>
-                                                    <Text fontSize={'12px'}>Delivery between</Text>
-                                                </Box>
-                                                <Box w='70%' display={'flex'} justifyContent='space-between'>
-                                                    <Button bg='#F6F6F7' fontSize={'12px'} color='#151B3999' size='sm' _hover={'none'} letterSpacing={'1px'} onClick={() => removeCart(el.id)}>REMOVE</Button>
-                                                    <Button bg='#F6F6F7' fontSize={'12px'} color='#151B3999' size='sm' _hover='none' letterSpacing={'1px'}>SAVE FOR LATER</Button>
-                                                </Box>
-                                            </Box>
-                                        </Box>
-                                    ))
-                                }
+                                        ))
+                                    }
+                                </Box>
+                                <Flex mt='15px' justifyContent={'space-between'}>
+                                    <Text fontSize={'13px'} color='#24aeb1' fontWeight={'600'} letterSpacing='1px'>ADD MORE ITEMS</Text>
+                                <AddIcon color="#24aeb1"/>
+                            </Flex>
                             </Box>
-                            <Flex mt='15px' justifyContent={'space-between'}>
-                                <Text fontSize={'13px'} color='#24aeb1' fontWeight={'600'} letterSpacing='1px'>ADD MORE ITEMS</Text>
-                            <AddIcon color="#24aeb1"/>
-                        </Flex>
+                        </Box>
+                        <Box m='20px 0' p='15px' bg='#fff' borderRadius={'7px'}>
+                            <Text color='#151B3999' as='b' fontSize={'15px'} letterSpacing='1px'>SAVED FOR LATER</Text>
+                            {
+                                saveForLaterData ?  
+                                <Box>
+                                    {
+                                        saveForLaterData.map(el => (
+                                            <Box key={el.id} display={{base: 'block', lg: 'flex'}} borderBottom='1px solid #dddde0' p='15px' gap='10px'>
+                                                <Box>
+                                                    <Image w='120px' h={{base: '100px', lg: '100%'}} src={el.img1}></Image>
+                                                </Box>
+                                                <Box w='100%' >
+                                                    <Box w='100%'>
+                                                        <Box display={{base: 'block', lg: 'flex'}} justifyContent='space-between'>
+                                                            <Box>
+                                                                <Text fontWeight={'600'} mb='5px'>{el.title}</Text>
+                                                            </Box>
+                                                            <Box>
+                                                                <Text fontWeight={'600'} color='#ef4281'>Rs.{el.actual_price.toFixed(2)}</Text>
+                                                                {el.crossed_price && <Text color='#151B3999' fontWeight={'400'} textDecoration={'line-through'} fontSize={'12px'}>Rs.{el.crossed_price.toFixed(2)}</Text>}
+                                                            </Box>
+                                                        </Box>
+                                                        <Text fontSize={'12px'} color='#151B3999'>QTY: {el.quantity ? el.quantity : 1}</Text>
+                                                        <Text fontSize={'12px'} color='#151B3999'>Mfr: {el.manufacturer}</Text>
+                                                        <Flex mt='20px'>
+                                                            <Button bg='#e7e8eb' mr='10px' borderRadius={'3px'} fontSize={'12px'} color='#151B3999' size='sm' _hover={'none'} letterSpacing={'1px'} onClick={() => removeCart('https://netmedsdata.onrender.com/saveForlater/', el.id)}>REMOVE</Button>
+                                                            <Button bg='#24aeb1' color='#fff' borderRadius={'3px'} fontSize={'12px'} size='sm' _hover={'none'} letterSpacing={'1px'} onClick={() => AddToCartFromSave(el)}>ADD TO CART</Button>
+                                                        </Flex>
+                                                    </Box>
+                                                    
+                                                </Box>
+                                            </Box>
+                                        ))
+                                    }
+                                </Box> :
+                                <Box><Text mt='5px' fontSize={'12px'} color='#151B3999'>No items in save for later</Text></Box> 
+                            }
                         </Box>
                     </Box>
-                    <Box border='1px solid blue' w='40%'>
-                        price
+                    <Box w={{base: '100%', lg: '45%'}}>
+                        <Box p='10px' pb='20px' borderRadius={'5px'} bg='#fff' mb='15px'>
+                            <Box>
+                                <Text fontSize={'12px'} color='#151B3999' fontWeight='600' letterSpacing='1px' mb='10px'>APPLY PROMOCODE / NMS SUPERCASH</Text>
+                                <Checkbox onChange={() => handlePromo(showHidden)} colorScheme={'teal'}>Apply Promo Code</Checkbox>
+                                <Center><Text color='#151B3999' w='80%' mt='10px' fontSize={'12px'}>Get flat discount! Vouchers applicable in payment options.</Text></Center>
+                            </Box>
+                            <Box  mt='30px' pos='relative'>
+                                <Box ref={promeRef} display='none'>
+                                    <Text color='#24aeb1' fontSize={'12px'} fontWeight='600'>PROMOCODE</Text>
+                                    <Box>
+                                        <Input onChange={(e) => setPromoCode(e.target.value)} size={'xs'} variant='flushed' placeholder='Have a promocode? Enter here' />
+                                        <Button onClick={ApplyPromoCode} pos='absolute' right='0' bottom='-5px' bg='none' _hover='none' color='#ef4281'>Apply</Button>
+                                    </Box>
+                                    {
+                                        validPromoCode===false && <Text color='red'>Invalid promocode</Text>
+                                    }
+                                </Box>
+                            </Box>
+                        </Box>
+                        <Box p='10px' pb='20px' borderRadius={'5px'} bg='#fff' mb='15px'>
+                            <Box p='5px'>
+                                <Text fontSize={'12px'} color='#151B3999' fontWeight='600' letterSpacing='1px' mb='15px'>PAYMENT DETAILS</Text>
+                                <Flex fontSize={'14px'} mb='10px' justifyContent={'space-between'}>
+                                    <Text>MRP Total</Text>
+                                    <Text>Rs.{parseFloat(totalMRP).toFixed(2)}</Text>
+                                </Flex>
+                                <Flex fontSize={'14px'} mb='10px' justifyContent={'space-between'}>
+                                    <Text>Netmeds Discount</Text>
+                                    <Text>-Rs.{parseFloat(discount).toFixed(2)}</Text>
+                                </Flex>
+                                {
+                                    promoCodeDiscount==0? <Box></Box> : 
+                                    <Flex fontSize={'14px'} mb='10px' justifyContent={'space-between'}>
+                                        <Text>Promocode Discount</Text>
+                                        <Text>-Rs.{parseFloat(promoCodeDiscount).toFixed(2)}</Text>
+                                    </Flex>
+                                }
+                                <Flex fontSize={'14px'} mb='20px' justifyContent={'space-between'}>
+                                    <Text as='b'>Total Amount *</Text>
+                                    <Text as='b'>Rs.{parseFloat(totalMRP-discount-promoCodeDiscount).toFixed(2)}</Text>
+                                </Flex>
+                            </Box>
+                            <Box bg='#f3f8ec' p='10px 15px' mb='30px'>
+                                <Text fontSize={'12px'} fontWeight='600' color='#489841' letterSpacing='1px'>TOTAL SAVINGS RS.{parseFloat(discount).toFixed(2)}</Text>
+                            </Box>
+                            <Flex justifyContent={'space-between'} p='5px'>
+                                <Box>
+                                    <Text fontSize={'11px'} letterSpacing='1px' fontWeight={'600'} color='#151B3999'>TOTAL AMOUNT</Text>
+                                    <Text fontSize={'20px'} as='b'>Rs.{parseFloat(totalMRP-discount-promoCodeDiscount).toFixed(2)}</Text>
+                                </Box>
+                                <Box>
+                                    <Button onClick={handleProcced} bg='#24aeb1' borderRadius={'2px'} color='#fff' letterSpacing={'1px'} _hover='none' p='0 30px'>PROCEED</Button>
+                                </Box>
+                            </Flex>
+                        </Box>
+                        <Box mt='-20px' p='15px'>
+                            <Text  as='i' fontSize={'10px'} lineHeight='-10px'>Netmeds is a technology platform to facilitate transaction of business. The products and services are offered for sale by the sellers. The user authorizes the delivery personnel to be his agent for delivery of the goods. For details read <span style={{color: '#0033ff'}}>Terms & Conditions</span></Text>
+                        </Box>
                     </Box>
                 </Box>
             </Box>

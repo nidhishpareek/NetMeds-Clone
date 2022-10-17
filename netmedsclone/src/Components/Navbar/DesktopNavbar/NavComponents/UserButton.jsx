@@ -1,30 +1,41 @@
 //Change isLoggedIn and name according to Redux.
 
 import { Avatar, Box, Flex, IconButton, Text } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 
 const UserButton = () => {
-  
-  const isLoggedIn = false;
-  const name = "Nidhish";
+  const isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn")) || false;
+  const navigate = useNavigate();
+  const userDetails = JSON.parse(localStorage.getItem("userDetails")) || [];
+  const name = userDetails.firstName;
+  const handleClickOnUserButton = () => {
+    if (isLoggedIn) {
+      localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("userDetails");
+    }
+  };
   return (
     <Box
       bgColor={"rgb(50,174,177)"}
       _hover={{ bg: "rgb(50,174,177)" }}
       size="xs"
     >
-      <Link _hover={{ textDecoration: "none" }} to={"/Login"}>
+      <Link
+        to={"/Login"}
+        _hover={{ textDecoration: "none" }}
+        onClick={handleClickOnUserButton}
+      >
         <Flex align={"center"}>
           <Avatar
-            paddingLeft={'10px'}
+            paddingLeft={"10px"}
             icon={<FaUserCircle />}
             bg='"rgb(50,174,177)"'
             boxSize={"30px"}
           ></Avatar>
 
           <Text
-            paddingLeft={'5px'}
+            paddingLeft={"5px"}
             color={"white"}
             fontSize="14px"
             fontWeight="semibold"

@@ -9,42 +9,14 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
 import CartButton from "./CartButton";
 import { v4 as uuid } from "uuid";
 import CartMenuNavbarItem from "./CartMenuNavbarItem";
-import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
-
+import { useSelector, useDispatch } from "react-redux";
 const CartNavbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const cart = [
-    {
-      id: 1746,
-      title: "Festal N Tablets 10's",
-      img1: "https://www.netmeds.com/images/product-v1/600x600/918989/festal_n_tablets_10s_128705_0_1.jpg",
-      img2: "",
-      img3: "",
-      actual_price: "136.09",
-      crossed_price: "1,460.00",
-      manufacturer: "Sanofi India Limited",
-      country: "India",
-      category: "HealthAid Digeston (Papaya & Digestive Enzymes) Tablet 60's",
-      sub_category: "General Discomfort",
-    },
-    {
-      id: 1,
-      title: "Ciphands Antiseptic Hand Sanitizer 100 ml",
-      img1: "https://www.netmeds.com/images/product-v1/150x150/908599/ciphands_antiseptic_hand_sanitizer_100_ml_0_1.jpg",
-      img2: "",
-      img3: "",
-      actual_price: "40",
-      crossed_price: "50",
-      manufacturer: "Cipla Ltd(Otc)",
-      country: "India",
-      category: "Personal Care",
-      sub_category: "Hands & Feet",
-    },
-  ];
+  const cart = useSelector((state) => state.cart);
+
   return (
     <Menu isOpen={isOpen} isLazy={true} placement="bottom-end">
       <MenuButton
@@ -59,7 +31,7 @@ const CartNavbar = () => {
         onMouseLeave={onClose}
       >
        
-          <CartButton />
+          <CartButton count={cart.length} />
       </MenuButton>
       <MenuList onMouseEnter={onOpen} onMouseLeave={onClose}>
         <MenuItem
