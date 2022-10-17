@@ -38,6 +38,9 @@ const AllProduct = () => {
             })
         }
     }
+
+    const allProduct = useSelector(state => state.allProduct)
+    // console.log(allProduct, "here")
     const toast = useToast()
     const navigate = useNavigate();
     const handleProductDetail = (productDetails) => {
@@ -79,7 +82,6 @@ const AllProduct = () => {
                                     </Box>
                                     <Button w="100%" bgColor={"#24aeb1"} color="white" textTransform={"uppercase"} _hover={{ bgColor: "#24aeb1", color: "white" }} onClick={() => {
                                         handleAdd(el)
-
                                     }} >Add to cart</Button>
                                 </GridItem >
                             })}

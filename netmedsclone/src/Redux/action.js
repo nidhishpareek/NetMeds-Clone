@@ -1,7 +1,9 @@
 export const LOADINGSTATE='LOADINGSTATE';
 export const ERRORSTATE='ERRORSTATE';
 export const SETCART='SETCART';
-export const GETPRODUCT="GETPRODUCT "
+export const GETPRODUCT="GETPRODUCT"
+export const FILTERPRODUCT="FILTERPRODUCT"
+export const FILTERUNCHECKPRODUCT="FILTERUNCHECKPRODUCT"
 
 
 export const loadingState=()=>({
@@ -17,5 +19,14 @@ export const setCartProduct=(data)=>({
 })
 export const getAllProducts=(data)=>({
     type:GETPRODUCT,
+    payload:data
+})
+
+export const filterProduct=(data)=>({
+    type:FILTERPRODUCT,
+    payload:data
+})
+export const filterUncheckProduct=(data)=>({
+    type:FILTERUNCHECKPRODUCT,
     payload:data
 })

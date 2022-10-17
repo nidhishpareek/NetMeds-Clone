@@ -1,5 +1,5 @@
 import { Box, Button, Image, Input, Text, useToast } from '@chakra-ui/react';
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Data } from '../Context/DataContext';
 import { AiFillStar, AiOutlineStar } from "react-icons/ai"
 import { HiArrowCircleRight } from 'react-icons/hi'
@@ -10,13 +10,16 @@ import axios from 'axios';
 function DetailSection() {
     const { currProduct } = useContext(Data);
     const dispatch = useDispatch();
-    const toast = useToast();
     const cartApi = 'https://netmedsdata.onrender.com/cart'
-    const cart = useSelector((state) => state.cart);
+    // const cart = useSelector((state) => state.cart);
+    const [cartData, setCartData] = useState([])
     const { title, country, actual_price, crossed_price, category, sub_category, manufacturer } = currProduct
     const discount = Math.round(((crossed_price - actual_price) / crossed_price) * 100)
+    const toast = useToast();
     const handleAdd = (item) => {
-        const check = cart.filter(allItem => allItem.id === item.id)
+        axios.get(cartApi).then((res) => setCartData(res))
+        console.log(cartData)
+        const check = cartData.filter(allItem => allItem.id === item.id)
         if (check.length === 0) {
             axios.post(cartApi, item)
                 .then(() => {
@@ -80,7 +83,7 @@ function DetailSection() {
                 <Input size={"sm"} type="number" defaultValue={"110002"} w="110px" pl="5px" fontSize={"19px"} fontWeight="700" border="none" focusBorderColor="white" pb="0" />
                 <HiArrowCircleRight color={"#02b7c2"} fontSize="30px" />
             </Box>
-            <Box mt="30px">
+            {crossed_price && <Box mt="30px">
                 <Text fontSize={"16px"} color="#6f7284" fontWeight={"700"}>OFFERS APPLICABLE</Text>
                 <Box display={"flex"} mt="10px" background={"#f3f3f3"} p="15px" borderRadius={"10px"} justifyContent="space-between">
                     <Box display="flex" gap="20px">
@@ -93,7 +96,7 @@ function DetailSection() {
                     </Box>
                     <Text color={"#ef4281"} fontSize="12px">Offer Applied</Text>
                 </Box>
-            </Box>
+            </Box>}
 
         </Box >
     )

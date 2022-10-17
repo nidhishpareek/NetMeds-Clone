@@ -175,13 +175,13 @@ const DataContext = ({ children }) => {
     const [loading, setLoading] = useState(false);
     const [currProduct, setCurrProduct] = useState({});
     const dispatch = useDispatch();
-    // const getallProducts = () => {
-    //     const api = "https://netmedsdata.onrender.com/products";
-    //     axios.get(api).then(res => dispatch(getAllProducts(res.data)))
-    // }
-    // useEffect(() => {
-    //     getallProducts()
-    // }, [])
+    const getallProducts = () => {
+        const api = "https://netmedsdata.onrender.com/products";
+        axios.get(api).then(res => dispatch(getAllProducts(res.data)))
+    }
+    useEffect(() => {
+        getallProducts()
+    }, [])
     const getProduct = () => {
         setLoading(true)
         const api = updatedUrl(`https://netmedsdata.onrender.com/products?_page=${page}&_limit=20`, sort, order, subCategory, sortCategory, manufacturer, sliderVal)
@@ -209,7 +209,14 @@ const DataContext = ({ children }) => {
         getProduct()
     }, [page, sort, order, subCategory, sortCategory, manufacturer, sliderVal])
 
-
+    const handleReset = (p, sub, categ, manu, slid) => {
+        handlePage(p)
+        handleSubCategory(sub)
+        handleCategory(categ)
+        handleManufacturer(manu)
+        handlePriceRange(slid)
+        // getProduct()
+    }
     const handleSubCategory = (val) => {
         const newVal = val;
         setSubCategory(newVal)
@@ -243,7 +250,7 @@ const DataContext = ({ children }) => {
     // }, [])
 
     const val = {
-        Categories, setval, handlePage, handleManufacturer, handleSubCategory, getProduct, handleCategory, handlecurrProduct, currProduct, sortCategory, loading, prod, page, sort, currItem, total, manufacturer, order, handlePriceRange, sliderVal
+        Categories, handleReset, setval, handlePage, handleManufacturer, handleSubCategory, getProduct, handleCategory, handlecurrProduct, currProduct, sortCategory, loading, prod, page, sort, currItem, total, manufacturer, order, handlePriceRange, sliderVal
     }
     return (
         <Data.Provider value={val}>

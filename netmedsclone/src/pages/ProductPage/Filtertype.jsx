@@ -1,27 +1,42 @@
 import { Box, Checkbox, Input, Text } from '@chakra-ui/react'
 import React, { useContext } from 'react'
+import { useRef } from 'react';
 import { BsSearch } from 'react-icons/bs';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuid } from 'uuid';
+import { filterProduct, filterUncheckProduct } from '../../Redux/action';
 import { Data } from '../Context/DataContext';
 
 const Filtertype = ({ name }) => {
     const { prod, handleFilter, handleManufacturer, handleCategory } = useContext(Data);
-    const allProduct = useSelector(state => state.allProduct)
-
+    const { allProduct, filteredProduct } = useSelector(state => state)
+    const dispatch = useDispatch();
     // console.log(allProduct, "here")
     const handleclick = (val) => {
-        if (val) {
-            const filtered = allProduct.filter(item => {
-                return item.manufacturer === val
-            })
-            console.log(filtered)
-            // handleFilter(filtered)
-        } else {
-            return allProduct
-        }
+        console.log(val)
+        // if (val) {
+        //     const filtered = allProduct.filter(item => {
+        //         return item.manufacturer === val
+        //     })
+        //     // console.log(filtered)
+        //     dispatch(filterProduct(filtered))
+        //     // handleFilter(filtered)
+        // } else {
+        //     const newFilter = filteredProduct.filter(item => {
+        //         return item.manufacturer !== val
+        //     })
+        //     dispatch(filterUncheckProduct(newFilter))
+        //     console.log(newFilter, "herefilter")
+        // }
     }
+    // console.log(filteredProduct)
 
+
+    const checkbox = useRef(null);
+    const handlecheck = (val) => {
+
+        console.log(checkbox.current.checked)
+    }
     const setManu = new Set();
     const setCat = new Set();
     const arr1 = []
@@ -57,6 +72,7 @@ const Filtertype = ({ name }) => {
                     arr1.map((el) => {
                         if (name === 'Manufacturers')
                             return <Checkbox pl="10px" key={uuid()} pb="8px" fontSize="13px" value={el} onChange={(e) => { e.target.checked ? handleclick(e.target.value) : handleclick('') }}>
+                                {/* // return <Checkbox pl="10px" key={uuid()} pb="8px" fontSize="13px" value={el} onChange={(e) => { e.target.checked ? handleclick(e.target.value) : handleclick('') }}> */}
                                 <Text fontSize={"13px"}>{el}</Text>
                             </Checkbox>
                     })}
