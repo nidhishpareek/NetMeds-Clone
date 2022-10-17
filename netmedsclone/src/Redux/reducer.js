@@ -1,4 +1,4 @@
-import {  ERRORSTATE, LOADINGSTATE, SETCART, TOGGLEVIEW,SETCARTBYREDUCER } from "./action"
+import {  ERRORSTATE, LOADINGSTATE, SETCART, TOGGLEVIEW,SETCARTBYREDUCER, REMOVECART } from "./action"
 
 const initState={
     loading:false, 
@@ -42,7 +42,16 @@ function reducer(state=initState,{type,payload}){
             console.log('view Changed')
             return{...state, mobileView: payload}
         }
-
+        case REMOVECART:{
+            let updated = state.cart.filter(el => (
+                el.id !== payload
+            ))
+            return{
+                loading:true,
+                error:false,
+                cart: updated
+            }
+        }
         
         default:{
             return state;
