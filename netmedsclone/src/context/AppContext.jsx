@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-
+import axios from 'axios'
 export const AppContext = createContext();
 
 export const AppContextProvider = ({children}) => {
@@ -42,6 +42,13 @@ export const AppContextProvider = ({children}) => {
             setError(true);
         })
     }
+    const deleteAll = () => {
+        cartData.map(el => {
+            axios.delete(`https://netmedsdata.onrender.com/cart/${el.id}`)
+        }).then((res) => {
+            console.log(res, 'res')
+        })
+    }
 
     const ApplyPromoCode = () => {
         if(promoCode==='Hurray!') {
@@ -53,5 +60,5 @@ export const AppContextProvider = ({children}) => {
         }
     }
 
-    return <AppContext.Provider value={{promoCode, setPromoCode, validPromoCode, setValidPromoCode, ApplyPromoCode, cartData, setCartData, error, setError, loading, setLoading, totalMRP, setTotalMRP, discount, setDiscount, promoCodeDiscount, setPromoCodeDiscount, getData}}>{children}</AppContext.Provider>
+    return <AppContext.Provider value={{promoCode, deleteAll, setPromoCode, validPromoCode, setValidPromoCode, ApplyPromoCode, cartData, setCartData, error, setError, loading, setLoading, totalMRP, setTotalMRP, discount, setDiscount, promoCodeDiscount, setPromoCodeDiscount, getData}}>{children}</AppContext.Provider>
 }
