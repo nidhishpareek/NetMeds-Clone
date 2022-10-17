@@ -5,30 +5,30 @@ import { setCartProductRReducer } from "../../Redux/action";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 const Navbar = () => {
-  const mobileView = useSelector((state) => state.mobileView);
+    const mobileView = useSelector((state) => state.mobileView);
 
-  const dispatch = useDispatch();
-  const getData = () => {
-    fetch("https://netmedsdata.onrender.com/cart")
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        dispatch(setCartProductRReducer(res));
-      });
-  };
-  useEffect(() => {
-    getData();
-  }, []);
+    const dispatch = useDispatch();
+    const getData = () => {
+        fetch("https://netmedsdata.onrender.com/cart")
+            .then((res) => res.json())
+            .then((res) => {
+                console.log(res);
+                dispatch(setCartProductRReducer(res));
+            });
+    };
+    useEffect(() => {
+        getData();
+    }, []);
 
-  return (
-    <Box>
-      {mobileView ? (
-        <MobileNavbar></MobileNavbar>
-      ) : (
-        <DesktopNavbar></DesktopNavbar>
-      )}
-    </Box>
-  );
+    return (
+        <Box>
+            {mobileView ? (
+                <MobileNavbar></MobileNavbar>
+            ) : (
+                <DesktopNavbar></DesktopNavbar>
+            )}
+        </Box>
+    );
 };
 
 export default Navbar;
