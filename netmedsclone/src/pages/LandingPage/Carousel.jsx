@@ -8,46 +8,50 @@ export const Carousel = () => {
     const ref = useRef(null);
     const [timing, setTiming] = useState('');
 
-    const handleClick = (val) => {
+    const handleClick = (val, plus) => {
         setTiming(clearTimeout(timing));
         let newCount = count;
-            if (val === 'forward') {
-                newCount++;
-                setCount(newCount);
-            } else if (val === 'backward') {
-                newCount--;
-                setCount(newCount);
-            }
-    
-            if (newCount === images.length) {
-                setCount(0);
-                ref.current.style.transform = 'translate(0)';
-                return;
-            }
-            if (newCount === -1) {
-                setCount(images.length-1);
-                ref.current.style.transform = `translate(-${
-                    (images.length - 1) * (100 / images.length)
-                }%)`;
-                return;
-            }
-    
+        if(plus>0) {
+            newCount = plus-1;
+        }
+        if (val === 'forward') {
+            newCount++;
+            setCount(newCount);
+        } else if (val === 'backward') {
+            newCount--;
+            setCount(newCount);
+        }
+
+        if (newCount === images.length) {
+            setCount(0);
+            ref.current.style.transform = 'translate(0)';
+            return;
+        }
+        if (newCount === -1) {
+            setCount(images.length-1);
             ref.current.style.transform = `translate(-${
-                newCount * (100 / images.length)
+                (images.length - 1) * (100 / images.length)
             }%)`;
+            return;
+        }
+
+        ref.current.style.transform = `translate(-${
+            newCount * (100 / images.length)
+        }%)`;
     }
     const setTimer = () => {
 		setTiming(clearTimeout(timing));
 		setTiming(
 			setTimeout(() => {
 				setCount(count + 1);
-				handleClick('forward');
+				handleClick('forward', 0);
 			}, 3000),
 		);
 	};
 	useEffect(setTimer, [count]);
     const handleDot = (value) => {
         setCount(value);
+        handleClick('forward', value);
     }
     const dotStyleTrue = {
         height: '8px',
@@ -92,8 +96,8 @@ export const Carousel = () => {
                 </Box>
             </Box>
             <Box position={'absolute'} w='100%' display={'flex'} justifyContent='space-between' top='50%' transform='translateY(-50%)'>
-                <span style={{fontSize:'35px', cursor: 'pointer', marginLeft: '8px', color: '#363b46'}} onClick={() => handleClick('backward')} className="material-symbols-outlined">arrow_back_ios</span>
-                <span style={{fontSize:'35px', cursor: 'pointer', color: '#363b46'}} onClick={() => handleClick('forward')} className="material-symbols-outlined">arrow_forward_ios</span>
+                <span style={{fontSize:'35px', cursor: 'pointer', marginLeft: '8px', color: '#363b46'}} onClick={() => handleClick('backward',0)} className="material-symbols-outlined">arrow_back_ios</span>
+                <span style={{fontSize:'35px', cursor: 'pointer', color: '#363b46'}} onClick={() => handleClick('forward',0)} className="material-symbols-outlined">arrow_forward_ios</span>
             </Box>
            
         </Box>
