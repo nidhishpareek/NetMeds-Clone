@@ -1,4 +1,4 @@
-import { Grid, GridItem } from "@chakra-ui/react";
+import { Grid, GridItem, Spinner } from "@chakra-ui/react";
 import {SlideAddress} from "./rSlideAddressPage"
 import { OrderStatus } from "./orderStatus";
 import { SimpleGrid, Box, Text, Image, Flex, Input,Button,Icon ,Select,Checkbox} from "@chakra-ui/react";
@@ -6,13 +6,14 @@ import { SpinnerIcon,CheckCircleIcon,RepeatIcon,EmailIcon } from '@chakra-ui/ico
 import React, { useContext } from "react"
 import {NewCarddetails} from"./newCarddetails"
 import { AppContext } from "../../context/AppContext";
+import { useEffect } from "react";
 
 
 export const PymentDetails=()=>{
 
 const{Change,setChange}=React.useState(false)
 
-const {totalMRP,discount,promoCodeDiscount}= useContext(AppContext);
+const {totalMRP,discount,promoCodeDiscount,getData,cartData,loading}= useContext(AppContext);
 
     const PayButton=(el)=>{
         console.log(Change)
@@ -42,17 +43,24 @@ const {totalMRP,discount,promoCodeDiscount}= useContext(AppContext);
     }
 
 
+    useEffect(()=>{
+      getData()
+    },[])
+
 
 
     return (
-        <Box>
+        <Box mt="20px">
+          {
+                    loading && <Box zIndex={'2'} opacity='0.8' display={'grid'} position='fixed' bottom='0px' placeContent='center' w='100vw' h='110vh' bg='black'><Spinner color='#fff' size='xl' /></Box>
+                }
     <OrderStatus/>
     <Box w={{ base: '100%', md: '100%', lg: '70%' }} m="auto" mt='30px' >
     
-      <Flex   justifyContent='space-between' wrap='wrap' >
+      <Box   justifyContent='space-between' wrap='wrap' display={{base:"block", lg:"flex"}} >
         
 
-        <SimpleGrid columns={1}  w={{  md: '70%'}} >
+        <SimpleGrid columns={1}  w={{  md: '70%'}}  mr="20px" >
           <Box   >
             <Box  padding='20px' mb='50px' id='boxshadow' >
             <Flex align='center'>
@@ -218,7 +226,7 @@ const {totalMRP,discount,promoCodeDiscount}= useContext(AppContext);
 
 
       
-        <Box   height='auto' padding='10px' id='boxshadow2'  w={{ base: '100%', md: 'auto', lg: '30%' }}>
+        <Box   height='auto' padding='10px' id='boxshadow2'   w={{base:"100%",lg:"30%"}} >
             <Text color='rgba(21,27,57,.6)'fontSize='12px'>PAYMENT DETAILS</Text>
             <Box   lineHeight='40px'  >
             <Flex justifyContent="space-between">
@@ -244,7 +252,7 @@ const {totalMRP,discount,promoCodeDiscount}= useContext(AppContext);
 
             <Flex justifyContent="space-between" fontWeight='bold'>
               <Text >Total Amount</Text>
-              <Text > *Rs.{totalMRP.toFixed(2)-discount.toFixed(2)}</Text>
+              <Text > *Rs.{(totalMRP-discount).toFixed(2)}</Text>
             </Flex>
             </Box>
             <Box bg='#f3f8ec' mt='20px' p='10px'>
@@ -255,7 +263,7 @@ const {totalMRP,discount,promoCodeDiscount}= useContext(AppContext);
 
               <Box >
                 <Text>TOTAL AMOUNT</Text>
-                <Text fontWeight='bold' fontSize='20px'>Rs.{totalMRP.toFixed(2)-discount.toFixed(2)}</Text>
+                <Text fontWeight='bold' fontSize='20px'>Rs.{(totalMRP-discount).toFixed(2)}</Text>
               </Box>
 
               
@@ -267,7 +275,7 @@ const {totalMRP,discount,promoCodeDiscount}= useContext(AppContext);
 
 
 
-      </Flex>
+      </Box>
     </Box>
 
     </Box>

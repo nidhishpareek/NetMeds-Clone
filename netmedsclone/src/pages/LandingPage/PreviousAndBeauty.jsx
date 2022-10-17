@@ -24,7 +24,7 @@ export default function PreviousAndBeauty() {
                 <Heading as='h2' fontSize='25px' mb='10px' fontWeight='500'>Beauty Products</Heading>
                 <Text color='#80b552' fontWeight={'400'}>Save Upto 40% off</Text>
                 <Flex>
-                    <Button h='35px' letterSpacing={'1px'} borderRadius={'3px'} boxShadow= '0 6px 12px 0 rgb(36 174 177 / 40%)'  p='0 20px' bg='#24aeb1' color='#fff' _hover={'none'} fontSize='14px' mt='40px'>Explore Beauty</Button>
+                    <Button h='35px' letterSpacing={'1px'} borderRadius={'3px'} boxShadow= '0 6px 12px 0 rgb(36 174 177 / 40%)'  p='0 20px' bg='#24aeb1' color='#fff' _hover={{bg:'#24aeb1'}} fontSize='14px' mt='40px'>Explore Beauty</Button>
                 </Flex>
             </Box>
             <Spacer />

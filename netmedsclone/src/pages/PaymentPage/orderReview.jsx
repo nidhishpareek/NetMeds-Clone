@@ -141,17 +141,17 @@ const PaymentDetails={
 
   
   return (
-    <Box>
+    <Box mt="20px">
       {
                     loading && <Box zIndex={'2'} opacity='0.8' display={'grid'} position='fixed' bottom='0px' placeContent='center' w='100vw' h='110vh' bg='black'><Spinner color='#fff' size='xl' /></Box>
                 }
     <OrderStatus/>
-    <Box w={{ base: '100%', md: '100%', lg: '70%' }} m="auto" mt='30px' border="1px solid blue">
+    <Box w={{ base: '100%', md: '100%', lg: '70%' }} m="auto" mt='10px'  >
     
-      <Box   justifyContent='space-between' wrap='wrap' border="1px solid red" display={{base:"block", lg:"flex"}} >
+      <Box   justifyContent='space-between' wrap='wrap'  display={{base:"block", lg:"flex"} } >
         
 
-        <SimpleGrid columns={1} w={{  md: '100%'}} >
+        <SimpleGrid columns={1} w={{ lg:"80%",  md: '100%'}} mr="20px" >
           <Box   >
           <Text color='rgba(21,27,57,.6)'fontSize='12px'>PRODUCTS</Text>
             <Box  padding='10px' mb='50px' id='boxshadow'>
@@ -244,7 +244,7 @@ const PaymentDetails={
 
 
       
-        <Box   height='auto' padding='10px' id='boxshadow2' w={{base:"100%",lg:"30%"}} border="1px solid blue">
+        <Box   height='auto' padding='10px' id='boxshadow2' w={{base:"100%",lg:"35%"} } mt="20px">
             <Text color='rgba(21,27,57,.6)'fontSize='12px'>PAYMENT DETAILS</Text>
             <Box   lineHeight='40px'  >
             <Flex justifyContent="space-between">
@@ -267,7 +267,7 @@ const PaymentDetails={
 
             <Flex justifyContent="space-between" fontWeight='bold'>
               <Text >Total Amount</Text>
-              <Text > *Rs.{totalMRP.toFixed(2)-discount.toFixed(2)}</Text>
+              <Text > *Rs.{(totalMRP-discount).toFixed(2)}</Text>
             </Flex>
             </Box>
             <Box bg='#f3f8ec' mt='20px' p='10px'>
@@ -278,7 +278,7 @@ const PaymentDetails={
 
               <Box >
                 <Text>TOTAL AMOUNT</Text>
-                <Text fontWeight='bold' fontSize='20px'> Rs.{totalMRP.toFixed(2)-discount.toFixed(2)}</Text>
+                <Text fontWeight='bold' fontSize='20px'> Rs.{(totalMRP-discount).toFixed(2)}</Text>
               </Box>
 
               <Box >

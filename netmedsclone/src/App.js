@@ -21,6 +21,7 @@ function App() {
       } else if (screenwidth > 1080 && !isMobileView ) {
         setCurrentview(false);
       }
+      
     }
     window.addEventListener("resize", handleWindowResize);
 

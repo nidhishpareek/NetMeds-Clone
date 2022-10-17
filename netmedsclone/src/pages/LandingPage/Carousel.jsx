@@ -5,7 +5,7 @@ export const Carousel = () => {
         {id: 1}, {id: 2}, {id: 3}, {id: 4}
     ]
     const [count, setCount] = useState(0);
-    const ref = useRef();
+    const ref = useRef(null);
     const [timing, setTiming] = useState('');
 
     const handleClick = (val) => {

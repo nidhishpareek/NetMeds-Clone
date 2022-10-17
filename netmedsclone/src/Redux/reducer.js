@@ -39,7 +39,7 @@ function reducer(state=initState,{type,payload}){
             }
         }
         case SETCARTBYREDUCER:{
-            console.log('setcart called', [...state.cart, ...payload])
+            // console.log('setcart called', [...state.cart, ...payload])
             return {
                 loading:false,
                 error:false,
@@ -47,7 +47,7 @@ function reducer(state=initState,{type,payload}){
             }
         }
         case TOGGLEVIEW:{
-            console.log('view Changed')
+            // console.log('view Changed')
             return{...state, mobileView: payload}
         }
         case REMOVECART:{
