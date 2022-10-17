@@ -1,11 +1,24 @@
-import { Box, Checkbox, Input, Text } from '@chakra-ui/react'
+import { Box, Button, Checkbox, Input } from '@chakra-ui/react'
 import React, { useContext } from 'react'
+import { useState } from 'react';
 import { BsSearch } from 'react-icons/bs';
-import { v4 as uuid } from 'uuid';
 import { Data } from '../Context/DataContext';
 
 const Filtertype = ({ name }) => {
     const { prod, handleManufacturer, handleCategory } = useContext(Data);
+    const [clickVal, setClickVal] = useState(true)
+    const [clickCateg, setClickCateg] = useState(true)
+    const handleToggle = (val) => {
+        setClickVal(!clickVal)
+        console.log(clickVal);
+        clickVal ? handleManufacturer(val) : handleManufacturer("")
+    }
+    const handleToggleCategory = (val) => {
+        setClickCateg(!clickCateg)
+        console.log(clickCateg)
+        clickCateg ? handleCategory(val) : handleCategory("")
+    }
+
     const setManu = new Set();
     const setCat = new Set();
     const arr1 = []
@@ -37,18 +50,17 @@ const Filtertype = ({ name }) => {
                     bg: `#6f7284`
                 },
             }}>
-                {
-                    arr1.map((el) => {
-                        if (name === 'Manufacturers')
-                            return <Checkbox pl="10px" key={uuid()} pb="8px" fontSize="13px" value={el} onChange={(e) => { e.target.checked ? handleManufacturer(e.target.value) : handleCategory('') }}>
-                                <Text fontSize={"13px"}>{el}</Text>
-                            </Checkbox>
-                    })}
+                {arr1.map((el) => {
+                    if (name === 'Manufacturers')
+                        return <Checkbox ml="10px" key={el} value={el}
+                            onChange={(e) => handleToggle(e.target.value)}
+                        >{el}</Checkbox>
+                })}
                 {arr2.map((el) => {
                     if (name === 'Categories')
-                        return <Checkbox pl="10px" key={uuid()} pb="8px" fontSize="13px" value={el} onChange={(e) => { e.target.checked ? handleCategory(e.target.value) : handleCategory('') }}>
-                            <Text fontSize={"13px"}>{el}</Text>
-                        </Checkbox>
+                        return <Checkbox ml="10px" key={el} value={el}
+                            onChange={(e) => handleToggleCategory(e.target.value)}
+                        >{el}</Checkbox>
                 })}
             </Box>
         </>

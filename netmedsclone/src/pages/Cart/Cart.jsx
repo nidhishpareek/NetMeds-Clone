@@ -1,51 +1,19 @@
 import { AddIcon } from '@chakra-ui/icons';
 import { Box, Button, Center, Checkbox, Flex, Heading, Image, Input, Select, Spinner, Text } from '@chakra-ui/react';
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
+import { AppContext } from '../../context/AppContext';
+import { removeCartRedux, setCartProduct } from '../../Redux/action';
+import ErrorPage from '../ErrorPage';
 
 export const Cart = () => {
-    const [cartData, setCartData] = useState([0]);
     const [saveForLaterData, setSaveForLaterData] = useState([]);
-    const [loading, setLoading] = useState(false);
     const [showHidden, setShowHidden] = useState('show')
-    const [error, setError] = useState(false);
-    const [promoCode, setPromoCode] = useState('');
-    const [validPromoCode, setValidPromoCode] = useState(true);
-    const [promoCodeDiscount, setPromoCodeDiscount] = useState(0);
     const promeRef = useRef(null);
-    const [totalMRP, setTotalMRP] = useState(0);
-    const [discount, setDiscount] = useState(0);
     const date = Date(Date.now());
-    const getData = () => {
-        setLoading(true);
-        fetch('https://netmedsdata.onrender.com/cart')
-        .then((res) => res.json())
-        .then((res) => {
-            setLoading(false);
-            setTotalMRP(0);
-            setDiscount(0);
-            res.map(el => {
-                if(el.quantity && el.crossed_price) {
-                    setTotalMRP((prev) => prev+ (Number(el.crossed_price)*Number(el.quantity)))
-                    setDiscount((prev) => prev+ ((Number(el.crossed_price)-Number(el.actual_price))*Number(el.quantity)))
-                }
-                else if(el.quantity && el.actual_price) {
-                    setTotalMRP((prev) => prev+ (Number(el.actual_price)*Number(el.quantity)))
-                }
-                else if(el.crossed_price) {
-                    setTotalMRP((prev) => prev+ (Number(el.crossed_price)))
-                    setDiscount((prev) => prev+ (Number(el.crossed_price)-Number(el.actual_price)))
-                }
-                else {
-                    setTotalMRP((prev) => prev+ (Number(el.actual_price)))
-                }
-            })
-            setCartData(res);
-        }).catch((err) => {
-            setLoading(false);
-            setError(true);
-        })
-    }
+    const dispatch = useDispatch();
+    const { setPromoCode, validPromoCode, ApplyPromoCode, cartData, loading, setLoading, error, setError, getData, totalMRP, discount, promoCodeDiscount } = useContext(AppContext);
     const getSaveData = () => {
         setLoading(true);
         fetch('https://netmedsdata.onrender.com/saveForlater')
@@ -65,6 +33,9 @@ export const Cart = () => {
             method: 'DELETE',
         }).then(() => {
             setLoading(false)
+            if(url==='https://netmedsdata.onrender.com/cart/') {
+                dispatch(removeCartRedux(id));
+            }
             getData();
             getSaveData();
         }).catch((err) => {
@@ -104,6 +75,7 @@ export const Cart = () => {
                 'Content-Type': 'application/json'
             }
         }).then((() => {
+            dispatch(setCartProduct(el));
             setLoading(false);
         })).catch((err) => {
             setLoading(false);
@@ -128,9 +100,18 @@ export const Cart = () => {
     }
     const gotToProceed = useNavigate();
     const handleProcced = () => {
-        gotToProceed('/payment')
+        let auth = localStorage.getItem('isLoggedIn');
+        if(auth) {
+            gotToProceed('/payment')
+        }
+        else {
+            gotToProceed('/Login')
+        }
     }
     const handleAddProducts = () => {
+        gotToProceed('/')
+    }
+    const handleAddMore =() => {
         gotToProceed('/')
     }
     const handlePromo = (val) => {
@@ -143,14 +124,8 @@ export const Cart = () => {
             setShowHidden('hidden')
         }
     }
-    const ApplyPromoCode = () => {
-        if(promoCode==='Hurray!') {
-            setPromoCodeDiscount(((totalMRP-discount)*20)/100)
-            setValidPromoCode(true);
-        }
-        else {
-            setValidPromoCode(false);
-        }
+    if(error) {
+        return <ErrorPage></ErrorPage>
     }
     return (
     <Box position={'relative'} bg='#F6F6F7'>
@@ -274,8 +249,8 @@ export const Cart = () => {
                                 </Box>
                                 <Flex mt='15px' justifyContent={'space-between'}>
                                     <Text fontSize={'13px'} color='#24aeb1' fontWeight={'600'} letterSpacing='1px'>ADD MORE ITEMS</Text>
-                                <AddIcon color="#24aeb1"/>
-                            </Flex>
+                                    <AddIcon cursor={'pointer'} onClick={handleAddMore} color="#24aeb1"/>
+                                </Flex>
                             </Box>
                         </Box>
                         <Box m='20px 0' p='15px' bg='#fff' borderRadius={'7px'}>

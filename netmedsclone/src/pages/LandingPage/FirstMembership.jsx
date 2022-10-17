@@ -20,7 +20,7 @@ export const FirstMembership = () => {
                 </Box>
             </Flex>
             <Flex ml={{base: '', md: '45%'}} p={{base: '', md: '0'}} alignItems={'center'} justifyContent='space-between'>
-                <Box color={'#ef4281'} fontWeight='600'><i class="fa-solid fa-bolt"></i> Starting at ₹299</Box>
+                <Box color={'#ef4281'} fontWeight='600'><i className="fa-solid fa-bolt"></i> Starting at ₹299</Box>
                 <Box>
                     <Button h='50px' letterSpacing={'1px'} borderRadius={'3px'} boxShadow= '0 6px 12px 0 rgb(36 174 177 / 40%)'  p='0 20px' bg='#24aeb1' color='#fff' _hover={'none'} fontSize='14px'>Explore Plans</Button>
                 </Box>

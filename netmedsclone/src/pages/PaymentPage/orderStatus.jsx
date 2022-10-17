@@ -11,7 +11,7 @@ import { useDisclosure,Button,
 
 export const OrderStatus=()=>{
     return (
-        <Box bg='#151b39' w='70%' p={4} color='white' m="auto" borderRadius="10px"  h="fit-content">
+        <Box bg='#151b39' w={{ base: '90%', md: 'auto', lg: '70%' }} p={4} color='white' m="auto" borderRadius="10px"  h="fit-content">
              <Flex justifyContent="space-between">
           <Text  fontSize="22px">Order Review</Text>
           
