@@ -10,42 +10,54 @@ import { useDisclosure,Button,
    FormHelperText,} from '@chakra-ui/react'
 
 import { PhoneIcon, AddIcon, WarningIcon } from '@chakra-ui/icons'
-import React from "react"
+import React, { useContext } from "react"
 import { useState } from 'react'
+import { AppContext } from '../../context/AppContext';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { OrderReview } from './orderReview';
 
-var userAddressArray=JSON.parse(localStorage.getItem("userAddress")) || [];
+var userAddress=JSON.parse(localStorage.getItem("userAddress")) || {};
 
  export const SlideAddress=()=>{
 
       const { isOpen, onOpen, onClose } = useDisclosure()
       const firstField = React.useRef()
 
+     
+
       // console.log("useref",firstField.current)
       const isError = Input === ''
 
-      const [address,setAddress]=useState({FirstName:"",LastName:"",Address:"",Landmark:"",Phonenumber:"",City:"",State:"",PinCode:""})
+      // const [address,setAddress]=useState({FirstName:"",LastName:"",Address:"",Landmark:"",Phonenumber:"",City:"",State:"",PinCode:""})
+      const [userAddressdata, setuserAddressdata] = useState({FirstName:"",LastName:"",Address:"",Landmark:"",Phonenumber:"",City:"",State:"",PinCode:""})
+      const{FirstName,LastName,Address,Landmark,Phonenumber,City,State,PinCode}=userAddressdata;
 
-      const{FirstName,LastName,Address,Landmark,Phonenumber,City,State,PinCode}=address;
-
+      
+       
       const handelChange=(e)=>{
         const {name,value} = e.target;
-        setAddress({
-         ...address,
+        setuserAddressdata({
+         ...userAddressdata,
           [name]:value
         })
       }
 
 
-      const handelClick=()=>{
-        var UserAddressobj={...address};
+      
 
-        userAddressArray.push(UserAddressobj);
-    
-        localStorage.setItem("userAddress",JSON.stringify(userAddressArray));
+      const handelClick=()=>{
+        var UserAddressobj={...userAddressdata};
+        localStorage.setItem("userAddress",JSON.stringify(UserAddressobj));
+
+        onClose()
+        window.location.reload(false);
 
         
        
     }
+
+
+    var userDetails=JSON.parse(localStorage.getItem("userDetails"))
 
       return (
         <FormControl isInvalid={isError}>
@@ -74,14 +86,15 @@ var userAddressArray=JSON.parse(localStorage.getItem("userAddress")) || [];
                       ref={firstField}
                       id='username'
                       placeholder='Pin Code'
+                      type="number"
                       name="PinCode" value={PinCode}  onChange={handelChange}
                     />
                   </Box>
 
 
                l<Flex>
-               <Input htmlSize={5} width='auto' placeholder='City' name="City" value={City}  onChange={handelChange} />
-               <Input htmlSize={5} width='auto' placeholder='State' name="State" value={State}  onChange={handelChange} />
+               <Input htmlSize={5} width='auto' type="text" placeholder='City' name="City" value={City}  onChange={handelChange} />
+               <Input htmlSize={5} width='auto' type="text" placeholder='State' name="State" value={State}  onChange={handelChange} />
                </Flex>
 
 
@@ -93,7 +106,8 @@ var userAddressArray=JSON.parse(localStorage.getItem("userAddress")) || [];
                       ref={firstField}
                       id='FirstName'
                       placeholder='First Name'
-                      name="FirstName" value={FirstName}  onChange={handelChange}
+                      type="text"
+                      name="FirstName" value={userDetails.firstName}  
                     />
                   </Box>
                   <Box>
@@ -102,7 +116,8 @@ var userAddressArray=JSON.parse(localStorage.getItem("userAddress")) || [];
                       ref={firstField}
                       id='LastName'
                       placeholder='Last Name'
-                      name="LastName" value={LastName}  onChange={handelChange}
+                      type="text"
+                      name="LastName" value={userDetails.lastName}   
                     />
                   </Box>
 
@@ -112,6 +127,7 @@ var userAddressArray=JSON.parse(localStorage.getItem("userAddress")) || [];
                       ref={firstField}
                       id='Address'
                       placeholder='Address'
+                      type="text"
                       name="Address" value={Address}  onChange={handelChange}
                     />
                   </Box>
@@ -122,13 +138,14 @@ var userAddressArray=JSON.parse(localStorage.getItem("userAddress")) || [];
                       ref={firstField}
                       id='Landmark'
                       placeholder='Landmark'
+                      type="text"
                       name="Landmark" value={Landmark}  onChange={handelChange}
                     />
                   </Box>
 
                   <InputGroup>
                      <InputLeftAddon children='+91' />
-                      <Input type='tel' placeholder='phone number' name="Phonenumber" value={Phonenumber}  onChange={handelChange} />
+                      <Input  type="number" placeholder='phone number' name="Phonenumber" value={Phonenumber}  onChange={handelChange} />
                   </InputGroup>
     
                   {/* <Box>

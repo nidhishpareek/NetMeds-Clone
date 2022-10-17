@@ -1,13 +1,17 @@
 import { Grid, GridItem } from "@chakra-ui/react";
 import {SlideAddress} from "./rSlideAddressPage"
 import { OrderStatus } from "./orderStatus";
-import React from "react"
+import React, { useContext } from "react"
 import { SimpleGrid, Box, Text, Image, Flex, Input,Button,Icon,Progress } from "@chakra-ui/react";
 import { SpinnerIcon,CheckCircleIcon,RepeatIcon,EmailIcon } from '@chakra-ui/icons'
 import { Navigate, useNavigate } from "react-router-dom";
+import { AppContext } from "../../context/AppContext";
 
 
-var userAddressArray=JSON.parse(localStorage.getItem("userAddress")) || [];
+var userAddress=JSON.parse(localStorage.getItem("userAddress")) || {};
+var userDetails=JSON.parse(localStorage.getItem("userDetails"))
+
+
 
 async function GetData(){
   const key="";
@@ -35,12 +39,14 @@ catch(err){
 
 export const OrderReview = () => {
 
+  
 
   const[posts,setPosts]=React.useState([]);
   const[page,setPage]=React.useState(1);
   
+  const {totalMRP,discount,promoCodeDiscount,userAddressdata}= useContext(AppContext);
 
-    
+  // const{FirstName,LastName,Address,Landmark,Phonenumber,City,State,PinCode}=userAddressdata;
 
     React.useEffect(()=>{
         Data1()
@@ -98,24 +104,28 @@ const handleNavigate = () => {
 
 
 const ProductData={
-  Imageurl:"https://www.netmeds.com/images/product-v1/75x75/362506/scalpe_plus_anti_dandruff_shampoo_75_ml_0_1.jpg",
-  name:"Scalpe Plus Anti Dandruff Shampoo 70 ml",
-  Details:"Mrf: Glenmark Pharmaceuticals Ltd Seller : RELIANCE RETAIL LIMITED [BIKANER FC] Expiry : Jul 2024",
-  Qty:"2",
+  
   DeliveryDate:"19-October-2022",
 
 }
 
 
 
-const finaladdress=userAddressArray[userAddressArray.length - 1];
+
+
+
 const DELIVERYADDRESS={
   
   
-  ...finaladdress
+  ...userAddress,
+
+
 
 }
 
+const Username={
+  ...userDetails
+}
 
 
 const PaymentDetails={
@@ -158,7 +168,7 @@ const PaymentDetails={
 
                 <Box  mr='40px'>
                   
-                  <Text fontSize='16px' mb='20px'>{post.title}</Text>
+                  <Text fontSize='16px' mb='20px' w="80%">{post.title}</Text>
                     <Text fontSize='12px' w={{ base: '100%', md: '100%', lg: '70%' }} lineHeight='30px'>
                     {post.manufacturer}
                     </Text>
@@ -192,9 +202,9 @@ const PaymentDetails={
               </Flex>
 
               <Box >
-                <Text color='#151b39' mb='10px' fontSize='16px' fontWeight='bold'>{DELIVERYADDRESS.FirstName +" "+DELIVERYADDRESS.LastName}</Text>
+                <Text color='#151b39' mb='10px' fontSize='16px' fontWeight='bold'>{Username.firstName +" "+Username.lastName}</Text>
                     <Text lineHeight='40px' w={{ base: '100%', md: '100%', lg: '30%' }} fontSize='14px'>
-                    {DELIVERYADDRESS.Address}
+                    {DELIVERYADDRESS.Address+" "+DELIVERYADDRESS.Landmark}
                     
                     </Text>
 
@@ -205,7 +215,7 @@ const PaymentDetails={
                     </Text>
                     <Text lineHeight='40px' w={{ base: '100%', md: '100%', lg: '30%' }} fontSize='14px'>
                     
-                    {"+91"+DELIVERYADDRESS.Phonenumber+"   "}
+                    {DELIVERYADDRESS.Phonenumber+"   "}
                     
                     </Text>
               </Box>
@@ -235,30 +245,36 @@ const PaymentDetails={
             <Box   lineHeight='40px'  >
             <Flex justifyContent="space-between">
               <Text>MRP Total</Text>
-              <Text>Rs.{Productprice}</Text>
+              <Text>Rs.{totalMRP.toFixed(2)}</Text>
             </Flex>
 
 
             <Flex justifyContent="space-between">
               <Text>Netmeds Discount</Text>
-              <Text>- Rs.{PaymentDetails.Discount}</Text>
+              <Text>- Rs.{discount.toFixed(2)}</Text>
             </Flex>
-
+            {
+                                    promoCodeDiscount==0? <Box></Box> : 
+                                    <Flex fontSize={'14px'} mb='10px' justifyContent={'space-between'}>
+                                        <Text>Promocode Discount</Text>
+                                        <Text>-Rs.{parseFloat(promoCodeDiscount).toFixed(2)}</Text>
+                                    </Flex>
+                                }
 
             <Flex justifyContent="space-between" fontWeight='bold'>
               <Text >Total Amount</Text>
-              <Text > *Rs.{parseInt(Productprice)-PaymentDetails.Discount}</Text>
+              <Text > *Rs.{totalMRP.toFixed(2)-discount.toFixed(2)}</Text>
             </Flex>
             </Box>
             <Box bg='#f3f8ec' mt='20px' p='10px'>
-              <Text color='#378f30' fontSize='14px'> TOTAL SAVINGS   RS.{PaymentDetails.Discount}</Text>
+              <Text color='#378f30' fontSize='14px'> TOTAL SAVINGS   RS.{(discount+promoCodeDiscount).toFixed(2)}</Text>
             </Box>
 
             <Flex justifyContent='space-between' mt='30px'>
 
               <Box >
                 <Text>TOTAL AMOUNT</Text>
-                <Text fontWeight='bold' fontSize='20px'> Rs.{parseInt(Productprice)-PaymentDetails.Discount}</Text>
+                <Text fontWeight='bold' fontSize='20px'> Rs.{totalMRP.toFixed(2)-discount.toFixed(2)}</Text>
               </Box>
 
               <Box >

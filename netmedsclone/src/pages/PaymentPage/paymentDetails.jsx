@@ -3,11 +3,16 @@ import {SlideAddress} from "./rSlideAddressPage"
 import { OrderStatus } from "./orderStatus";
 import { SimpleGrid, Box, Text, Image, Flex, Input,Button,Icon ,Select,Checkbox} from "@chakra-ui/react";
 import { SpinnerIcon,CheckCircleIcon,RepeatIcon,EmailIcon } from '@chakra-ui/icons'
-import React from "react"
+import React, { useContext } from "react"
 import {NewCarddetails} from"./newCarddetails"
+import { AppContext } from "../../context/AppContext";
+
+
 export const PymentDetails=()=>{
 
 const{Change,setChange}=React.useState(false)
+
+const {totalMRP,discount,promoCodeDiscount}= useContext(AppContext);
 
     const PayButton=(el)=>{
         console.log(Change)
@@ -218,30 +223,39 @@ const{Change,setChange}=React.useState(false)
             <Box   lineHeight='40px'  >
             <Flex justifyContent="space-between">
               <Text>MRP Total</Text>
-              <Text>Rs.{PaymentDetails.MrpTotal}</Text>
+              <Text>Rs.{totalMRP.toFixed(2)}</Text>
             </Flex>
 
 
             <Flex justifyContent="space-between">
               <Text>Netmeds Discount</Text>
-              <Text>- Rs.{PaymentDetails.Discount}</Text>
+              <Text>- Rs.{discount.toFixed(2)}</Text>
             </Flex>
+
+
+            {
+                                    promoCodeDiscount==0? <Box></Box> : 
+                                    <Flex fontSize={'14px'} mb='10px' justifyContent={'space-between'}>
+                                        <Text>Promocode Discount</Text>
+                                        <Text>-Rs.{parseFloat(promoCodeDiscount).toFixed(2)}</Text>
+                                    </Flex>
+                                }
 
 
             <Flex justifyContent="space-between" fontWeight='bold'>
               <Text >Total Amount</Text>
-              <Text > *Rs.{PaymentDetails.TotalAmount}</Text>
+              <Text > *Rs.{totalMRP.toFixed(2)-discount.toFixed(2)}</Text>
             </Flex>
             </Box>
             <Box bg='#f3f8ec' mt='20px' p='10px'>
-              <Text color='#378f30' fontSize='14px'> TOTAL SAVINGS   RS.{PaymentDetails.SAVINGS}</Text>
+              <Text color='#378f30' fontSize='14px'> TOTAL SAVINGS   RS.{(discount+promoCodeDiscount).toFixed(2)}</Text>
             </Box>
 
             <Flex justifyContent='space-between' mt='30px'>
 
               <Box >
                 <Text>TOTAL AMOUNT</Text>
-                <Text fontWeight='bold' fontSize='20px'>Rs.{PaymentDetails.TotalAmount}</Text>
+                <Text fontWeight='bold' fontSize='20px'>Rs.{totalMRP.toFixed(2)-discount.toFixed(2)}</Text>
               </Box>
 
               
