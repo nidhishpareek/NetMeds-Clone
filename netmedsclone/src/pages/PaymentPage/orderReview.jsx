@@ -7,6 +7,8 @@ import { SpinnerIcon,CheckCircleIcon,RepeatIcon,EmailIcon } from '@chakra-ui/ico
 import { Navigate, useNavigate } from "react-router-dom";
 
 
+var userAddressArray=JSON.parse(localStorage.getItem("userAddress")) || [];
+
 async function GetData(){
   const key="";
   // const url="https://jsonplaceholder.typicode.com/posts?_limit=10";
@@ -32,6 +34,8 @@ catch(err){
 
 
 export const OrderReview = () => {
+
+
   const[posts,setPosts]=React.useState([]);
   const[page,setPage]=React.useState(1);
   
@@ -42,7 +46,7 @@ export const OrderReview = () => {
         Data1()
         cartDataPrice()
         // cartData()
-        console.log("calling useeffect")
+        // console.log("calling useeffect")
     },[])
 
 
@@ -74,10 +78,10 @@ const cartDataPrice=()=>{
     
     )
     )}
-    console.log(TotalPrice);
+    // console.log(TotalPrice);
    setProductprice(TotalPrice);
     
-    console.log("heee",Productprice);
+    // console.log("heee",Productprice);
 }
 
 
@@ -102,17 +106,23 @@ const ProductData={
 
 }
 
+
+
+const finaladdress=userAddressArray[userAddressArray.length - 1];
 const DELIVERYADDRESS={
-  Name:"Akshay Pareek",
-  Address:"Riet college jaipur,near rcew girls college,Jaipur - 302026, Rajasthan.+91 - 8290918154",
+  
+  
+  ...finaladdress
 
 }
+
 
 
 const PaymentDetails={
   
-  Discount:121,
+  Discount:0,
 }
+
 
 
 
@@ -137,9 +147,9 @@ const PaymentDetails={
 
               {posts.map((post)=>
     (
-      <Box  mb="10px">
+      <Box  mb="10px" key={post.title}>
       <Flex >
-                <Box >
+                <Box mr="12px" >
                   <Image  w='50px'
                     src={post.img1}
                     alt="Product Img"
@@ -148,23 +158,25 @@ const PaymentDetails={
 
                 <Box  mr='40px'>
                   
-                  <Text fontSize='16px' mb='30px'>{post.title}</Text>
-                    <Text fontSize='12px' w={{ base: '100%', md: '100%', lg: '50%' }} lineHeight='30px'>
+                  <Text fontSize='16px' mb='20px'>{post.title}</Text>
+                    <Text fontSize='12px' w={{ base: '100%', md: '100%', lg: '70%' }} lineHeight='30px'>
                     {post.manufacturer}
                     </Text>
                 </Box>
 
                 
               
-
-              <Box  ml="auto" >
-                    Price
-                  <Text fontSize='16px' color='#ef4281' mb='30px'>{post.actual_price}</Text>
-                <Text fontSize='12px' fontWeight='bold'>Qty:{ProductData.Qty}</Text>
+              <Box ml="auto" w="90px" >
+              <Box   ml="0px" >
+                  <Text fontSize='14px' color='#ef4281' >Rs.{post.actual_price}</Text>
+                  {post.crossed_price && <Text mb='15px' color='#151B3999' fontWeight={'400'} textDecoration={'line-through'} fontSize={'12px'}>Rs.{post.crossed_price.toFixed(2)}</Text>}
+                <Text fontSize={'12px'} color='#151B3999'>QTY: {post.quantity ? post.quantity : 1}</Text>
+              </Box>
               </Box>
               </Flex>
               <hr/>
            </Box>
+           
     )
     )}
 
@@ -180,10 +192,21 @@ const PaymentDetails={
               </Flex>
 
               <Box >
-                <Text color='#151b39' mb='10px' fontSize='16px' fontWeight='bold'>{DELIVERYADDRESS.Name}</Text>
+                <Text color='#151b39' mb='10px' fontSize='16px' fontWeight='bold'>{DELIVERYADDRESS.FirstName +" "+DELIVERYADDRESS.LastName}</Text>
+                    <Text lineHeight='40px' w={{ base: '100%', md: '100%', lg: '30%' }} fontSize='14px'>
+                    {DELIVERYADDRESS.Address}
+                    
+                    </Text>
+
                     <Text lineHeight='40px' w={{ base: '100%', md: '100%', lg: '30%' }} fontSize='14px'>
                     
-                    {DELIVERYADDRESS.Address}
+                    {DELIVERYADDRESS.City+"   "+DELIVERYADDRESS.State+"   "+DELIVERYADDRESS.PinCode+" "}
+                    
+                    </Text>
+                    <Text lineHeight='40px' w={{ base: '100%', md: '100%', lg: '30%' }} fontSize='14px'>
+                    
+                    {"+91"+DELIVERYADDRESS.Phonenumber+"   "}
+                    
                     </Text>
               </Box>
             </Box>
