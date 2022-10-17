@@ -5,50 +5,15 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
 import { AppContext } from '../../context/AppContext';
 import { removeCartRedux, setCartProduct } from '../../Redux/action';
-import DataContext from '../Context/DataContext';
+import ErrorPage from '../ErrorPage';
 
 export const Cart = () => {
-    const [cartData, setCartData] = useState([0]);
     const [saveForLaterData, setSaveForLaterData] = useState([]);
-    const [loading, setLoading] = useState(false);
     const [showHidden, setShowHidden] = useState('show')
-    const [error, setError] = useState(false);
-    const [promoCode, setPromoCode] = useState('');
-    const [validPromoCode, setValidPromoCode] = useState(true);
     const promeRef = useRef(null);
     const date = Date(Date.now());
     const dispatch = useDispatch();
-    const {totalMRP, setTotalMRP, discount, setDiscount, promoCodeDiscount, setPromoCodeDiscount} = useContext(AppContext);
-    const getData = () => {
-        setLoading(true);
-        fetch('https://netmedsdata.onrender.com/cart')
-        .then((res) => res.json())
-        .then((res) => {
-            setLoading(false);
-            setTotalMRP(0);
-            setDiscount(0);
-            res.map(el => {
-                if(el.quantity && el.crossed_price) {
-                    setTotalMRP((prev) => prev+ (Number(el.crossed_price)*Number(el.quantity)))
-                    setDiscount((prev) => prev+ ((Number(el.crossed_price)-Number(el.actual_price))*Number(el.quantity)))
-                }
-                else if(el.quantity && el.actual_price) {
-                    setTotalMRP((prev) => prev+ (Number(el.actual_price)*Number(el.quantity)))
-                }
-                else if(el.crossed_price) {
-                    setTotalMRP((prev) => prev+ (Number(el.crossed_price)))
-                    setDiscount((prev) => prev+ (Number(el.crossed_price)-Number(el.actual_price)))
-                }
-                else {
-                    setTotalMRP((prev) => prev+ (Number(el.actual_price)))
-                }
-            })
-            setCartData(res);
-        }).catch((err) => {
-            setLoading(false);
-            setError(true);
-        })
-    }
+    const { setPromoCode, validPromoCode, ApplyPromoCode, cartData, loading, setLoading, error, setError, getData, totalMRP, discount, promoCodeDiscount } = useContext(AppContext);
     const getSaveData = () => {
         setLoading(true);
         fetch('https://netmedsdata.onrender.com/saveForlater')
@@ -159,14 +124,17 @@ export const Cart = () => {
             setShowHidden('hidden')
         }
     }
-    const ApplyPromoCode = () => {
-        if(promoCode==='Hurray!') {
-            setPromoCodeDiscount(((totalMRP-discount)*20)/100)
-            setValidPromoCode(true);
-        }
-        else {
-            setValidPromoCode(false);
-        }
+    // const ApplyPromoCode = () => {
+    //     if(promoCode==='Hurray!') {
+    //         setPromoCodeDiscount(((totalMRP-discount)*20)/100)
+    //         setValidPromoCode(true);
+    //     }
+    //     else {
+    //         setValidPromoCode(false);
+    //     }
+    // }
+    if(error) {
+        return <ErrorPage></ErrorPage>
     }
     return (
     <Box position={'relative'} bg='#F6F6F7'>
