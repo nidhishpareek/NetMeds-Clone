@@ -71,7 +71,7 @@ const Filtertype = ({ name }) => {
                 {
                     arr1.map((el) => {
                         if (name === 'Manufacturers')
-                            return <Checkbox pl="10px" key={uuid()} pb="8px" fontSize="13px" value={el} onChange={(e) => { e.target.checked ? handleclick(e.target.value) : handleclick('') }}>
+                            return <Checkbox pl="10px" key={uuid()} pb="8px" fontSize="13px" value={el} onChange={(e) => { e.target.checked ? handleManufacturer(e.target.value) : handleManufacturer('') }}>
                                 {/* // return <Checkbox pl="10px" key={uuid()} pb="8px" fontSize="13px" value={el} onChange={(e) => { e.target.checked ? handleclick(e.target.value) : handleclick('') }}> */}
                                 <Text fontSize={"13px"}>{el}</Text>
                             </Checkbox>
