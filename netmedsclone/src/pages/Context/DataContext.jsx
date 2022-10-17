@@ -11,25 +11,27 @@ const updatedUrl = (api, sort, order, subcategory, sortCategory, manufacturer, s
         `${api}&_sort=${sort}&_order=${order}&category=${sortCategory}&sub_category=${subcategory}` :
         sortCategory && subcategory && manufacturer ?
             `${api}&category=${sortCategory}&sub_category=${subcategory}&manufacturer=${manufacturer}` :
-            sortCategory && subcategory ?
-                `${api}&category=${sortCategory}&sub_category=${subcategory}` :
-                sort && subcategory ?
-                    `${api}&_sort=${sort}&_order=${order}&sub_category=${subcategory}` :
-                    sort && sliderVal ?
-                        `${api}&_sort=${sort}&_order=${order}&actual_price_gte=${sliderVal[0]}&actual_price_lte=${sliderVal[1]}` :
-                        sort ?
-                            `${api}&_sort=${sort}&_order=${order}` :
-                            subcategory && sliderVal ?
-                                `${api}&sub_category=${subcategory}&actual_price_gte=${sliderVal[0]}&actual_price_lte=${sliderVal[1]}` :
-                                subcategory ?
-                                    `${api}&sub_category=${subcategory}` :
-                                    sortCategory ?
-                                        `${api}&category=${sortCategory}` :
-                                        manufacturer ?
-                                            `${api}&manufacturer=${manufacturer}` :
-                                            sliderVal ?
-                                                `${api}&actual_price_gte=${sliderVal[0]}&actual_price_lte=${sliderVal[1]}` :
-                                                api
+            sort && sliderVal && subcategory ?
+                `${api}&_sort=${sort}&_order=${order}&sub_category=${subcategory}&actual_price_gte=${sliderVal[0]}&actual_price_lte=${sliderVal[1]}` :
+                sortCategory && subcategory ?
+                    `${api}&category=${sortCategory}&sub_category=${subcategory}` :
+                    sort && subcategory ?
+                        `${api}&_sort=${sort}&_order=${order}&sub_category=${subcategory}` :
+                        sort && sliderVal ?
+                            `${api}&_sort=${sort}&_order=${order}&actual_price_gte=${sliderVal[0]}&actual_price_lte=${sliderVal[1]}` :
+                            sort ?
+                                `${api}&_sort=${sort}&_order=${order}` :
+                                subcategory && sliderVal ?
+                                    `${api}&sub_category=${subcategory}&actual_price_gte=${sliderVal[0]}&actual_price_lte=${sliderVal[1]}` :
+                                    subcategory ?
+                                        `${api}&sub_category=${subcategory}` :
+                                        sortCategory ?
+                                            `${api}&category=${sortCategory}` :
+                                            manufacturer ?
+                                                `${api}&manufacturer=${manufacturer}` :
+                                                sliderVal ?
+                                                    `${api}&actual_price_gte=${sliderVal[0]}&actual_price_lte=${sliderVal[1]}` :
+                                                    api
 }
 
 
