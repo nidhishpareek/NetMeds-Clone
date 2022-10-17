@@ -184,7 +184,7 @@ export const Cart = () => {
                                     <Box>
                                         {
                                             saveForLaterData.map(el => (
-                                                <Flex borderBottom='1px solid #dddde0' p='15px' gap='10px'>
+                                                <Flex key={el.id} borderBottom='1px solid #dddde0' p='15px' gap='10px'>
                                                     <Box>
                                                         <Image w='120px' h='100%' src={el.img1}></Image>
                                                     </Box>
@@ -285,7 +285,7 @@ export const Cart = () => {
                                 <Box>
                                     {
                                         saveForLaterData.map(el => (
-                                            <Box display={{base: 'block', lg: 'flex'}} borderBottom='1px solid #dddde0' p='15px' gap='10px'>
+                                            <Box key={el.id} display={{base: 'block', lg: 'flex'}} borderBottom='1px solid #dddde0' p='15px' gap='10px'>
                                                 <Box>
                                                     <Image w='120px' h={{base: '100px', lg: '100%'}} src={el.img1}></Image>
                                                 </Box>
