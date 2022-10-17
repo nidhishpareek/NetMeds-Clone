@@ -56,7 +56,7 @@ const Signin = () => {
           </Box>
           <Box maxW={"468px"}>
 
-            {(mobileAuthenticated || true) ?
+            {(mobileAuthenticated) ?
             <OTPform
               number={mobilenumber ? mobilenumber : 8696861773}
               toggleMobileAuthenticate={toggleMobileAuthenticate}
