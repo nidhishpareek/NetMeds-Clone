@@ -16,7 +16,6 @@ export const Cart = () => {
     const promeRef = useRef(null);
     const date = Date(Date.now());
     const {totalMRP, setTotalMRP, discount, setDiscount, promoCodeDiscount, setPromoCodeDiscount} = useContext(AppContext);
-    console.log(totalMRP, 'value')
     const getData = () => {
         setLoading(true);
         fetch('https://netmedsdata.onrender.com/cart')
@@ -132,6 +131,9 @@ export const Cart = () => {
         gotToProceed('/payment')
     }
     const handleAddProducts = () => {
+        gotToProceed('/')
+    }
+    const handleAddMore =() => {
         gotToProceed('/')
     }
     const handlePromo = (val) => {
@@ -275,8 +277,8 @@ export const Cart = () => {
                                 </Box>
                                 <Flex mt='15px' justifyContent={'space-between'}>
                                     <Text fontSize={'13px'} color='#24aeb1' fontWeight={'600'} letterSpacing='1px'>ADD MORE ITEMS</Text>
-                                <AddIcon color="#24aeb1"/>
-                            </Flex>
+                                    <AddIcon cursor={'pointer'} onClick={handleAddMore} color="#24aeb1"/>
+                                </Flex>
                             </Box>
                         </Box>
                         <Box m='20px 0' p='15px' bg='#fff' borderRadius={'7px'}>
