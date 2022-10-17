@@ -142,13 +142,13 @@ export function LimitedTimeDeals() {
                                     limitedTimeData.map(el => (
                                         <Box w={{base: '200px', md: '18.2vw'}} key={el.id} p=' 30px 15px 15px 15px' boxShadow='rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px' borderRadius={'10px'} bg='#fff'>
                                             <Center><Image w='150px' h={{base: '100px', md: '150px'}} src={el.img1}></Image></Center>
-                                            <Text mt='30px'fontWeight={'600'} h='50px' noOfLines={[1,2]} textOverflow={'ellipsis'}>{el.title}</Text>
+                                            <Text mt='30px'fontWeight={'600'} h='60px' noOfLines={[1,2]} textOverflow={'ellipsis'}>{el.title}</Text>
                                             <Flex mt='8px' alignItems={'flex-end'}>
                                                 <Text fontWeight={'600'} mr='5px'>₹ {parseFloat(el.actual_price).toFixed(2)}</Text>
                                                 <Text color='gray' fontWeight={'600'} textDecoration={'line-through'} fontSize={'10px'}>₹ {parseFloat(el.crossed_price).toFixed(2)}</Text>
                                             </Flex>
                                             <Text m='5px 0' color='#60a723' fontSize='15px' fontWeight={'500'}>UPTO 25% off</Text>
-                                            <Center><Button onClick={() => handleAdd(el)} h='35px' borderRadius={'3px'} bg='#24aeb1' color='#fff' _hover={'none'} fontSize='14px' w='100%'>ADD TO CART</Button></Center>
+                                            <Center><Button onClick={() => handleAdd(el)} h='35px' borderRadius={'3px'} bg='#24aeb1' color='#fff' _hover={{bg:'#24aeb1'}} fontSize='14px' w='100%'>ADD TO CART</Button></Center>
                                         </Box>
                                     ))
                                 }
