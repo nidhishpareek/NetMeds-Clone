@@ -1,4 +1,4 @@
-import { Grid, GridItem } from "@chakra-ui/react";
+import { Grid, GridItem, Spinner } from "@chakra-ui/react";
 import {SlideAddress} from "./rSlideAddressPage"
 import { OrderStatus } from "./orderStatus";
 import { SimpleGrid, Box, Text, Image, Flex, Input,Button,Icon ,Select,Checkbox} from "@chakra-ui/react";
@@ -12,7 +12,7 @@ export const PymentDetails=()=>{
 
 const{Change,setChange}=React.useState(false)
 
-const {totalMRP,discount,promoCodeDiscount}= useContext(AppContext);
+const {totalMRP,discount,promoCodeDiscount,getData,cartData,loading}= useContext(AppContext);
 
     const PayButton=(el)=>{
         console.log(Change)
@@ -46,10 +46,13 @@ const {totalMRP,discount,promoCodeDiscount}= useContext(AppContext);
 
     return (
         <Box>
+          {
+                    loading && <Box zIndex={'2'} opacity='0.8' display={'grid'} position='fixed' bottom='0px' placeContent='center' w='100vw' h='110vh' bg='black'><Spinner color='#fff' size='xl' /></Box>
+                }
     <OrderStatus/>
     <Box w={{ base: '100%', md: '100%', lg: '70%' }} m="auto" mt='30px' >
     
-      <Flex   justifyContent='space-between' wrap='wrap' >
+      <Box   justifyContent='space-between' wrap='wrap' display={{base:"block", lg:"flex"}} >
         
 
         <SimpleGrid columns={1}  w={{  md: '70%'}} >
@@ -218,7 +221,7 @@ const {totalMRP,discount,promoCodeDiscount}= useContext(AppContext);
 
 
       
-        <Box   height='auto' padding='10px' id='boxshadow2'  w={{ base: '100%', md: 'auto', lg: '30%' }}>
+        <Box   height='auto' padding='10px' id='boxshadow2'   w={{base:"100%",lg:"30%"}}>
             <Text color='rgba(21,27,57,.6)'fontSize='12px'>PAYMENT DETAILS</Text>
             <Box   lineHeight='40px'  >
             <Flex justifyContent="space-between">
@@ -267,7 +270,7 @@ const {totalMRP,discount,promoCodeDiscount}= useContext(AppContext);
 
 
 
-      </Flex>
+      </Box>
     </Box>
 
     </Box>

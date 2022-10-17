@@ -146,9 +146,9 @@ const PaymentDetails={
                     loading && <Box zIndex={'2'} opacity='0.8' display={'grid'} position='fixed' bottom='0px' placeContent='center' w='100vw' h='110vh' bg='black'><Spinner color='#fff' size='xl' /></Box>
                 }
     <OrderStatus/>
-    <Box w={{ base: '100%', md: '100%', lg: '70%' }} m="auto" mt='30px' border="1px solid blue">
+    <Box w={{ base: '100%', md: '100%', lg: '70%' }} m="auto" mt='30px' >
     
-      <Box   justifyContent='space-between' wrap='wrap' border="1px solid red" display={{base:"block", lg:"flex"}} >
+      <Box   justifyContent='space-between' wrap='wrap'  display={{base:"block", lg:"flex"}} >
         
 
         <SimpleGrid columns={1} w={{  md: '100%'}} >
@@ -244,7 +244,7 @@ const PaymentDetails={
 
 
       
-        <Box   height='auto' padding='10px' id='boxshadow2' w={{base:"100%",lg:"30%"}} border="1px solid blue">
+        <Box   height='auto' padding='10px' id='boxshadow2' w={{base:"100%",lg:"30%"}} >
             <Text color='rgba(21,27,57,.6)'fontSize='12px'>PAYMENT DETAILS</Text>
             <Box   lineHeight='40px'  >
             <Flex justifyContent="space-between">
