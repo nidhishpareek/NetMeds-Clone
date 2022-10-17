@@ -1,11 +1,10 @@
-import {  ERRORSTATE, FILTERPRODUCT, FILTERUNCHECKPRODUCT, GETPRODUCT, LOADINGSTATE, SETCART } from "./action"
+import {  ERRORSTATE, LOADINGSTATE, SETCART, TOGGLEVIEW,SETCARTBYREDUCER, REMOVECART } from "./action"
 
 const initState={
-    loading:false,
+    loading:false, 
     error:false,
-    allProduct:[],
     cart:[],
-    filteredProduct:[]
+    mobileView:false,
 }
 function reducer(state=initState,{type,payload}){
     switch(type){
@@ -16,7 +15,7 @@ function reducer(state=initState,{type,payload}){
                 cart:[]
             }
         }
-        case ERRORSTATE:{
+        case ERRORSTATE:{ 
             return {
                 loading:false,
                 error:true,
@@ -29,6 +28,7 @@ function reducer(state=initState,{type,payload}){
             }
         }
         case SETCART:{
+            // console.log('setcart called', [...state.cart, payload])
             return {
                 loading:false,
                 error:false,
@@ -47,6 +47,29 @@ function reducer(state=initState,{type,payload}){
                 ...state,filteredProduct:[...state.filteredProduct,...payload]
             }
         }
+        case SETCARTBYREDUCER:{
+            console.log('setcart called', [...state.cart, ...payload])
+            return {
+                loading:false,
+                error:false,
+                cart:[...state.cart,...payload]
+            }
+        }
+        case TOGGLEVIEW:{
+            console.log('view Changed')
+            return{...state, mobileView: payload}
+        }
+        case REMOVECART:{
+            let updated = state.cart.filter(el => (
+                el.id !== payload
+            ))
+            return{
+                loading:true,
+                error:false,
+                cart: updated
+            }
+        }
+        
         default:{
             return state;
         }

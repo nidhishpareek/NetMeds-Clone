@@ -1,18 +1,12 @@
 //Line 38 for changing the cart badge number.
 
 /////////////////////////////////////////////
-import {
-  Avatar,
-  AvatarBadge,
-  Box,
-  Flex,
-  Text,
-} from "@chakra-ui/react";
+import { Avatar, AvatarBadge, Box, Flex, Text } from "@chakra-ui/react";
 
 import { HiShoppingCart } from "react-icons/hi";
 
-const CartButton = () => {
-  const count = 2;
+const CartButton = ({count}) => {  
+
   return (
     <>
       <Box
@@ -26,15 +20,15 @@ const CartButton = () => {
             icon={<HiShoppingCart />}
             bg='"rgb(50,174,177)"'
             boxSize={"30px"}
-            position='relative'
+            position="relative"
           >
             <AvatarBadge
               boxSize="15px"
               bg="red.500"
               border={"0px"}
               fontSize="10px"
-              position={'absolute'}
-              top='0'
+              position={"absolute"}
+              top="0"
             >
               {count}
             </AvatarBadge>

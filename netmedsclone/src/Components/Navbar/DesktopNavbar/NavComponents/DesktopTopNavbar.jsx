@@ -30,10 +30,10 @@ const TopNavbar = () => {
           <InputComponent />
           <UploadButton />
           <Link to={"/Cart"}>
-            <CartNavbar />{" "}
+            <CartNavbar />
           </Link>
 
-          <UserButton />
+         <UserButton />
         </Flex>
       </Container>
     </Box>

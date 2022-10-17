@@ -34,7 +34,7 @@ export default function NewOnNetmeds() {
     <Box w='95vw' m='auto' mb='30px'>
     <Box display={'flex'} alignItems='center' justifyContent='space-between' mb='30px'>
         <Box>
-        <Heading as='h2' fontSize='25px' fontWeight='500'>Trending Today</Heading>
+        <Heading as='h2' fontSize='25px' fontWeight='500'>New on Netmeds</Heading>
         </Box>
     </Box>
     <Box overflow={{base: 'scroll', md: 'hidden'}} >
@@ -51,8 +51,8 @@ export default function NewOnNetmeds() {
 
 </Box>
 <Box w='99%' left='0.5%' position={'absolute'} display={{base: 'none', md: 'flex'}} justifyContent={'space-between'} top='55%'>
-        <Button disabled={count===0} onClick={() => handleClick('backward')} borderRadius={'50%'} bg='#fff' w='40px' h='40px'><span style={{fontSize:'30px'}} class="material-symbols-outlined">chevron_left</span></Button>
-        <Button disabled={count===newOnNetmeds.length-3} onClick={() => handleClick('forward')} borderRadius={'50%'} bg='#fff' w='40px' h='40px'><span style={{fontSize:'30px'}} class="material-symbols-outlined">chevron_right</span></Button>
+        <Button disabled={count===0} onClick={() => handleClick('backward')} borderRadius={'50%'} bg='#fff' w='40px' h='40px'><span style={{fontSize:'30px'}} className="material-symbols-outlined">chevron_left</span></Button>
+        <Button disabled={count===newOnNetmeds.length-3} onClick={() => handleClick('forward')} borderRadius={'50%'} bg='#fff' w='40px' h='40px'><span style={{fontSize:'30px'}} className="material-symbols-outlined">chevron_right</span></Button>
     </Box>
 </Box>
   )

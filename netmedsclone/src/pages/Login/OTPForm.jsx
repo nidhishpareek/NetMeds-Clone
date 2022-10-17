@@ -75,15 +75,15 @@ const OTPform = ({ number, toggleMobileAuthenticate }) => {
     } else {
       setValidations({ ...init });
     }
-    Authenticate(formEntries);
+    Authenticate(formEntries); 
     console.log(formEntries);
   };
   const Authenticate = (formEntries) => {
     setLoadingSignup(true);
     SigninAuthentication(formEntries)
-      .then(() => {
-        console.log("done");
-        localStorage.setItem("userDetails", JSON.stringify(formEntries));
+      .then((result) => {
+        console.log(result);
+        localStorage.setItem("userDetails", JSON.stringify(result));
         localStorage.setItem("isLoggedIn", true);
         navigate("/");
       })

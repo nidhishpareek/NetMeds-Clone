@@ -64,8 +64,8 @@ export default function() {
 
     </Box>
     <Box w='99%' left='0.5%' position={'absolute'} display={{base: 'none', md: 'flex'}} justifyContent={'space-between'} top='55%'>
-            <Button disabled={count===0} onClick={() => handleClick('backward')} borderRadius={'50%'} bg='#fff' w='40px' h='40px'><span style={{fontSize:'30px'}} class="material-symbols-outlined">chevron_left</span></Button>
-            <Button disabled={count===trending.length-3} onClick={() => handleClick('forward')} borderRadius={'50%'} bg='#fff' w='40px' h='40px'><span style={{fontSize:'30px'}} class="material-symbols-outlined">chevron_right</span></Button>
+            <Button disabled={count===0} onClick={() => handleClick('backward')} borderRadius={'50%'} bg='#fff' w='40px' h='40px'><span style={{fontSize:'30px'}} className="material-symbols-outlined">chevron_left</span></Button>
+            <Button disabled={count===trending.length-3} onClick={() => handleClick('forward')} borderRadius={'50%'} bg='#fff' w='40px' h='40px'><span style={{fontSize:'30px'}} className="material-symbols-outlined">chevron_right</span></Button>
         </Box>
     </Box>
   )

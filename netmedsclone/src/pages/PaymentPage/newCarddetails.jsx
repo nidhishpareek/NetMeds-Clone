@@ -7,7 +7,7 @@ import { useDisclosure,Button,
     InputGroup,InputLeftAddon, Flex,Text,Alert,
     AlertIcon,
     AlertTitle,
-    AlertDescription,CloseButton} from '@chakra-ui/react'
+    AlertDescription,CloseButton,FormControl} from '@chakra-ui/react'
  
  import { PhoneIcon, AddIcon, WarningIcon } from '@chakra-ui/icons'
  import React from "react"
@@ -18,6 +18,9 @@ import { useDisclosure,Button,
        const firstField = React.useRef()
      
        const [message, setMessage] = React.useState('');
+       const [cvvdata, setcvvdata] = React.useState('');
+       const [yydata, setyydata] = React.useState('');
+       const [mmdata, setmmdata] = React.useState('');
        const isAnonymous = false;
         
         
@@ -25,7 +28,7 @@ import { useDisclosure,Button,
       
     
        return (
-         <>
+        <FormControl isRequired>
     
            <Button w="40%" colorScheme='teal' onClick={onOpen}>
             Add New Card
@@ -48,7 +51,7 @@ import { useDisclosure,Button,
                    <Box>
                      <FormLabel htmlFor='username'>Card Number</FormLabel>
                      <Input
-                       type="text"
+                       type="number"
                        id="message"
                        name="message"
                        value={message}
@@ -59,21 +62,34 @@ import { useDisclosure,Button,
  
  
                 l<Flex>
-                <Input htmlSize={5} width='auto' placeholder='MM' required/>
-                <Input htmlSize={5} width='auto' placeholder='YY' required/>
+                <Input type="number" htmlSize={5} width='auto' placeholder='MM' required
+                value={mmdata}
                 
-                <Input htmlSize={5} width='auto' placeholder='CVV' required/>
+                onChange={event => setmmdata(event.target.value)}
+                />
+                <Input type="number" htmlSize={5} width='auto' placeholder='YY' required
+                value={yydata}
+                
+                onChange={event => setyydata(event.target.value)}
+                />
+                
+                <Input type="number" htmlSize={5} width='auto' placeholder='CVV' required 
+                value={cvvdata}
+                
+                onChange={event => setcvvdata(event.target.value)}
+                />
                 </Flex>
  
  
  
  
                    <Box>
-                     <FormLabel htmlFor='username'></FormLabel>
+                     <FormLabel htmlFor='username'>Name On Card</FormLabel>
                      <Input
                        ref={firstField}
                        id='FirstName'
                        placeholder='Name on Card'
+                       type="text"
                      />
                    </Box>
 
@@ -91,18 +107,29 @@ import { useDisclosure,Button,
                <DrawerFooter borderTopWidth='1px'>
                  <Button colorScheme='green' width='100%' disabled={isAnonymous ? true : false} onClick={()=>{
                     
-                    if(message.length==16){
-                        alert(" Payment Sucsses ")
+                    if(message.length!=16 ){
+                        alert(" Wrong Card Number  You Enter !  "+message.length)
+                    }
+                    else if(mmdata.length!=2){
+                      alert(" Wrong Month Details Must Be 2 digit ! ")
+                    }
+                    else if(yydata.length!=2){
+                      
+                      alert(" Wrong Year Details Must Be Year Last 2 digit ! ")
+                    }
+                    else if(cvvdata.length!=3){
+                      
+                      alert(" Wrong CVV Details Check CVV on Backside Of Your Card ! ")
                     }
                     else{
-                        alert("Wrong Details")
+                        alert(" Payment successful :)")
                     }
                 }}
                     >Pay</Button>
                </DrawerFooter>
              </DrawerContent>
            </Drawer>
-         </>
+         </FormControl>
        )
      }
    
