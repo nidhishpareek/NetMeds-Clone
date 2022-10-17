@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 const DesktopNavbar = () => {
   const [location, setlocation] = useState();
   let currlocation = useLocation();
-  console.log(currlocation.pathname);
   useEffect(() => {
     setlocation(currlocation);
     currlocation.pathname === "/"

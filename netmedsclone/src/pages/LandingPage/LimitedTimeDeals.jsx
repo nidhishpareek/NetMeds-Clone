@@ -39,7 +39,7 @@ export function LimitedTimeDeals() {
         }
     },[seconds])
     const getData = () => {
-        console.log('here')
+        // console.log('here')
         fetch('https://netmedsdata.onrender.com/home?_page=1&_limit=10')
         .then((res) => res.json())
         .then((res) => {

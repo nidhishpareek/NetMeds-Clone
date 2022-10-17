@@ -1,7 +1,7 @@
 import "./App.css";
 import MainNavbar from "./Components/Navbar/MainNavbar";
 import { AllRoutes } from "./Components/AllRoutes/AllRoutes";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { useEffect } from "react";
 import { toggleView } from "./Redux/action";
@@ -16,15 +16,11 @@ function App() {
   useEffect(() => {
     function handleWindowResize() {
       let screenwidth = getWindowSize().innerWidth;
-      // console.log(screenwidth);
       if (screenwidth < 1080 && !isMobileView) {
         setCurrentview(true);
-        console.log("set true");
       } else if (screenwidth > 1080 && !isMobileView ) {
         setCurrentview(false);
-        console.log("set false");
       }
-      console.log(screenwidth > 1080 , isMobileView);
     }
     window.addEventListener("resize", handleWindowResize);
 
@@ -34,7 +30,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log("using dispatch");
     dispatch(toggleView(isMobileView));
   }, [isMobileView]);
 

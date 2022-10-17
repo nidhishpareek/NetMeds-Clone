@@ -10,11 +10,7 @@ const UserButton = () => {
   const userDetails = JSON.parse(localStorage.getItem("userDetails")) || [];
   const name = userDetails.firstName;
   const handleClickOnUserButton = () => {
-    if (!isLoggedIn) {
-      console.log("navigating");
-      navigate("/Login");
-
-    } else {      console.log("removing");
+    if (isLoggedIn) {
       localStorage.removeItem("isLoggedIn");
       localStorage.removeItem("userDetails");
     }
@@ -26,6 +22,7 @@ const UserButton = () => {
       size="xs"
     >
       <Link
+        to={"/Login"}
         _hover={{ textDecoration: "none" }}
         onClick={handleClickOnUserButton}
       >
