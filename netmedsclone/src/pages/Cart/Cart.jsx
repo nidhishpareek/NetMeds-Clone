@@ -128,7 +128,13 @@ export const Cart = () => {
     }
     const gotToProceed = useNavigate();
     const handleProcced = () => {
-        gotToProceed('/payment')
+        let auth = localStorage.getItem('isLoggedIn');
+        if(auth) {
+            gotToProceed('/payment')
+        }
+        else {
+            gotToProceed('/Login')
+        }
     }
     const handleAddProducts = () => {
         gotToProceed('/')
