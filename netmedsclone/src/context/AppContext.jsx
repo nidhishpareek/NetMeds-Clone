@@ -1,7 +1,4 @@
-import { Children, createContext, useState } from "react";
-import { Cart } from "../pages/Cart/Cart";
-import { OrderReview } from "../pages/PaymentPage/orderReview";
-import { PymentDetails } from "../pages/PaymentPage/paymentDetails";
+import { createContext, useState } from "react";
 
 export const AppContext = createContext();
 
