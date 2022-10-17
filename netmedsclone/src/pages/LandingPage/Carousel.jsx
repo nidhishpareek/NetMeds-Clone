@@ -68,6 +68,12 @@ export const Carousel = () => {
             <Box overflow={'hidden'}>
                 <Box ref={ref} w='400%' display={'grid'} gridTemplateColumns='repeat(4,1fr)' transition='0.3s'>
                 {
+                    window.innerWidth<599 ? 
+                    images.map(el => (
+                        <Box key={el.id} borderRadius={{base: '10px', md: '0'}} w='97vw' h={{base: '200px', md: '250px', lg: '300px',}}>
+                            <Image borderRadius={{base: '10px', md: '0'}} w='100%' h='100%' src={process.env.PUBLIC_URL + `/Images/netmedSCC${el.id}.jpg`} alt="" />
+                        </Box>
+                    )) :
                     images.map(el => (
                         <Box key={el.id} borderRadius={{base: '10px', md: '0'}} w='97vw' h={{base: '200px', md: '250px', lg: '300px',}}>
                             <Image borderRadius={{base: '10px', md: '0'}} w='100%' h='100%' src={process.env.PUBLIC_URL + `/Images/netmedC${el.id}.jpg`} alt="" />
