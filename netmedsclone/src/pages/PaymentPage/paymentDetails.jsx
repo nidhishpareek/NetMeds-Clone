@@ -45,7 +45,7 @@ const {totalMRP,discount,promoCodeDiscount,getData,cartData,loading}= useContext
 
 
     return (
-        <Box>
+        <Box mt="20px">
           {
                     loading && <Box zIndex={'2'} opacity='0.8' display={'grid'} position='fixed' bottom='0px' placeContent='center' w='100vw' h='110vh' bg='black'><Spinner color='#fff' size='xl' /></Box>
                 }
@@ -55,7 +55,7 @@ const {totalMRP,discount,promoCodeDiscount,getData,cartData,loading}= useContext
       <Box   justifyContent='space-between' wrap='wrap' display={{base:"block", lg:"flex"}} >
         
 
-        <SimpleGrid columns={1}  w={{  md: '70%'}} >
+        <SimpleGrid columns={1}  w={{  md: '70%'}}  mr="20px" >
           <Box   >
             <Box  padding='20px' mb='50px' id='boxshadow' >
             <Flex align='center'>
@@ -221,7 +221,7 @@ const {totalMRP,discount,promoCodeDiscount,getData,cartData,loading}= useContext
 
 
       
-        <Box   height='auto' padding='10px' id='boxshadow2'   w={{base:"100%",lg:"30%"}}>
+        <Box   height='auto' padding='10px' id='boxshadow2'   w={{base:"100%",lg:"30%"}} >
             <Text color='rgba(21,27,57,.6)'fontSize='12px'>PAYMENT DETAILS</Text>
             <Box   lineHeight='40px'  >
             <Flex justifyContent="space-between">
