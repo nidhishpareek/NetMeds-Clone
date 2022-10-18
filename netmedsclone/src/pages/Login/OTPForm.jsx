@@ -37,6 +37,7 @@ const OTPform = ({ number, toggleMobileAuthenticate }) => {
   const generateOTPfunction = () => {
     const newotp = Math.floor(Math.random() * 10 ** 6);
     setGeneratedOTP(newotp);
+    if (newotp<99999)generateOTPfunction(); 
     console.log(newotp);
   };
   const goodEmailCheck = (entryEmail) => {
@@ -75,7 +76,7 @@ const OTPform = ({ number, toggleMobileAuthenticate }) => {
     } else {
       setValidations({ ...init });
     }
-    Authenticate(formEntries); 
+    Authenticate(formEntries);
     console.log(formEntries);
   };
   const Authenticate = (formEntries) => {
