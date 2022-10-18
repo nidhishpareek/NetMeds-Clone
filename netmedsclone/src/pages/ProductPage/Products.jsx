@@ -29,7 +29,7 @@ function Products() {
             < Box w="97%" margin="20px auto" display="flex" gap="10px">
                 <Box w={{ base: "0%", lg: "18%" }} display={"flex"} flexDir="column" gap="40px" >
                     <CategoriesComp />
-                    <Button w="100%" bgColor={"#24aeb1"} color="white" textTransform={"uppercase"} _hover={{ bgColor: "#24aeb1", color: "white" }} onClick={() => handleReset(1, "", "", "", [0, 45000])}>Reset Filter</Button>
+                    <Button w="100%" bgColor={"#24aeb1"} color="white" textTransform={"uppercase"} _hover={{ bgColor: "#24aeb1", color: "white" }} onClick={() => handleReset(1, "", "", "", [0, 45000])} display={{base:'none',lg:'block'}}>Reset Filter</Button>
                     <Filters />
                 </Box>
                 <Box w={{ base: "100%", lg: "80%" }} m={{ base: "5px 0", lg: "0 10px 0 10px" }}>

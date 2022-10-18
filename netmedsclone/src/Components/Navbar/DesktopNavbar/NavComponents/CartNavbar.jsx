@@ -77,7 +77,7 @@ const CartNavbar = () => {
         >
           <Box>
             <Text fontSize={"16px"} color='#ef4281'>
-              Rs. {cart.cart_actual_price ? cart.cart_actual_price : totalMRP}
+              Rs. {cart.cart_actual_price ? cart.cart_actual_price : totalMRP.toFixed(2)}
             </Text>
             <Text fontSize={"12px"}>
               {" "}

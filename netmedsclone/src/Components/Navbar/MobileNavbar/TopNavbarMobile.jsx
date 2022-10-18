@@ -6,23 +6,23 @@ import { useSelector } from "react-redux";
 const MobileNavbar = () => {
   const cart = useSelector((state) => state.cart);
   return (
-    <Box>
+    <Box >
       <Flex
         position={"fixed"}
         width='100%'
         top="0px"
-        zIndex={"1"}
+        zIndex={"10"}
         background="white"
         paddingInline={"16px"}
         height="50px"
         alignItems={"center"}
         justifyContent="space-between"
       >
-        <Image
+        <Link to='/'><Image
           src="https://www.netmeds.com/assets/gloryweb/images/netmeds-footer-logo.svg"
           alt="netmedslogomobile"
           width={"110px"}
-        ></Image>
+        ></Image></Link>
         <Flex>
           <Image src="https://m.netmeds.com/assets/version1665682643/glorymsite/images/icons/offer_icon.svg"></Image>
           <Link to={"/cart"}>
