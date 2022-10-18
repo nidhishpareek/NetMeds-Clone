@@ -14,15 +14,13 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
-import { EmptyCart, removeLogin } from "../../../../Redux/action";
+import { useSelector } from "react-redux";
 import { useContext } from "react";
 import { AppContext } from "../../../../context/AppContext";
 
 const UserButton = () => {
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const userDetails = useSelector((state) => state.userDetails)|| JSON.parse(localStorage.getItem('userDetails'));
-  const dispatch = useDispatch();
   const {deleteAll} = useContext(AppContext)
   const name = userDetails.firstName;
   const handleClickOnUserButton = () => {
@@ -30,9 +28,7 @@ const UserButton = () => {
       console.log('here')
       localStorage.removeItem("isLoggedIn");
       localStorage.removeItem("userDetails");
-      
       deleteAll();
-      
     }
   };
   const { isOpen, onOpen, onClose } = useDisclosure();
