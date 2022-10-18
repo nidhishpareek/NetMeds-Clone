@@ -36,7 +36,7 @@ const CategoriesComp = () => {
                                 </AccordionButton>
                             </h2>
                             {el.sub_cat.map((subs) => {
-                                return <AccordionPanel key={uuid()} p="2px 26px" textAlign="left" color="#6f7284" _hover={{ color: "#151b39", cursor: "pointer" }} onClick={(e) => handleSubCategory(e.target.innerHTML)} >
+                                return <AccordionPanel key={uuid()} p="2px 26px" textAlign="left" color="#6f7284" _hover={{ color: "#151b39", cursor: "pointer" }} onClick={(e) => handleSubCategory(e.target.innerHTML, 1, "", "")} >
                                     {subs}
                                 </AccordionPanel>
                             })}

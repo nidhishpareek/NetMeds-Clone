@@ -14,9 +14,10 @@ const Filtertype = ({ name }) => {
         clickVal ? handleManufacturer(val) : handleManufacturer("")
     }
     const handleToggleCategory = (val) => {
+        const manu = prod.filter(item => item.category === val)
         setClickCateg(!clickCateg)
         console.log(clickCateg)
-        clickCateg ? handleCategory(val) : handleCategory("")
+        clickCateg ? handleCategory(val, 1, manu.manufacturer, "") : handleCategory("", 1, manu.manufacturer, "")
     }
 
     const setManu = new Set();
