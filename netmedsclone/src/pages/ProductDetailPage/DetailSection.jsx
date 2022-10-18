@@ -17,7 +17,7 @@ function DetailSection() {
     const discount = Math.round(((crossed_price - actual_price) / crossed_price) * 100)
     const toast = useToast();
     const handleAdd = (item) => {
-        axios.get(Cart_API).then((res) => setCartData(res))
+        axios.get(Cart_API).then((res) => setCartData(res.data))
         console.log(cartData)
         const check = cartData.filter(allItem => allItem.id === item.id)
         if (check.length === 0) {
@@ -44,7 +44,7 @@ function DetailSection() {
     }
 
     return (
-        <Box w="50%" pr="25px">
+        <Box w={{ base: "100%", lg: "50%" }} ml={{ base: "20px" }} pr={{ base: "0", lg: "25px" }}>
             <Text fontSize={"20px"}>{title}</Text>
             <Box mt="10px" mb="10px">
                 {category && <Text as="span" background={"#f6f6f7"} color="#6f7284" fontSize={"12px"} textOverflow="ellipsis" p="3px 8px" mr="5px" borderRadius={"5px"} mt="90px">{category}</Text>}
@@ -85,7 +85,7 @@ function DetailSection() {
             </Box>
             {crossed_price && <Box mt="30px">
                 <Text fontSize={"16px"} color="#6f7284" fontWeight={"700"}>OFFERS APPLICABLE</Text>
-                <Box display={"flex"} mt="10px" background={"#f3f3f3"} p="15px" borderRadius={"10px"} justifyContent="space-between">
+                <Box display={"flex"} mr="40px" mt="10px" background={"#f3f3f3"} p="15px" borderRadius={"10px"} justifyContent="space-between">
                     <Box display="flex" gap="20px">
                         <Image src="https://www.netmeds.com/assets/version1665682643/gloryweb/images/icons/offer_blue_outline.svg" />
                         <Box display="flex" flexDirection={"column"} gap={"5px"}>
