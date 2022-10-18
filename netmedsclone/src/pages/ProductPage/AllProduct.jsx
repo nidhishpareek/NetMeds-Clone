@@ -7,18 +7,18 @@ import ErrorPage from '../ErrorPage';
 import axios from 'axios';
 import { setCartProduct } from '../../Redux/action';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Cart_API } from '../../api';
 const AllProduct = () => {
     const { page, total, loading, sortCategory, prod, handlePage, handlecurrProduct } = useContext(Data);
     console.log(sortCategory, 'sortedone')
-    const cartApi = 'https://netmedsdata.onrender.com/cart'
     const [cart, setCart] = useState([]);
     const dispatch = useDispatch();
     let [search, setSearchParam] = useSearchParams();
     const handleAdd = (item) => {
-        axios.get(cartApi).then((res) => setCart(res.data))
+        axios.get(Cart_API).then((res) => setCart(res.data))
         const check = cart.filter(allItem => allItem.id === item.id)
         if (check.length === 0) {
-            axios.post(cartApi, item)
+            axios.post(Cart_API, item)
                 .then(() => {
                     dispatch(setCartProduct(item))
                     toast({

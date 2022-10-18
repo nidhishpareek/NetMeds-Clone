@@ -6,22 +6,22 @@ import { HiArrowCircleRight } from 'react-icons/hi'
 import { useDispatch, useSelector } from 'react-redux';
 import { setCartProduct } from '../../Redux/action';
 import axios from 'axios';
+import { Cart_API } from '../../api';
 
 function DetailSection() {
     const { currProduct } = useContext(Data);
     const dispatch = useDispatch();
-    const cartApi = 'https://netmedsdata.onrender.com/cart'
     // const cart = useSelector((state) => state.cart);
     const [cartData, setCartData] = useState([])
     const { title, country, actual_price, crossed_price, category, sub_category, manufacturer } = currProduct
     const discount = Math.round(((crossed_price - actual_price) / crossed_price) * 100)
     const toast = useToast();
     const handleAdd = (item) => {
-        axios.get(cartApi).then((res) => setCartData(res))
+        axios.get(Cart_API).then((res) => setCartData(res))
         console.log(cartData)
         const check = cartData.filter(allItem => allItem.id === item.id)
         if (check.length === 0) {
-            axios.post(cartApi, item)
+            axios.post(Cart_API, item)
                 .then(() => {
                     dispatch(setCartProduct(item))
                     toast({

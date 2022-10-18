@@ -3,6 +3,7 @@ import { createContext } from 'react'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import { errorState } from '../../Redux/action'
+import { Product_API } from '../../api'
 export const Data = createContext()
 
 const updatedUrl = (api, sort, order, subcategory, sortCategory, manufacturer, sliderVal) => {
@@ -189,10 +190,10 @@ const DataContext = ({ children }) => {
     const [loading, setLoading] = useState(false);
     const [currProduct, setCurrProduct] = useState({});
     const dispatch = useDispatch();
-    
+
     const getProduct = () => {
         setLoading(true)
-        const api = updatedUrl(`https://netmedsdata.onrender.com/products?_page=${page}&_limit=20`, sort, order, subCategory, sortCategory, manufacturer, sliderVal)
+        const api = updatedUrl(`${Product_API}?_page=${page}&_limit=20`, sort, order, subCategory, sortCategory, manufacturer, sliderVal)
         // console.log(api)
         axios.get(api)
             .then(res => {
@@ -223,9 +224,11 @@ const DataContext = ({ children }) => {
         handleManufacturer(manu)
         handlePriceRange(slid)
     }
-    const handleSubCategory = (val) => {
-        const newVal = val;
-        setSubCategory(newVal)
+    const handleSubCategory = (sub, p, manu, cat) => {
+        handlePage(p)
+        handleCategory(cat)
+        handleManufacturer(manu)
+        setSubCategory(sub)
         console.log("subcategory", subCategory)
     }
     const handleCategory = (val) => {

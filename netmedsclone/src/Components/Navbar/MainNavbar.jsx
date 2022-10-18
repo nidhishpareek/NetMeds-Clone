@@ -4,12 +4,13 @@ import MobileNavbar from "./MobileNavbar/MobileNavbar";
 import { setCartProductRReducer } from "../../Redux/action";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Cart_API } from "../../api";
 const Navbar = () => {
   const mobileView = useSelector((state) => state.mobileView);
   const isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn")) || false;
   const dispatch = useDispatch();
   const MountgetData = () => {
-    fetch("https://netmedsdata.onrender.com/cart")
+    fetch(Cart_API)
       .then((res) => res.json())
       .then((res) => {
         dispatch(setCartProductRReducer(res));
