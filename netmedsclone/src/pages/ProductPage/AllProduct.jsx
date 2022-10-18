@@ -57,7 +57,7 @@ const AllProduct = () => {
 
     const { error } = useSelector((state) => state);
     return loading ? <Box h="100vh" opacity="0.5" w="100wh" pos={"relative"}>
-        <Image pos={"absolute"} top="15%" left="50%" m="100px auto" bgColor={"transparent"} src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.giff" />
+        <Image pos={"absolute"} top="15%" left="40%" m="100px auto" bgColor={"transparent"} src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.giff" />
     </Box> :
         error ? <ErrorPage /> :
             (
