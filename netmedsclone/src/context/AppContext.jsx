@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
 import axios from 'axios'
 import { useDispatch } from "react-redux";
-import { EmptyCart, removeCartRedux } from "../Redux/action";
+import { EMPTYCART, EmptyCart, removeCartRedux } from "../Redux/action";
 import { Cart_API } from "../api";
 export const AppContext = createContext();
 
@@ -46,13 +46,13 @@ export const AppContextProvider = ({ children }) => {
                 setError(true);
             })
     }
-    const deleteAll = () => {
-        console.log('deleteall called')
+    const deleteAll = () => {;
+        dispatch(EmptyCart())
         cartData.map(el => {
-            dispatch(removeCartRedux(el.id))
-            axios.delete(`${Cart_API}/${el.id}`)
-        }).then((res) => {
-
+            console.log('here')
+            fetch(`${Cart_API}/${el.id}`, {
+                method: 'DELETE'
+            })
         })
     }
 

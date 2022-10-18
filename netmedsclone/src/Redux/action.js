@@ -27,7 +27,7 @@ export const setCartProductRReducer = (data) => ({
   payload: data
 });
 export const EmptyCart = () => ({
-  type: SETCARTBYREDUCER,
+  type: EMPTYCART,
 });
 export const removeCartRedux = (data) => ({
   type: REMOVECART,

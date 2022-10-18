@@ -84,9 +84,10 @@ const MobileNoForm = ({ toggleMobileAuthenticate }) => {
             }
           />
           <Input
+            
             paddingBlock={"3px"}
             height="24px"
-            type="tel"
+            type="number"
             placeholder="Enter your mobile number"
             fontSize={"16px"}
             onChange={validatorFunction}

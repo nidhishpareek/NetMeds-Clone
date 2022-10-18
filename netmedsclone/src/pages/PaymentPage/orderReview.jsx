@@ -230,8 +230,8 @@ const PaymentDetails={
 
 
             <Box  padding='10px'mb='60px' id='boxshadow' >
-              <Text color='rgba(21,27,57,.6)' fontSize='12px'  mb='20px'>Coustomer Notes</Text>
-              <textarea name="paragraph_text" cols="30" rows="5" ></textarea>
+              <Text color='rgba(21,27,57,.6)' fontSize='12px'  mb='20px'>Customer Notes</Text>
+              <textarea style={{padding: '5px'}} name="paragraph_text" cols="30" rows="5" ></textarea>
             </Box>
           </Box>
 

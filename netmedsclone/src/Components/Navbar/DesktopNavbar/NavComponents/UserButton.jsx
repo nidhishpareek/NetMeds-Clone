@@ -29,6 +29,7 @@ const UserButton = () => {
       localStorage.removeItem("isLoggedIn");
       localStorage.removeItem("userDetails");
       deleteAll();
+      window.location.reload(false);
     }
   };
   const { isOpen, onOpen, onClose } = useDisclosure();

@@ -17,6 +17,10 @@ import { PhoneIcon, AddIcon, WarningIcon } from '@chakra-ui/icons'
 import React from "react"
 import { useContext } from 'react'
 import { AppContext } from '../../context/AppContext'
+import { useDispatch } from 'react-redux';
+import { EmptyCart, EMPTYCART, removeCartRedux } from '../../Redux/action';
+import axios from 'axios';
+import { Cart_API } from '../../api';
 
 export const NewCarddetails = () => {
 
@@ -29,16 +33,17 @@ export const NewCarddetails = () => {
   const [mmdata, setmmdata] = React.useState('');
   const isAnonymous = false;
   const { deleteAll } = useContext(AppContext);
-
-
+  const dispatch = useDispatch();
+  const {cartData} = useContext(AppContext);
 
   const navigateToDetails = useNavigate();
   const handleNavigate = () => {
     console.log('here')
     navigateToDetails('/');
-    window.location.reload(false);
+    // window.location.reload(false);
+    deleteAll();
   }
-
+  
 
   return (
     <FormControl isRequired>
@@ -143,8 +148,7 @@ export const NewCarddetails = () => {
                   alert(" Payment successful :)")
                   handleNavigate()
                   deleteAll();
-
-
+                  dispatch(EmptyCart());
 
                 }
               }
