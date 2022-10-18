@@ -47,7 +47,6 @@ const AllProduct = () => {
     const toast = useToast()
     const navigate = useNavigate();
     const handleProductDetail = (productDetails) => {
-        console.log(productDetails.id)
         handlecurrProduct(productDetails)
         navigate(`/products/${productDetails.id}`)
     }

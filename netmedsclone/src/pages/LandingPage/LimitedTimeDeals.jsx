@@ -1,12 +1,14 @@
 import { ChevronRightIcon, TimeIcon } from '@chakra-ui/icons'
 import { Box, Button, Center, Flex, Heading, Image, Link, Text, useToast } from '@chakra-ui/react'
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState } from 'react';
 import { useRef } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { setCartProduct } from '../../Redux/action';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { Data } from '../Context/DataContext';
 
 export function LimitedTimeDeals() {
     const [hour, setHour] = useState(22);
@@ -18,6 +20,7 @@ export function LimitedTimeDeals() {
     const timeref = useRef(null);
     const [cartData, setCartData] = useState([]);
     const dispatch = useDispatch();
+    const {handlecurrProduct} = useContext(Data);
 
     useEffect(() => {
         clearInterval(timeref.current);
@@ -117,6 +120,11 @@ export function LimitedTimeDeals() {
             })
         }
     }    
+    const navigate = useNavigate();
+    const showProduct = (el) => {
+        handlecurrProduct(el)
+        navigate(`/products/${el.id}`)
+    }
 
   return (
     <Box position={'relative'}>
@@ -141,8 +149,8 @@ export function LimitedTimeDeals() {
                                 {
                                     limitedTimeData.map(el => (
                                         <Box w={{base: '200px', md: '18.2vw'}} key={el.id} p=' 30px 15px 15px 15px' boxShadow='rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px' borderRadius={'10px'} bg='#fff'>
-                                            <Center><Image w='150px' h={{base: '100px', md: '150px'}} src={el.img1}></Image></Center>
-                                            <Text mt='30px'fontWeight={'600'} h='60px' noOfLines={[1,2]} textOverflow={'ellipsis'}>{el.title}</Text>
+                                            <Center><Image onClick={() => showProduct(el)} cursor='pointer' w='150px' h={{base: '100px', md: '150px'}} src={el.img1}></Image></Center>
+                                            <Text mt='30px'fontWeight={'600'} h='53px' noOfLines={[1,2]} textOverflow={'ellipsis'}>{el.title}</Text>
                                             <Flex mt='8px' alignItems={'flex-end'}>
                                                 <Text fontWeight={'600'} mr='5px'>₹ {parseFloat(el.actual_price).toFixed(2)}</Text>
                                                 <Text color='gray' fontWeight={'600'} textDecoration={'line-through'} fontSize={'10px'}>₹ {parseFloat(el.crossed_price).toFixed(2)}</Text>

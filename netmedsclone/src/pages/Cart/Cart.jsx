@@ -9,6 +9,7 @@ import ErrorPage from '../ErrorPage';
 
 export const Cart = () => {
     const mobileView = useSelector((state) => state.mobileView);
+    console.log(mobileView);
     const [saveForLaterData, setSaveForLaterData] = useState([]);
     const [showHidden, setShowHidden] = useState('show')
     const promeRef = useRef(null);
@@ -218,20 +219,20 @@ export const Cart = () => {
                                                     </Box>
                                                 </Box>
                                                 <Box ml={{base: '20px', lg: '60px'}} mt='10px' display={'flex'} justifyContent='space-between' position={'relative'}>
-                                                    <Flex alignItems={'flex-end'}>
+                                                    <Box display={{base: 'block', md: 'flex'}} alignItems={'flex-end'}>
                                                         <Text fontWeight={'600'} color='#ef4281' mr='5px'>Rs. {parseFloat(el.actual_price).toFixed(2)}</Text>
                                                         {
                                                             el.crossed_price && <Text color='#151B3999' fontWeight={'400'} textDecoration={'line-through'} fontSize={'12px'}>Rs. {parseFloat(el.crossed_price).toFixed(2)}</Text>
                                                         }
-                                                    </Flex>
+                                                    </Box>
                                                     <Box>
                                                         <Text position={'absolute'} top='10px' right='90px' fontSize={'20px'}>QTY: </Text>
-                                                    <Select placeholder={el.quantity ? el.quantity : 1} onChange={(e) => handleQuantity(e, el.id)}>
-                                                        {
-                                                            [1,2,3,4,5,6,7,8,9,10].map(el => (
-                                                                <option key={el} value={el}>{el}</option>
-                                                            ))
-                                                        }
+                                                        <Select placeholder={el.quantity ? el.quantity : 1} onChange={(e) => handleQuantity(e, el.id)}>
+                                                            {
+                                                                [1,2,3,4,5,6,7,8,9,10].map(el => (
+                                                                    <option key={el} value={el}>{el}</option>
+                                                                ))
+                                                            }
                                                         </Select>
                                                     </Box>
                                                 </Box>
@@ -239,7 +240,7 @@ export const Cart = () => {
                                                     <Box borderRight='1px solid #dddde0' display={'grid'} alignContent='center' w='100%' mr='15px'>
                                                         <Text fontSize={'12px'}>Delivery between <span style={{fontSize: '13px'}}>{date.toString().substring(0, 8)}{date.toString().substring(8, 10)}-{date.toString().substring(0, 8)}{+date.toString().substring(8, 10)+1}</span></Text>
                                                     </Box>
-                                                    <Box w={{base: '100%', lg: '70%'}} display={'flex'} justifyContent='space-between' gap='10px'>
+                                                    <Box w={{base: '100%', lg: '70%'}} display={'flex'} justifyContent='space-between' gap='10px' mt={{base: '10px', lg: '0'}}>
                                                         <Button bg='#F6F6F7' fontSize={'12px'} color='#151B3999' size='sm' _hover={'none'} letterSpacing={'1px'} onClick={() => removeCart('https://netmedsdata.onrender.com/cart/',el.id)}>REMOVE</Button>
                                                         <Button onClick={() => handleSaveForLater(el)} bg='#F6F6F7' fontSize={'12px'} color='#151B3999' size='sm' _hover='none' letterSpacing={'1px'}>SAVE FOR LATER</Button>
                                                     </Box>

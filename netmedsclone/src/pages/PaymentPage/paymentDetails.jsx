@@ -60,7 +60,7 @@ const {totalMRP,discount,promoCodeDiscount,getData,cartData,loading}= useContext
       <Box   justifyContent='space-between' wrap='wrap' display={{base:"block", lg:"flex"}} >
         
 
-        <SimpleGrid columns={1}  w={{  md: '70%'}}  mr="20px" >
+        <SimpleGrid columns={1}  w={{  md: '100%'}}  mr="20px" padding={{base:"20px", lg:"0px"}}>
           <Box   >
             <Box  padding='20px' mb='50px' id='boxshadow' >
             <Flex align='center'>
@@ -226,7 +226,7 @@ const {totalMRP,discount,promoCodeDiscount,getData,cartData,loading}= useContext
 
 
       
-        <Box   height='auto' padding='10px' id='boxshadow2'   w={{base:"100%",lg:"30%"}} >
+        <Box   height='auto' padding='10px' id='boxshadow2'   w={{base:"100%",lg:"50%"}} >
             <Text color='rgba(21,27,57,.6)'fontSize='12px'>PAYMENT DETAILS</Text>
             <Box   lineHeight='40px'  >
             <Flex justifyContent="space-between">
