@@ -20,18 +20,17 @@ import { useContext } from "react";
 import { AppContext } from "../../../../context/AppContext";
 
 const UserButton = () => {
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
-  const userDetails = useSelector((state) => state.userDetails)|| JSON.parse(localStorage.getItem('userDetails'));
+  const isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) ;
+  const userDetails = JSON.parse(localStorage.getItem('userDetails'));
   const dispatch = useDispatch();
   const {deleteAll} = useContext(AppContext)
-  const name = userDetails.firstName;
   const handleClickOnUserButton = () => {
     if (isLoggedIn) {
       localStorage.removeItem("isLoggedIn");
       localStorage.removeItem("userDetails");
       dispatch(EmptyCart());
-      deleteAll()
-      dispatch(removeLogin())
+      deleteAll();
+      dispatch(removeLogin());
     }
   };
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -75,7 +74,7 @@ const UserButton = () => {
                   fontWeight="semibold"
                   whiteSpace="nowrap"
                 >
-                  {isLoggedIn ? name : "Sign in / Sign up"}
+                  {isLoggedIn ? userDetails.firstName : "Sign in / Sign up"}
                 </Text>
               </Flex>
             </MenuButton>
