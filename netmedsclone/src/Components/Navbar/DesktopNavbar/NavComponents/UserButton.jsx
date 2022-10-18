@@ -1,24 +1,41 @@
 //Change isLoggedIn and name according to Redux.
 
-import { Avatar, Box, Flex, Text } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Button,
+  Flex,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Text,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { EmptyCart } from "../../../../Redux/action";
+import { useState } from "react";
 
 const UserButton = () => {
-  const isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn")) || false;
-  const userDetails = JSON.parse(localStorage.getItem("userDetails")) || [];
+  const [isLoggedIn, setLogin] = useState(JSON.parse(localStorage.getItem("isLoggedIn")) || false);
+  const [userDetails, setUserdetails] = useState(JSON.parse(localStorage.getItem("userDetails")) || []);
   const dispatch = useDispatch();
-
+  const toggleLogin=()=>{setLogin(!isLoggedIn)}
+  const toggleUserDetails= ()=>{setUserdetails(localStorage.getItem('userDetails') || [])}
   const name = userDetails.firstName;
   const handleClickOnUserButton = () => {
     if (isLoggedIn) {
       localStorage.removeItem("isLoggedIn");
       localStorage.removeItem("userDetails");
-      dispatch(EmptyCart())
+      toggleLogin()
+      toggleUserDetails();
+      dispatch(EmptyCart());
     }
   };
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <Box
       bgColor={"rgb(50,174,177)"}
@@ -30,24 +47,43 @@ const UserButton = () => {
         _hover={{ textDecoration: "none" }}
         onClick={handleClickOnUserButton}
       >
-        <Flex align={"center"}>
-          <Avatar
-            paddingLeft={"10px"}
-            icon={<FaUserCircle />}
-            bg='"rgb(50,174,177)"'
-            boxSize={"30px"}
-          ></Avatar>
+        <Menu isOpen={isOpen} isLazy={true} placement="bottom-end">
+          <>
+            <MenuButton
+              fontSize="14px"
+              size="sm"
+              p={"0px"}
+              isActive={isOpen}
+              colorScheme="rgb(50,174,177)"
+              as={Button}
+              color="white"
+              onMouseEnter={onOpen}
+              onMouseLeave={onClose}
+            >
+              <Flex align={"center"}>
+                <Avatar
+                  paddingLeft={"10px"}
+                  icon={<FaUserCircle />}
+                  bg='"rgb(50,174,177)"'
+                  boxSize={"30px"}
+                ></Avatar>
 
-          <Text
-            paddingLeft={"5px"}
-            color={"white"}
-            fontSize="14px"
-            fontWeight="semibold"
-            whiteSpace="nowrap"
-          >
-            {isLoggedIn ? name : "Sign in / Sign up"}
-          </Text>
-        </Flex>
+                <Text
+                  paddingLeft={"5px"}
+                  color={"white"}
+                  fontSize="14px"
+                  fontWeight="semibold"
+                  whiteSpace="nowrap"
+                >
+                  {isLoggedIn ? name : "Sign in / Sign up"}
+                </Text>
+              </Flex>
+            </MenuButton>
+            <MenuList onMouseEnter={onOpen} onMouseLeave={onClose}>
+              <MenuItem size='xs' fontSize={'14px'}>{isLoggedIn? 'Logout' : 'LogIn'}</MenuItem>
+            </MenuList>
+          </>
+        </Menu>
       </Link>
     </Box>
   );
