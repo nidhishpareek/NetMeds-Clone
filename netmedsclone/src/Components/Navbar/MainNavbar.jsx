@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Cart_API } from "../../api";
 const Navbar = () => {
   const mobileView = useSelector((state) => state.mobileView);
-  const isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn")) || false;
   const dispatch = useDispatch();
   const MountgetData = () => {
     fetch(Cart_API)

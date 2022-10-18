@@ -30,9 +30,9 @@ const UserButton = () => {
       console.log('here')
       localStorage.removeItem("isLoggedIn");
       localStorage.removeItem("userDetails");
-      dispatch(EmptyCart());
-      deleteAll()
-      dispatch(removeLogin())
+      
+      deleteAll();
+      
     }
   };
   const { isOpen, onOpen, onClose } = useDisclosure();
