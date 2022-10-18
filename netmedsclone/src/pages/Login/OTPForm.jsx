@@ -9,10 +9,15 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { changeLoginStatus } from "../../Redux/action";
 import { SigninAuthentication } from "./LoginAuthentication";
 
 const OTPform = ({ number, toggleMobileAuthenticate }) => {
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const userDetails = useSelector((state) => state.userDetails);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const init = {
     goodEmail: true,
@@ -37,7 +42,7 @@ const OTPform = ({ number, toggleMobileAuthenticate }) => {
   const generateOTPfunction = () => {
     const newotp = Math.floor(Math.random() * 10 ** 6);
     setGeneratedOTP(newotp);
-    if (newotp<99999)generateOTPfunction(); 
+    if (newotp < 99999) generateOTPfunction();
     console.log(newotp);
   };
   const goodEmailCheck = (entryEmail) => {
@@ -62,18 +67,23 @@ const OTPform = ({ number, toggleMobileAuthenticate }) => {
       setValidations({ ...init, goodFirstName: false });
       return;
     } else if (lastName.current.value.length === 0) {
+    } else if (formEntries.lastName.length === 0) {
+      setValidations({ ...init, goodLastName: false });
+      return;
+    } else if (lastName.current.value.length === 0) {
       setValidations({ ...init, goodLastName: false });
     } else if (otp && otp.length === 0) {
-      console.log("fasl;f");
+      console.log("false");
       setValidations({ ...init, goodOTP: false });
       return;
     }
     if (otp !== generatedOTP) {
-      console.log("dddddd");
+      console.log(otp, generatedOTP ,'false');
 
       setValidations({ ...init, validOTP: false });
       return;
     } else {
+      console.log(otp, 'equal case but why' , generatedOTP, 'compare',otp === generatedOTP )
       setValidations({ ...init });
     }
     Authenticate(formEntries);
@@ -86,6 +96,7 @@ const OTPform = ({ number, toggleMobileAuthenticate }) => {
         console.log(result);
         localStorage.setItem("userDetails", JSON.stringify(result));
         localStorage.setItem("isLoggedIn", true);
+        dispatch(changeLoginStatus(result));
         navigate("/");
       })
       .catch(() => {
