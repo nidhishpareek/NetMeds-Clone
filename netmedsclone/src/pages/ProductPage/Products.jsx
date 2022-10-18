@@ -1,4 +1,4 @@
-import { Box, Button } from '@chakra-ui/react'
+import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button } from '@chakra-ui/react'
 import React from 'react'
 import { useContext } from 'react'
 import { Data } from '../Context/DataContext'
@@ -15,6 +15,16 @@ function Products() {
 
     return (
         <Box bg={"#f3f3f3"} pt="30px" pb="30px">
+            <Breadcrumb pl="30px" spacing='8px' >
+                <BreadcrumbItem>
+                    <BreadcrumbLink href='/'>Home</BreadcrumbLink>
+                </BreadcrumbItem>
+
+                <BreadcrumbItem>
+                    <BreadcrumbLink href='/products'>Products</BreadcrumbLink>
+                </BreadcrumbItem>
+
+            </Breadcrumb>
             < Box w="97%" margin="20px auto" display="flex" gap="10px">
                 <Box w={{ base: "0%", lg: "18%" }} display={"flex"} flexDir="column" gap="40px" >
                     <CategoriesComp />
