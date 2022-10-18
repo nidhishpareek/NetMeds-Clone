@@ -9,7 +9,16 @@ import {
 } from "@chakra-ui/react";
 import FooterTagsCompiled from "./FooterTagsCompiled";
 import NewsLetterSection from './NewsLetterSection'
+import {  useSelector } from "react-redux";
 const Footer = () => {
+  const mobileView = useSelector((state) => state.mobileView);
+
+  if(mobileView) {
+    return(
+      <></>
+    )
+  }
+
   return (
     <Box width={"80%"} margin={"auto"} paddingBlock="34px">
       <Flex>

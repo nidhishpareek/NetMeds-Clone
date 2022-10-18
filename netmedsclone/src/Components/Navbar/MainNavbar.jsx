@@ -12,7 +12,6 @@ const Navbar = () => {
     fetch("https://netmedsdata.onrender.com/cart")
       .then((res) => res.json())
       .then((res) => {
-        // console.log(res);
         dispatch(setCartProductRReducer(res));
       });
   };
@@ -23,9 +22,9 @@ const Navbar = () => {
   return (
     <Box >
       {mobileView ? (
-        <MobileNavbar></MobileNavbar>
+        <MobileNavbar />
       ) : (
-        <DesktopNavbar></DesktopNavbar>
+        <DesktopNavbar />
       )}
     </Box>
   );
