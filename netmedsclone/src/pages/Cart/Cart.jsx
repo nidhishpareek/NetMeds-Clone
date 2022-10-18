@@ -9,8 +9,8 @@ import { removeCartRedux, setCartProduct } from '../../Redux/action';
 import ErrorPage from '../ErrorPage';
 
 export const Cart = () => {
-    const mobileView = useSelector((state) => state.mobileView);
-    console.log(mobileView);
+    // const mobileView = useSelector((state) => state.mobileView);
+    // console.log(mobileView);
     const [saveForLaterData, setSaveForLaterData] = useState([]);
     const [showHidden, setShowHidden] = useState('show')
     const promeRef = useRef(null);

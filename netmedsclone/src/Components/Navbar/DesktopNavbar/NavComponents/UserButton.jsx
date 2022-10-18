@@ -28,9 +28,9 @@ const UserButton = () => {
     if (isLoggedIn) {
       localStorage.removeItem("isLoggedIn");
       localStorage.removeItem("userDetails");
-      dispatch(EmptyCart());
+      
       deleteAll();
-      dispatch(removeLogin());
+      
     }
   };
   const { isOpen, onOpen, onClose } = useDisclosure();
