@@ -32,7 +32,7 @@ export const Cart = () => {
     const removeCart = (url, id) => {
         console.log(url, 'url');
         setLoading(true);
-        fetch(`${url}${id}`, {
+        fetch(`${url}/${id}`, {
             method: 'DELETE',
         }).then(() => {
             setLoading(false)
