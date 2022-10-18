@@ -1,6 +1,7 @@
 import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button } from '@chakra-ui/react'
 import React from 'react'
 import { useContext } from 'react'
+import { Link } from 'react-router-dom'
 import { Data } from '../Context/DataContext'
 import AllProduct from './AllProduct'
 import CategoriesComp from './Categories'
@@ -17,11 +18,11 @@ function Products() {
         <Box bg={"#f3f3f3"} pt="30px" pb="30px">
             <Breadcrumb pl="30px" spacing='8px' >
                 <BreadcrumbItem>
-                    <BreadcrumbLink href='/'>Home</BreadcrumbLink>
+                    <BreadcrumbLink ><Link to={'/'}>Home</Link></BreadcrumbLink>
                 </BreadcrumbItem>
 
                 <BreadcrumbItem>
-                    <BreadcrumbLink href='/products'>Products</BreadcrumbLink>
+                    <BreadcrumbLink ><Link to='/products'> Products</Link></BreadcrumbLink>
                 </BreadcrumbItem>
 
             </Breadcrumb>
