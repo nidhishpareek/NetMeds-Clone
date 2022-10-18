@@ -16,17 +16,21 @@ import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { EmptyCart, removeLogin } from "../../../../Redux/action";
+import { useContext } from "react";
+import { AppContext } from "../../../../context/AppContext";
 
 const UserButton = () => {
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const userDetails = useSelector((state) => state.userDetails)|| JSON.parse(localStorage.getItem('userDetails'));
   const dispatch = useDispatch();
+  const {deleteAll} = useContext(AppContext)
   const name = userDetails.firstName;
   const handleClickOnUserButton = () => {
     if (isLoggedIn) {
       localStorage.removeItem("isLoggedIn");
       localStorage.removeItem("userDetails");
       dispatch(EmptyCart());
+      deleteAll()
       dispatch(removeLogin())
     }
   };
