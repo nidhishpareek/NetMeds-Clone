@@ -47,8 +47,8 @@ function DetailSection() {
         <Box w="50%" pr="25px">
             <Text fontSize={"20px"}>{title}</Text>
             <Box mt="10px" mb="10px">
-                <Text as="span" background={"#f6f6f7"} color="#6f7284" fontSize={"12px"} textOverflow="ellipsis" p="3px 8px" mr="5px" borderRadius={"5px"} mt="90px">{category}</Text>
-                <Text as="span" background={"#f6f6f7"} color="#6f7284" fontSize={"12px"} textOverflow="ellipsis" p="3px 8px" mr="5px" borderRadius={"5px"}>{sub_category}</Text>
+                {category && <Text as="span" background={"#f6f6f7"} color="#6f7284" fontSize={"12px"} textOverflow="ellipsis" p="3px 8px" mr="5px" borderRadius={"5px"} mt="90px">{category}</Text>}
+                {sub_category && <Text as="span" background={"#f6f6f7"} color="#6f7284" fontSize={"12px"} textOverflow="ellipsis" p="3px 8px" mr="5px" borderRadius={"5px"}>{sub_category}</Text>}
             </Box>
             <Box display={"flex"} mt="10px" mb="20px">
                 <Image src="https://www.netmeds.com/assets/version1665682643/gloryweb/images/icons/icon_favourite.svg" mr="30px" />
