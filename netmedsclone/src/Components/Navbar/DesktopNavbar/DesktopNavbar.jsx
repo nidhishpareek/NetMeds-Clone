@@ -10,9 +10,7 @@ const DesktopNavbar = () => {
   let currlocation = useLocation();
   useEffect(() => {
     setlocation(currlocation);
-    currlocation.pathname === "/"
-      ? (document.title = "Netmeds.com: Indian Online Pharmacy")
-      : (document.title = `${currlocation.pathname.slice(1)} | Netmeds`);
+    document.title = "Netmeds.com: Indian Online Pharmacy";
   }, [useLocation()]);
 
   return (
