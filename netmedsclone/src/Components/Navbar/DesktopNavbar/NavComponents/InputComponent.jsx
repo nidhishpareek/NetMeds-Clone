@@ -7,6 +7,7 @@ import {
 } from "@chakra-ui/react";
 import { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Product_API } from "../../../../api";
 import { Data } from "../../../../pages/Context/DataContext";
 import DelieveryComponent from "./DelieveryComponent";
 const InputComponent = () => {
@@ -21,7 +22,7 @@ const InputComponent = () => {
   }
   var displayRelated = debounce (function() {
     if(input.length>1) {
-      fetch(`https://netmedsdata.onrender.com/products?q=${input}&_limit=10`)
+      fetch(`${Product_API}?q=${input}&_limit=10`)
       .then((res) => res.json())
       .then((data) => {
         ref.current.style.display = 'block'
@@ -64,7 +65,7 @@ const InputComponent = () => {
           value={input}
         />
       </Flex>
-      { input.length>0 && <Box pos='absolute' className="webkit" borderTop={'1px solid #ddde0'} ref={ref} borderRadius={'6px'} display='none' bg='#fff' w='100%' maxH='70vh' overflow={'auto'}>
+      { input.length>0 && <Box pos='absolute' className="webkit" borderTop={'1px solid #ddde0'} ref={ref} borderRadius={'0 0 6px 6px'} mt='2px' display='none' bg='#fff' w='100%' maxH='70vh' overflow={'auto'}>
         <Box w='100%'>
           {
             searchData.map(el => (
