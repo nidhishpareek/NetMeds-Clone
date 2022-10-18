@@ -5,6 +5,9 @@ export const TOGGLEVIEW = "TOGGLEVIEW";
 export const SETCARTBYREDUCER = "SETCARTBYREDUCER";
 export const EMPTYCART = "EMPTYCART";
 export const REMOVECART = "REMOVECART"
+export const RESETLOGIN="RESETLOGIN"
+export const CHANGELOGINSTATUS="CHANGELOGINSTATUS"
+
 export const loadingState = () => ({
   type: LOADINGSTATE,
 });
@@ -29,5 +32,12 @@ export const EmptyCart = () => ({
 export const removeCartRedux = (data) => ({
   type: REMOVECART,
   payload: data
+})
+export const removeLogin = () => ({
+  type: RESETLOGIN,
+})
+export const changeLoginStatus = (data) => ({
+  type: CHANGELOGINSTATUS,
+  payload:data
 })
 

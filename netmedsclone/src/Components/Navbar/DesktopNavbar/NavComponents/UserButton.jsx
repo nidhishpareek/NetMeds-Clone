@@ -15,23 +15,19 @@ import {
 import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { EmptyCart } from "../../../../Redux/action";
-import { useState } from "react";
+import { EmptyCart, removeLogin } from "../../../../Redux/action";
 
 const UserButton = () => {
-  const [isLoggedIn, setLogin] = useState(JSON.parse(localStorage.getItem("isLoggedIn")) || false);
-  const [userDetails, setUserdetails] = useState(JSON.parse(localStorage.getItem("userDetails")) || []);
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const userDetails = useSelector((state) => state.userDetails)|| JSON.parse(localStorage.getItem('userDetails'));
   const dispatch = useDispatch();
-  const toggleLogin=()=>{setLogin(!isLoggedIn)}
-  const toggleUserDetails= ()=>{setUserdetails(localStorage.getItem('userDetails') || [])}
   const name = userDetails.firstName;
   const handleClickOnUserButton = () => {
     if (isLoggedIn) {
       localStorage.removeItem("isLoggedIn");
       localStorage.removeItem("userDetails");
-      toggleLogin()
-      toggleUserDetails();
       dispatch(EmptyCart());
+      dispatch(removeLogin())
     }
   };
   const { isOpen, onOpen, onClose } = useDisclosure();
