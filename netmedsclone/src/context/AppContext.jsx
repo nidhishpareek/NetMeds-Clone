@@ -47,6 +47,7 @@ export const AppContextProvider = ({ children }) => {
             })
     }
     const deleteAll = () => {
+        console.log('deleteall called')
         cartData.map(el => {
             dispatch(removeCartRedux(el.id))
             axios.delete(`${Cart_API}/${el.id}`)

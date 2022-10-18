@@ -16,18 +16,21 @@ import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { EmptyCart, removeLogin } from "../../../../Redux/action";
+import { useContext } from "react";
+import { AppContext } from "../../../../context/AppContext";
 
 const UserButton = () => {
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
-  const userDetails = useSelector((state) => state.userDetails)|| JSON.parse(localStorage.getItem('userDetails'));
+  const isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) ;
+  const userDetails = JSON.parse(localStorage.getItem('userDetails'));
   const dispatch = useDispatch();
-  const name = userDetails.firstName;
+  const {deleteAll} = useContext(AppContext)
   const handleClickOnUserButton = () => {
     if (isLoggedIn) {
       localStorage.removeItem("isLoggedIn");
       localStorage.removeItem("userDetails");
       dispatch(EmptyCart());
-      dispatch(removeLogin())
+      deleteAll();
+      dispatch(removeLogin());
     }
   };
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -71,7 +74,7 @@ const UserButton = () => {
                   fontWeight="semibold"
                   whiteSpace="nowrap"
                 >
-                  {isLoggedIn ? name : "Sign in / Sign up"}
+                  {isLoggedIn ? userDetails.firstName : "Sign in / Sign up"}
                 </Text>
               </Flex>
             </MenuButton>
