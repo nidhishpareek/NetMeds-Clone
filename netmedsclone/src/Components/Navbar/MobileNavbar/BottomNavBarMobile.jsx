@@ -51,7 +51,7 @@ const BottomNavBarMobile = () => {
   }
 
   return (
-    <Box paddingInline={"16px"}>
+    <Box paddingInline={"16px"}  zIndex='5'>
       <Flex alignItems="center" paddingBlock={"5px"}>
         <Text fontSize={"10px"} pt="2px">
           Deliver to
