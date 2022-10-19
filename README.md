@@ -1,4 +1,6 @@
 # Clone of Netmeds
+![image](https://user-images.githubusercontent.com/108894016/196782014-aadff2e4-8c29-4dfa-bcd2-0fa8b687cac9.png)
+
 ## Question statement
 We have given the project to clone the official site of Netmeds.
 
@@ -6,11 +8,11 @@ We have given the project to clone the official site of Netmeds.
 Hello, we are learning Full stack Web Development at Masai School. During Unit 6 on this web development journey, we got a group project with our batchmates to clone the website of Netmeds, which is a pharmaceutical company that offers medicines at a reasonable price. We have tried to clone the website in the time span of 10 days only.
 
 ## Tech Stack Used
-Reactjs
-CSS3
-JavaScript
-Chakra UI
-JSON server(Back-end)
+- Reactjs
+- CSS3
+- JavaScript
+- Chakra UI
+- JSON server(Back-end)
 ## Home Page
 We have created the navigation bar which has dropdown menus on hover, a cart section where the user can see the total number of products in the cart in real-time, and a login/signup button.
 ![image](https://user-images.githubusercontent.com/108894016/196271579-0e16f0ba-0819-45be-876d-ca9a9512eeb4.png)
