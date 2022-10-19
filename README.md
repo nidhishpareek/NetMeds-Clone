@@ -86,3 +86,26 @@ The second challenge was to merge the different files in the same final folder.
 ## Conclusions
 
 learning technology is a different thing and showing what you have learned is a different thing. This project has given us the confidence to showcase whatever we have learned so far. This project also help us to learn those concepts, which can be gained only by practically doing, that can’t be taught during class. Lastly, I would like to thank all the team members of the group who coordinate remotely and let the project go smoothly.
+
+## 🔗 Team members
+
+### Nidhish Pareek 
+  - [![portfolio](https://img.shields.io/badge/Gmail-red?style=for-the-badge&logo=gmail&logoColor=white)](mailto:pareek.np1@gmail.com)
+  - [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/nidhishpareek)
+  - [![twitter](https://img.shields.io/badge/GitHub-1DA1F2?style=for-the-badge&logo=github&logoColor=white)](https://github.com/nidhishpareek)
+
+### Ramzan Khan
+  - [![portfolio](https://img.shields.io/badge/Gmail-red?style=for-the-badge&logo=gmail&logoColor=white)](mailto:ramzanformasai03@gmail.com)
+  - [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ramzan-khan-263b87230/)
+  - [![twitter](https://img.shields.io/badge/GitHub-1DA1F2?style=for-the-badge&logo=github&logoColor=white)](https://github.com/mr-ramzan01)
+
+### Akshay Pareek
+  - [![portfolio](https://img.shields.io/badge/Gmail-red?style=for-the-badge&logo=gmail&logoColor=white)](mailto:akshaypareek.work@gmail.com)
+  - [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/akshay-pareek-377435216)
+  - [![twitter](https://img.shields.io/badge/GitHub-1DA1F2?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Akshaypareek01)
+
+### Gulshan Sharma 
+  - [![portfolio](https://img.shields.io/badge/Gmail-red?style=for-the-badge&logo=gmail&logoColor=white)](mailto:sharmagulshan252@gmail.com)
+  - [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/gulshan-sharma-397172184/)
+  - [![twitter](https://img.shields.io/badge/GitHub-1DA1F2?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Gulshan7777)
+
