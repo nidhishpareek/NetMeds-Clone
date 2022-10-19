@@ -89,6 +89,10 @@ The second challenge was to merge the different files in the same final folder.
 
 learning technology is a different thing and showing what you have learned is a different thing. This project has given us the confidence to showcase whatever we have learned so far. This project also help us to learn those concepts, which can be gained only by practically doing, that can’t be taught during class. Lastly, I would like to thank all the team members of the group who coordinate remotely and let the project go smoothly.
 
+## Deployment
+We have deployed the application on netlify and the link is below
+-Here is the deplyed link : https://teamnetlifyclone.netlify.app
+
 ## 🔗 Team members
 
 ### Nidhish Pareek 
