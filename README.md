@@ -1,4 +1,6 @@
 # Clone of Netmeds
+![image](https://user-images.githubusercontent.com/108894016/196782014-aadff2e4-8c29-4dfa-bcd2-0fa8b687cac9.png)
+
 ## Question statement
 We have given the project to clone the official site of Netmeds.
 
@@ -6,11 +8,11 @@ We have given the project to clone the official site of Netmeds.
 Hello, we are learning Full stack Web Development at Masai School. During Unit 6 on this web development journey, we got a group project with our batchmates to clone the website of Netmeds, which is a pharmaceutical company that offers medicines at a reasonable price. We have tried to clone the website in the time span of 10 days only.
 
 ## Tech Stack Used
-Reactjs
-CSS3
-JavaScript
-Chakra UI
-JSON server(Back-end)
+- Reactjs
+- CSS3
+- JavaScript
+- Chakra UI
+- JSON server(Back-end)
 ## Home Page
 We have created the navigation bar which has dropdown menus on hover, a cart section where the user can see the total number of products in the cart in real-time, and a login/signup button.
 ![image](https://user-images.githubusercontent.com/108894016/196271579-0e16f0ba-0819-45be-876d-ca9a9512eeb4.png)
@@ -86,3 +88,30 @@ The second challenge was to merge the different files in the same final folder.
 ## Conclusions
 
 learning technology is a different thing and showing what you have learned is a different thing. This project has given us the confidence to showcase whatever we have learned so far. This project also help us to learn those concepts, which can be gained only by practically doing, that can’t be taught during class. Lastly, I would like to thank all the team members of the group who coordinate remotely and let the project go smoothly.
+
+## Deployment
+We have deployed the application on netlify and the link is below
+-Here is the deplyed link : https://teamnetlifyclone.netlify.app
+
+## 🔗 Team members
+
+### Nidhish Pareek 
+  - [![portfolio](https://img.shields.io/badge/Gmail-red?style=for-the-badge&logo=gmail&logoColor=white)](mailto:pareek.np1@gmail.com)
+  - [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/nidhishpareek)
+  - [![twitter](https://img.shields.io/badge/GitHub-1DA1F2?style=for-the-badge&logo=github&logoColor=white)](https://github.com/nidhishpareek)
+
+### Ramzan Khan
+  - [![portfolio](https://img.shields.io/badge/Gmail-red?style=for-the-badge&logo=gmail&logoColor=white)](mailto:ramzanformasai03@gmail.com)
+  - [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ramzan01/)
+  - [![twitter](https://img.shields.io/badge/GitHub-1DA1F2?style=for-the-badge&logo=github&logoColor=white)](https://github.com/mr-ramzan01)
+
+### Akshay Pareek
+  - [![portfolio](https://img.shields.io/badge/Gmail-red?style=for-the-badge&logo=gmail&logoColor=white)](mailto:akshaypareek.work@gmail.com)
+  - [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/akshay-pareek-377435216)
+  - [![twitter](https://img.shields.io/badge/GitHub-1DA1F2?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Akshaypareek01)
+
+### Gulshan Sharma 
+  - [![portfolio](https://img.shields.io/badge/Gmail-red?style=for-the-badge&logo=gmail&logoColor=white)](mailto:sharmagulshan252@gmail.com)
+  - [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/gulshan-sharma-397172184/)
+  - [![twitter](https://img.shields.io/badge/GitHub-1DA1F2?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Gulshan7777)
+
