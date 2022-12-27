@@ -6,6 +6,7 @@ We have given the project to clone the official site of Netmeds.
 
 ## Introduction
 Hello, we are learning Full stack Web Development at Masai School. During Unit 6 on this web development journey, we got a group project with our batchmates to clone the website of Netmeds, which is a pharmaceutical company that offers medicines at a reasonable price. We have tried to clone the website in the time span of 10 days only.
+Its a FrontEnd centric  pixel perfect netmeds.com clone app, which is developed to showcase the skills of React.js, Redux, Axios, email.js and basic understanding of collaborating a React app. UI is fuled with Chakra UI,.  One o f the special feature is, we merged the UI of m.netmeds.com too in this projecis a dedicated website for mobile view. The backend is backed with Jsoneerver and  is deployed on render.com.
 
 ## Tech Stack Used
 - Reactjs
